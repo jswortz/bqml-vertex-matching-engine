@@ -1,0 +1,60 @@
+.circle {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid black;
+  }
+  
+  .sizeCircle {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid black;
+  }
+  
+  .sizeCircle.active {
+    background-color: black;
+    color: white;
+  }
+  
+  .sizeCircle:hover {
+    background-color: black;
+    color: white;
+  }
+  
+  .circle .active {
+    border: 1px solid white;
+  }
+  
+  .circle_inner:hover {
+    height: 13px;
+    width: 13px;
+    padding:5px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid white;
+  }
+  
+  .circle_inner {
+    height: 13px;
+    width: 13px;
+    padding:5px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid black;
+  }
+  
+    button.uk-link-muted {
+      color: black;
+  }
+  
+  button.uk-link-muted:hover, button.uk-link-muted:focus {
+    color: #666;
+  }
+  
+  .innerCircle {
+    padding: 10px;
+    font-size: 12px;
+  }

@@ -1,0 +1,12 @@
+service: front-rec-ai
+runtime: python37
+
+automatic_scaling:
+  min_instances: 3
+
+handlers:
+- url: /
+  static_files: dist/index.html
+  upload: dist/index.html
+- url: /
+  static_dir: dist

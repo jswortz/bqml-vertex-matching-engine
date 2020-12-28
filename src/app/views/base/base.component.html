@@ -1,0 +1,6 @@
+<app-navbar [store_name]="store_name" [categories]="categories"></app-navbar>
+<div *ngIf="isLoading">
+    <div className="uk-padding uk-text-center uk-width-xlarge"><span uk-spinner="ratio: 4.5"></span></div>
+</div> 
+<router-outlet></router-outlet>
+<app-footer [store_name]="store_name"></app-footer>

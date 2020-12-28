@@ -1,0 +1,49 @@
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background: black;
+}
+.uk-navbar-nav>li>a {
+    min-height: 3rem;
+}
+
+.uk-light .uk-navbar-nav>li>a:hover, .uk-light .uk-navbar-nav>li>a:focus, .uk-light .uk-navbar-nav>li>a {
+    color: white;
+    font-weight: 700;
+}
+
+
+.notification .badge {
+    position: absolute;
+    top: 0.25rem;
+    right: -0.5rem;
+    padding: .5px 5px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    font-size: x-small;
+  }
+
+  .notification {
+    position: relative;
+    display: inline-block;
+  }
+
+  .uk-link-muted a, a.uk-link-muted {
+      font-weight: 500;
+  }
+
+  .uk-light .uk-close {
+      color: white;
+  }
+
+  .uk-search-default .uk-search-input {
+      border: 1px solid #000;
+  }
+
+
+  .uk-search-input {
+      color: black;
+  }
+
+  a.uk-link-muted {
+    color: black;
+  }
