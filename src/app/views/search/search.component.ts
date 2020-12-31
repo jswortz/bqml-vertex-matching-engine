@@ -21,6 +21,8 @@ export class SearchComponent {
   startIndex:number = 0;
   endIndex:number = 0;
   numPages = 1;
+  onlyPage = false;
+  loading = false;
 
   constructor(
     private readonly router: Router, private readonly route: ActivatedRoute) { 
@@ -28,11 +30,17 @@ export class SearchComponent {
       this.brands = this.route.snapshot.data['Brands'];
       this.categories = this.route.snapshot.data['Categories'];
       this.route.data.subscribe(val => {
+        if(this.onlyPage){
+          this.onlyPage = false;
+          return;
+        }
         this.productList = val['Products'];
-        
       })
       // disable router reuse on param change
       this.route.queryParams.subscribe(params => {
+        if(this.parent_category === params['category'] && this.sub_category === params['subcategory'] && this.query === params['q']) {
+          this.onlyPage = true;
+        }
         this.parent_category = params['category'] ?? params['category'];
         this.sub_category = params['subcategory'] ?? params['subcategory'];
         this.query = params['q'] ?? params['q'];
@@ -46,10 +54,10 @@ export class SearchComponent {
           }
         });
       });
-      
     }
 
     scrollToTop() {
+      this.loading = true;
       window.scrollTo(0, 0);
     }
 

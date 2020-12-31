@@ -1,7 +1,7 @@
 <div>
     <ul class="uk-breadcrumb" style="margin: 10px">
-            <li *ngIf="parent_category"><a [routerLink]="['/product']" [queryParams]="{category: parent_category}">{{parent_category}}</a></li> 
-            <li *ngIf="sub_category"><a [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category}">{{sub_category}}</a></li>
+            <li *ngIf="parent_category"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category}">{{parent_category}}</a></li> 
+            <li *ngIf="sub_category"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category}">{{sub_category}}</a></li>
     </ul>
     <div class="uk-margin-large-bottom uk-margin-large-right" uk-grid="">
         <div class="uk-margin-left uk-width-1-4">
@@ -22,7 +22,7 @@
                     <ng-template *ngIf="sub_category; then yes; else no"></ng-template>
                     <ng-template #yes>
                         <li>
-                            <a class="uk-text-bold"
+                            <a class="uk-text-bold" (click)="scrollToTop()"
                             [routerLink]="['/product']" [queryParams]="{category: parent_category}"
                             >
                             view all {{parent_category}}
@@ -34,7 +34,7 @@
                     </ng-template>
                     <ng-template #list>
                         <li *ngFor="let subcategory of entire_category.category['subcategories']">
-                            <a 
+                            <a (click)="scrollToTop()"
                                 [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: subcategory.name}"
                                 [class.uk-active]="sub_category === subcategory.name"
                             >
@@ -72,7 +72,12 @@
                 </div>
             </div>
             <div uk-grid="" class="uk-child-width-1-4@l uk-child-width-1-2@m uk-child-width-1-1@s uk-margin-top">
-                <app-product-card  *ngFor="let product of itemsInView"[product]="product"></app-product-card> 
+                <ng-container *ngIf="loading">
+                    <div className="uk-padding uk-text-center uk-width-xlarge"><span uk-spinner="ratio: 4.5"></span></div>
+                </ng-container>
+                <ng-container *ngIf="!loading">
+                    <app-product-card  *ngFor="let product of itemsInView"[product]="product"></app-product-card> 
+                </ng-container>
             </div>
             <ul class="uk-pagination uk-flex-center" uk-margin>
                 <li *ngIf="page-1 > 0"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: page - 1}"><span uk-pagination-previous></span></a></li>
