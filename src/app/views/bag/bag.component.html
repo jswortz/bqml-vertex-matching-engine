@@ -1,44 +1,40 @@
 <div class="uk-section uk-section-default">
     <div class="uk-container">
-
         <h3 class="uk-text-bold uk-text-center">Shopping Bag</h3>
         <div class="" uk-grid="">
             <table class="uk-table uk-table-divider uk-width-expand">
-                <ng-template *ngIf="bag.length; then bag; else empty"></ng-template>
-                <ng-template #bag>
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th class="uk-text-center">Qty</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let product of bag; let index">
-                            <td>
-                                <div uk-grid="">
-                                    <img [src]="product.IMAGE_LINK" width="150" [alt]="product.NAME">
-                                    <span>
-                                        <b>{{product.NAME}}</b><br/>
-                                        <b>SKU:</b> {{product.ID}}<br/>
-                                        <b>Price:</b> <ng-template *ngIf="product.DISCOUNT; then discount; else regular"></ng-template> <ng-template #discount><span><del>${{product.PRICE}}</del> <span class="uk-text-danger">${{product.DISCOUNT}}</span></span></ng-template> : <ng-template #regular><span>${{product.PRICE}}</span></ng-template><br/>
-                                        <b>Color:</b> {{product.COLOR}}<br/>
-                                        <b>Size:</b> {{product.SIZE}}
-                                    </span>
-                                </div>
-                            </td>
-                            <td class="uk-text-center">
-                            <div class="uk-button-group">
-                                <button class="uk-button uk-button-default" (click)="cookieManagerService.editBag(index, product.quantity-1)">-</button>
-                                <input #quantity class="uk-input uk-width-1-6" type="text" [value]="product.quantity" onChange="cookieManagerService.editBag(index, quantity.value)"/>
-                                <button class="uk-button uk-button-default" (click)="cookieManagerService.editBag(index, product.quantity+1)">+</button>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class="uk-text-center">Qty</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of _bag; let i = index">
+                        <td>
+                            <div uk-grid="">
+                                <img [src]="product.IMAGE_LINK" width="150" [alt]="product.NAME">
+                                <span>
+                                    <b>{{product.NAME}}</b><br/>
+                                    <b>SKU:</b> {{product.ID}}<br/>
+                                    <b>Price:</b> {{product.PRICE}}<br/>
+                                    <b>Color:</b> {{product.COLOR}}<br/>
+                                    <b>Size:</b> {{product.SIZE}}
+                                </span>
                             </div>
-                                
-                            </td>
-                        </tr>
-                    </tbody>
-                </ng-template>
-                <ng-template #empty>
+                        </td>
+                        <td class="uk-text-center">
+                        <div class="uk-button-group">
+                            <button class="uk-button uk-button-default" (click)="editBag(i, product.quantity-1)">-</button>
+                            <input #quantity class="uk-input uk-width-1-6" type="text" [value]="product.quantity" (change)="editBag(i, quantity.value)"/>
+                            <button class="uk-button uk-button-default" (click)="editBag(i, product.quantity+1)">+</button>
+                        </div>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+                <ng-template *ngIf="_bag.length < 0">
                     <tbody>
                         <tr><td></td>
                             <td>

@@ -13,8 +13,7 @@ const routes: Routes = [
     component: BaseComponent,
     resolve: {
       Products: ProductsResolver,
-      Categories: CategoriesResolver,
-      Brands: BrandsResolver
+      Categories: CategoriesResolver
     },
     children: [
       {
@@ -22,7 +21,6 @@ const routes: Routes = [
         component: HomeComponent,
         resolve: {
           FeaturedProducts: FeaturedProductsResolver,
-          BrandsResolver: BrandsResolver
         }
       },
       {
@@ -39,7 +37,8 @@ const routes: Routes = [
           Products: ProductsResolver,
           Brands: BrandsResolver,
           Categories: CategoriesResolver
-        }
+        },
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
       },
       {
         path: 'bag',

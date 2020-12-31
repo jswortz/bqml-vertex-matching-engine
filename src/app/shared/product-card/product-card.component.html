@@ -1,6 +1,6 @@
-<a [href]="'/product/' + product.ID" class="uk-link-text" style="text-decoration: none; color: black">
+<a [routerLink]="'/product/' + product.ID" class="uk-link-text" style="text-decoration: none; color: black">
     <div class="uk-text-center">
-        <img [src]="product.IMAGE_LINK" [alt]="product.NAME">
+        <img [src]="product.IMAGE_LINK" [alt]="product.NAME" style="max-height: 150px;width: auto;">
         <p class="uk-margin-remove-bottom uk-text-bold">{{product.NAME}}</p>
         <p class="uk-margin-remove-bottom uk-margin-remove-top">{{product.COMPANY}}</p>
         <ng-template *ngIf="product.DISCOUNT; then discount; else regular"></ng-template>

@@ -3,7 +3,7 @@
     <li><a [href]="'/search?category=' + product.CATEGORY + '&subcategory=' + product.SUB_CATEGORY">{{product.SUB_CATEGORY}}</a></li>
     <li><span>{{product.NAME}}</span></li>
 </ul>
-<div class="uk-section uk-section-default" style="margin: 10px; padding-left: 100px; padding-right: 40px">
+<div class="uk-section uk-section-default" style="margin: 10px; padding-left: 100px; padding-right: 100px">
     <div class="uk-child-width-1-2" uk-grid="">
         <div>
             <img [src]="product.IMAGE_LINK" [alt]="product.NAME" width="100%">
@@ -22,12 +22,12 @@
                     </ng-template>
                         
                     <p class="uk-text-small uk-margin-remove">{{colorSelection}}</p>
-                        <span *ngFor="let color of product['COLORS']" class="circle" [style.background-color]="color" (click)="setColor(color)">
-                            <span class="circle_inner" [class.active]="colorSelection === color"></span>
+                        <span class="circle" [style.background-color]="product['COLOR']" (click)="setColor(product['COLOR'])">
+                            <span class="circle_inner" [class.active]="colorSelection === product['COLOR']"></span>
                         </span>
                     <p class="uk-text-small uk-margin-remove">size: {{sizeSelection}}</p>
-                        <span *ngFor="let size of product['SIZES']" class="sizeCircle" [class.active]="sizeSelection === size" (click)="setSize(size)">
-                            <span class="innerCircle">{{size}}</span>
+                        <span class="sizeCircle" [class.active]="sizeSelection === product['SIZE']" (click)="setSize(product['SIZE'])">
+                            <span class="innerCircle">{{product['SIZE']}}</span>
                         </span>
                         <p class="uk-text-small uk-margin-remove"><button class="uk-button uk-button-link uk-link-muted">size chart</button>
                     </p>
@@ -46,9 +46,9 @@
                     </div>
                 </li>
             </ul>
-            <p class="uk-text-bold"  style="color: #333; font-size: 1.25rem">Complete the Look</p>
+            <p class="uk-text-bold"  style="color: #333; font-size: 1.25rem">Frequently Bought Together</p>
             <div class="uk-child-width-1-3" uk-grid="">
-                <app-product-card *ngFor="let rec of product.RECOMMENDATIONS" [product]="product_list[parseInt(rec) - 1]"></app-product-card>
+                <app-product-card *ngFor="let rec of product.bought_together" [product]="rec"></app-product-card>
             </div>
         </div>
     </div>
@@ -56,9 +56,9 @@
 
 <div class="uk-section uk-section-default" style="margin: 10px; padding-left: 40px; padding-right: 40px">
     <div class="uk-container">
-        <h3 class="uk-text-bold">More To Consider</h3>
+        <h3 class="uk-text-bold">Recommended For You</h3>
         <div class="uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-3@s" uk-grid="">
-            <app-product-card *ngFor="let rec of product.RECOMMENDATIONS" product="product_list[parseInt(rec) - 1]"></app-product-card>
+            <app-product-card *ngFor="let rec of product.recommended" [product]="rec"></app-product-card>
         </div>
     </div>
 </div>
@@ -66,7 +66,7 @@
     <div class="uk-container">
         <h3 class="uk-text-bold">Recently Viewed</h3>
         <div class="uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-3@s" uk-grid="">
-            <app-product-card *ngFor="let rec of recently_viewed" product="product_list[parseInt(rec) - 1]"></app-product-card>
+            <app-product-card *ngFor="let rec of recently_viewed" [product]="rec"></app-product-card>
         </div>
     </div>
 </div>

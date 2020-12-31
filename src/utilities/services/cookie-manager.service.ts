@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import Cookies from 'universal-cookie';
-
-const cookies = new Cookies();
+import {BehaviorSubject, Observable} from 'rxjs';
+import { v4 as uuid } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +8,47 @@ const cookies = new Cookies();
 export class CookieManagerService {
   login$ = new BehaviorSubject<boolean>(false);
   bag$ = new BehaviorSubject<any>([]);
+  _bag = [];
   bagTotal$ = new BehaviorSubject(0.0);
   bagSize$ = new BehaviorSubject(0);
+  visitorId$ = new BehaviorSubject<string>('');
+
+  getCookie(name: string) {
+    const ca: string[] = document.cookie.split(';');
+    const caLen: number = ca.length;
+    const cookieName = `${name}=`;
+    let c: string;
+
+    for (let i: number = 0; i < caLen; i += 1) {
+      c = ca[i].replace(/^\s+/g, '');
+      if (c.indexOf(cookieName) === 0) {
+        return c.substring(cookieName.length, c.length);
+      }
+    }
+    return '';
+  }
+
+  setCookie(
+    name: string, value: any, expireDays: number, path: string = '') {
+    const d = new Date();
+    d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
+    const expires: string = `expires=${d.toUTCString()}`;
+    const cpath: string = path ? `; path=${path}` : '';
+    document.cookie = `${name}=${value}; ${expires}${cpath}`;
+  }
 
   constructor() {
-    this.bag = cookies.get('bag') ? cookies.get('bag') : [];
-    this.login = cookies.get('login') ? true : false;
-    this.bagTotal = cookies.get('bagTotal') ? cookies.get('bagTotal') : 0.0;
-    this.bagSize = cookies.get('bagSize') ? cookies.get('bagSize') : 0
+    this.bag = this.getCookie('bag') ? JSON.parse(this.getCookie('bag')) : [];
+    this.login = this.getCookie('login') ? true : false;
+    this.bagTotal = this.getCookie('bagTotal') ? parseFloat(this.getCookie('bagTotal')) : 0.0;
+    this.bagSize = this.getCookie('bagSize') ? parseInt(this.getCookie('bagSize')) : 0;
+    if(this.getCookie('visitorId')) {
+      this.visitorId = this.getCookie('visitorId');
+    }
+    else {
+      this.visitorId = uuid();
+      this.setCookie('visitorId',this.visitorId$.value, 100, '/');
+    }
   }
 
   set login(value: boolean) {
@@ -28,7 +59,7 @@ export class CookieManagerService {
     this.bag$.next(value);
   }
 
-  get _bag() {
+  get getBag() {
     return this.bag$.asObservable();
   }
 
@@ -48,58 +79,69 @@ export class CookieManagerService {
     return this.bagSize$.asObservable();
   }
 
-  editBag(index, newQuantity) {
-    let current_bag = this.bag$.value
+  set visitorId(value: string) {
+    this.visitorId$.next(value);
+  }
+
+  get _visitorId() {
+    return this.visitorId$.asObservable();
+  }
+
+  editBag(index: number, newQuantity: number) {
+    let current_bag = this.getCookie('bag') ? JSON.parse(this.getCookie('bag')) : [];
+    console.log(current_bag, index, newQuantity);
     let newSize = 0;
     if(newQuantity > current_bag[index]['quantity']) {
       current_bag[index]['quantity'] = newQuantity;
-      cookies.set('bag', current_bag, {path: '/'})
     }
     else {
-      if(newQuantity) {
+      if(newQuantity > 0) {
         current_bag[index]['quantity'] = newQuantity;
-        cookies.set('bag', current_bag, {path: '/'})
       }
       else {
         current_bag.splice(index, 1);
-        cookies.set('bag', current_bag, {path: '/'})
       }
     }
     let total = 0.0;
-    current_bag.map(item => {newSize += item['quantity']; total += item.price * item.quantity; return '';})
+    current_bag.map(item => {
+      newSize += item['quantity']; 
+      total += item.PRICE * item.quantity; 
+    })
+    this._bag = current_bag;
     this.bag = current_bag;
     this.bagSize = newSize;
     this.bagTotal = total.toFixed(2)
-    cookies.set('bagSize', newSize, {path: '/'})
+    this.setCookie('bag', JSON.stringify(current_bag), 100, '/')
+    this.setCookie('bagSize', this.bagSize, 100, '/')
+    this.setCookie('bagTotal', this.bagTotal, 100, '/')
   }
 
-  addToBag = (sku,name,image,price,size,color, discount, additional_price=0) => {
+  addToBag = (product) => {
     let current_bag = this.bag$.value
     let bagSize = this.bagSize$.value
-    let filtered_bag = current_bag.findIndex(e => e.sku === sku && e.size === size && e.color === color)
+    let filtered_bag = current_bag.findIndex(e => e.ID === product.ID && e.SIZE === product.SIZE && e.COLOR === product.COLOR)
     if (filtered_bag > -1) {
-      current_bag[filtered_bag]['quantity'] += 1
+      current_bag[filtered_bag]['quantity'] = typeof current_bag[filtered_bag]['quantity'] === typeof 1 ? current_bag[filtered_bag]['quantity']+1 : parseInt(current_bag[filtered_bag]['quantity'] as string) + 1
     }
     else {
       current_bag.push({
-        sku: sku,
-        name: name,
-        size: size,
-        color: color,
-        image: image,
-        price: price,
-        discount: discount,
-        additional_price: additional_price,
+        ID: product.ID,
+        NAME: product.NAME,
+        SIZE: product.SIZE,
+        COLOR: product.COLOR,
+        IMAGE_LINK: product.IMAGE_LINK,
+        PRICE: product.PRICE,
         quantity: 1
       })
     }
     let total = 0.0;
-    current_bag.map(item => total += item.price * item.quantity)
+    current_bag.map(item => total += item.PRICE * item.quantity)
+    this._bag = current_bag;
     this.bag = current_bag;
     this.bagSize = bagSize+1;
     this.bagTotal = total.toFixed(2)
-    cookies.set('bag', current_bag, {path: '/'})
-    cookies.set('bagSize', this.bagSize$, {path: '/'})
-    cookies.set('bagTotal', this.bagTotal$, {path: '/'})
+    this.setCookie('bag', JSON.stringify(current_bag), 100, '/')
+    this.setCookie('bagSize', this.bagSize, 100, '/')
+    this.setCookie('bagTotal', this.bagTotal, 100, '/')
   }
 }

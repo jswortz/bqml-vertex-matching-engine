@@ -1,6 +1,5 @@
-import { Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {ActivatedRoute} from '@angular/router';
+import { Component, ViewChild, Input } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -8,22 +7,50 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
-  productList = []
-  brands = []
-  categories = {}
-  brand = ""
-  parent_category = ""
-  sub_category = ""
+  productList = [];
+  brands = [];
+  categories = [];
+  brand = "";
+  parent_category = "";
+  sub_category = "";
+  query = "";
+  page = 1;
+  entire_category = {category: {name: '', subcategories: []}};
+  rowHeight:number = 50;
+  itemsInView: any[];
+  startIndex:number = 0;
+  endIndex:number = 0;
+  numPages = 1;
 
   constructor(
     private readonly router: Router, private readonly route: ActivatedRoute) { 
-      this.productList = this.route.snapshot.data['Products']
-      this.brands = this.route.snapshot.data['Brands']
-      this.categories = this.route.snapshot.data['Categories']
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.brands = this.route.snapshot.data['Brands'];
+      this.categories = this.route.snapshot.data['Categories'];
+      this.route.data.subscribe(val => {
+        this.productList = val['Products'];
+        
+      })
+      // disable router reuse on param change
       this.route.queryParams.subscribe(params => {
-        this.parent_category = params['category'] ? params['category'] : null;
-        this.sub_category = params['subcategory'] ? params['subcategory'] : null;
+        this.parent_category = params['category'] ?? params['category'];
+        this.sub_category = params['subcategory'] ?? params['subcategory'];
+        this.query = params['q'] ?? params['q'];
+        this.page = params['page'] ? parseInt(params['page']) : 1;
+        this.numPages = Math.floor(this.productList.length/this.rowHeight);
+        this.itemsInView = this.productList.slice(this.page*this.rowHeight, this.page*this.rowHeight+this.rowHeight);
+        this.categories.some(category => {
+          if(category.category.name === this.parent_category) {
+            this.entire_category = category;
+            return true;
+          }
+        });
       });
+      
+    }
+
+    scrollToTop() {
+      window.scrollTo(0, 0);
     }
 
     selectBrand() {

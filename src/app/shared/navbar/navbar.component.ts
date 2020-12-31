@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import {CookieManagerService} from '../../../utilities/services/cookie-manager.service'
 
@@ -7,17 +9,21 @@ import {CookieManagerService} from '../../../utilities/services/cookie-manager.s
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   @Input() store_name = "";
   signed_in = false;
   bagSize = 0;
   @Input() categories = [];
+  myControl = new FormControl();
 
-  constructor(private readonly cookieManager: CookieManagerService) { 
-    
+  constructor(private readonly cookieManagerService: CookieManagerService, private readonly router: Router) { 
+    this.cookieManagerService._bagSize.subscribe(val => this.bagSize = val)
   }
 
-  ngOnInit(): void {
+  goToSearch(event: KeyboardEvent) {
+    event.preventDefault();
+    this.router.navigate(
+        ['product'], {queryParams: {q: (event.target as HTMLInputElement).value}});
   }
 
   login() {

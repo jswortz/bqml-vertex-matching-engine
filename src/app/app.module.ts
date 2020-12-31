@@ -30,7 +30,9 @@ import { SearchComponent } from './views/search/search.component'
     AppRoutingModule,
     ServicesModule
   ],
-  providers: [],
+  providers: [  
+    {provide: 'googleTagManagerId', useValue: 'GTM-5328V3D'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

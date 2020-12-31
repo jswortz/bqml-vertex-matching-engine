@@ -1,15 +1,17 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, ActivatedRoute, Resolve, RouterStateSnapshot} from '@angular/router';
 import { product, products } from '../../assets/sample/product';
 import { categories } from '../../assets/sample/categories';
 import { brands } from '../../assets/sample/brands'
 import {Observable, of} from 'rxjs';
+import { CookieManagerService } from '../services/cookie-manager.service';
 
+let homeRoute = 'https://backend-q-dot-css-storeops.uc.r.appspot.com'
 
 @Injectable({providedIn: 'root'})
 export class ProductResolver implements Resolve<any> {
   async getList(productId: number): Promise<any> {
-    return fetch(`/getproduct/${productId}`)
+    return fetch(`${homeRoute}/getproduct/${productId}`, {headers: {'Access-Control-Allow-Origin': 'no-cors'}})
         .then((response => {
           if (!response.ok) {
             throw new Error(response.statusText);
@@ -17,6 +19,7 @@ export class ProductResolver implements Resolve<any> {
           return response.json();
         }))
         .then(d => {
+          console.log(d);
           return d;
         })
         .catch(err => {
@@ -49,20 +52,31 @@ export class ProductResolver implements Resolve<any> {
 
 @Injectable({providedIn: 'root'})
 export class ProductsResolver implements Resolve<any> {
-  async getList(): Promise<any> {
-    return fetch('/productbyfilter', {
+  async getList(category: string, subcategory: string, q: string): Promise<any> {
+    console.log({
+      "filters": {
+          "name": q ? q: "",
+          "company": "",
+          "sizes": "",
+          "colors": "",
+          "price": "",
+          "category": category ?  [category] : [],
+          "subcategory": subcategory ? [subcategory] : []
+          }
+      })
+    return fetch(`${homeRoute}/productbyfilter`, {
         method: 'POST',
         body: JSON.stringify({
             "filters": {
-                "company": "MG",
-                "sizes": "XXL",
+                "company": "",
+                "sizes": "",
                 "colors": "",
                 "price": "",
-                "category":["Clothing"],
-                "subcategory":["Plus"]
+                "category": category ?  [category] : "",
+                "subcategory": subcategory ? [subcategory] : ""
                 }
             }),
-        headers: {'Content-Type': 'application/json'}
+        headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'no-cors'}
       }).then(response => {
             if (!response.ok) {
             throw new Error(response.statusText);
@@ -70,6 +84,7 @@ export class ProductsResolver implements Resolve<any> {
             return response.json();
         })
             .then(products => {
+              console.log(products);
             return products;
             })
             .catch(err => {
@@ -80,7 +95,15 @@ export class ProductsResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
       Promise<any> {
-    return this.getList();
+    const row: string[] = [];
+    let category: string = '';
+    let subcategory: string = '';
+    let q: string = '';
+    category = route.queryParamMap.get('category') ? route.queryParamMap.get('category').trim() : '';
+    subcategory = route.queryParamMap.get('subcategory') ? route.queryParamMap.get('subcategory').trim() : '';
+    q = route.queryParamMap.get('q') ? route.queryParamMap.get('q').trim() : '';
+    console.log(category, subcategory, q)
+    return this.getList(category, subcategory, q);
   }
 }
 
@@ -88,30 +111,23 @@ export class ProductsResolver implements Resolve<any> {
 @Injectable({providedIn: 'root'})
 export class FeaturedProductsResolver implements Resolve<any> {
     async getList(): Promise<any> {
-        return fetch('/getfeaturedproduct', {
+      let cookieManagerService = new CookieManagerService();
+        return fetch(`${homeRoute}/getfeaturedproduct`, {
             method: 'POST',
             body: JSON.stringify({
-                "placement_name":"recommendedforyou-ctr",
-                "product_id": "28174",
+                "placement_name":"recommended-ctr",
                 "params":{
-                                "dryRun": false,
-                                "userEvent": {
-                                    "eventType": "detail-page-view",
-                                    "userInfo": {
-                                        "visitorId": "32.215.17.15"
-                                    },
-                                    "productEventDetail": {
-                                        "productDetails": [
-                                            {
-                                                "id": "28174"
-                                            }
-                                        ]
-                                    }
+                          "dryRun": false,
+                          "userEvent": {
+                              "eventType": "home-page-view",
+                              "userInfo": {
+                                  "visitorId": cookieManagerService.visitorId$.value
+                              }
                         }
                     }
                 }
             ),
-            headers: {'Content-Type': 'application/json'}
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'no-cors'}
           }).then(response => {
                 if (!response.ok) {
                 throw new Error(response.statusText);
@@ -119,6 +135,7 @@ export class FeaturedProductsResolver implements Resolve<any> {
                 return response.json();
             })
                 .then(products => {
+                  console.log(products);
                 return products;
                 })
                 .catch(err => {
@@ -137,13 +154,14 @@ export class FeaturedProductsResolver implements Resolve<any> {
 @Injectable({providedIn: 'root'})
 export class CategoriesResolver implements Resolve<any> {
     async getList(): Promise<any> {
-        return fetch('/getcategory').then(response => {
+        return fetch(`${homeRoute}/getcategory`, {headers: {'Access-Control-Allow-Origin': 'no-cors'}}).then(response => {
                 if (!response.ok) {
                 throw new Error(response.statusText);
                 }
                 return response.json();
             })
                 .then(categories => {
+                  console.log(categories);
                 return categories;
                 })
                 .catch(err => {
@@ -161,13 +179,14 @@ export class CategoriesResolver implements Resolve<any> {
 @Injectable({providedIn: 'root'})
 export class BrandsResolver implements Resolve<any> {
     async getList(): Promise<any> {
-        return fetch('/getbrand').then(response => {
+        return fetch(`${homeRoute}/getbrand`, {headers: {'Access-Control-Allow-Origin': 'no-cors'}}).then(response => {
                 if (!response.ok) {
                 throw new Error(response.statusText);
                 }
                 return response.json();
             })
                 .then(brand => {
+                  console.log(brand);
                 return brand;
                 })
                 .catch(err => {
