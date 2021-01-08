@@ -1,0 +1,2 @@
+gcloud builds submit --tag gcr.io/css-storeops/retail-store --project css-storeops  # update container to one created in cloud run and project id
+gcloud run deploy --image gcr.io/css-storeops/retail-store --project css-storeops --platform managed # update container to one created in cloud run and project id

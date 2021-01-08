@@ -1,0 +1,16 @@
+service: backend-q
+runtime: python37
+env: standard
+entrypoint: gunicorn -b :$PORT app:app
+
+runtime_config:
+  python_version: 3
+manual_scaling:
+  instances: 3
+vpc_access_connector:
+  name: projects/css-storeops/locations/us-central1/connectors/css-retail-server   #network name
+
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10

@@ -1,0 +1,2 @@
+CLIENT_ID = "569181271116-9heitgoi3rnpq41hmdvvu2vbflkiqdoj.apps.googleusercontent.com"          #Google OAuth 2.0 Client id
+CLIENT_SECRET = "UMKpyXQwjoc8hFjBlH4pEPbw"      #Google OAuth 2.0 Client secret
