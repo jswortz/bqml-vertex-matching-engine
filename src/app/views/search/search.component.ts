@@ -1,5 +1,7 @@
 import { Component, ViewChild, Input } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
+import { CookieManagerService } from '../../../utilities/services/cookie-manager.service'
+import {GoogleTagManagerService} from 'angular-google-tag-manager';
 
 @Component({
   selector: 'app-search',
@@ -7,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
+  allProducts = [];
   productList = [];
   brands = [];
   categories = [];
@@ -14,7 +17,7 @@ export class SearchComponent {
   parent_category = "";
   sub_category = "";
   query = "";
-  page = 1;
+  page = 0;
   entire_category = {category: {name: '', subcategories: []}};
   rowHeight:number = 50;
   itemsInView: any[];
@@ -24,17 +27,19 @@ export class SearchComponent {
   onlyPage = false;
   loading = false;
 
-  constructor(
-    private readonly router: Router, private readonly route: ActivatedRoute) { 
+  constructor( private readonly cookieManagerService: CookieManagerService, 
+    private readonly router: Router, private readonly route: ActivatedRoute, private readonly gtmService: GoogleTagManagerService) {
+
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.brands = this.route.snapshot.data['Brands'];
+      this.brands = this.route.snapshot.data['Brands'].sort();
       this.categories = this.route.snapshot.data['Categories'];
       this.route.data.subscribe(val => {
         if(this.onlyPage){
           this.onlyPage = false;
           return;
         }
-        this.productList = val['Products'];
+        this.allProducts = val['Products'];
+        this.productList = this.allProducts;
       })
       // disable router reuse on param change
       this.route.queryParams.subscribe(params => {
@@ -44,7 +49,9 @@ export class SearchComponent {
         this.parent_category = params['category'] ?? params['category'];
         this.sub_category = params['subcategory'] ?? params['subcategory'];
         this.query = params['q'] ?? params['q'];
-        this.page = params['page'] ? parseInt(params['page']) : 1;
+        this.brand = params['brand'] ?? params['brand'];
+        this.page = params['page'] ? parseInt(params['page']) : 0;
+        this.productList = this.brand ? this.allProducts.filter(product => product.COMPANY === this.brand) : this.allProducts
         this.numPages = Math.floor(this.productList.length/this.rowHeight);
         this.itemsInView = this.productList.slice(this.page*this.rowHeight, this.page*this.rowHeight+this.rowHeight);
         this.categories.some(category => {
@@ -53,6 +60,23 @@ export class SearchComponent {
             return true;
           }
         });
+        this.router.events.forEach(item => {
+          if (item instanceof NavigationEnd) {
+            const gtmTag = {
+              "automl": {
+                "eventType": 'search',
+                "userInfo": {
+                  "visitorId": cookieManagerService.visitorId$.value,
+                  "userId": this.cookieManagerService.visitorId$.value
+                },
+                "productEventDetail": {
+                  "searchQuery": this.query + " " + this.parent_category + " " + this.sub_category,
+                }
+              }
+            };
+            this.gtmService.pushTag(gtmTag);
+          }
+        }); 
       });
     }
 
@@ -61,8 +85,14 @@ export class SearchComponent {
       window.scrollTo(0, 0);
     }
 
-    selectBrand() {
-
+    selectBrand(event: any) {
+      event.preventDefault()
+      this.brand = event.target.value;  
+      this.productList = this.allProducts.filter(product => {
+        return product.COMPANY.trim().toLowerCase() === this.brand.trim().toLowerCase();
+      });
+      this.numPages = Math.floor(this.productList.length/this.rowHeight);
+      this.itemsInView = this.productList.slice(this.page*this.rowHeight, this.page*this.rowHeight+this.rowHeight);
     }
 
 }

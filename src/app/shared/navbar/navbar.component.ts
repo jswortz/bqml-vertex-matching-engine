@@ -17,7 +17,12 @@ export class NavbarComponent {
   myControl = new FormControl();
 
   constructor(private readonly cookieManagerService: CookieManagerService, private readonly router: Router) { 
-    this.cookieManagerService._bagSize.subscribe(val => this.bagSize = val)
+    this.cookieManagerService.bag$.subscribe(val => {
+      this.bagSize = 0;
+      val.map(item => {
+        this.bagSize += Number(item['quantity']); 
+      })
+    })
   }
 
   goToSearch(event: KeyboardEvent) {

@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit {
           "automl": {
             "eventType": 'home-page-view',
             "userInfo": {
-              "visitorId": cookieManagerService.visitorId$.value
+              "visitorId": cookieManagerService.visitorId$.value,
+              "userId": cookieManagerService.visitorId$.value
             }
           }
         };
@@ -28,7 +29,6 @@ export class HomeComponent implements OnInit {
       }
     });
     this.products = this.route.snapshot.data["FeaturedProducts"];
-    console.log(this.products);
   }
 
   ngOnInit(): void {

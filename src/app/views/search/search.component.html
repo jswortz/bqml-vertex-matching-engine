@@ -59,13 +59,11 @@
             <div style="border-bottom:calc(0.2px + 0.05em) solid #e5e5e5; width: 100%">
                 <div uk-form-custom="target: > * > span:first-child">
                     <select 
-                    (onChange)="selectBrand"
+                    (change)="selectBrand($event)"
                     >
-                        <option value="">Brand</option>
                         <option *ngFor="let brand of brands" [value]="brand.BRAND">{{brand.BRAND}}</option>
                     </select>
                     <button class="uk-button uk-button-text" type="button" tabIndex="-1">
-                        <span *ngIf="brand">{{Brand.BRAND}}</span>
                         <span></span>
                         <span uk-icon="icon: chevron-down"></span>
                     </button>
@@ -80,14 +78,14 @@
                 </ng-container>
             </div>
             <ul class="uk-pagination uk-flex-center" uk-margin>
-                <li *ngIf="page-1 > 0"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: page - 1}"><span uk-pagination-previous></span></a></li>
-                <li *ngIf="page-1 > 0"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: page-1}">{{page - 1}}</a></li>
-                <li class="uk-active"><span>{{page}}</span></li>
-                <li *ngIf="page+1 < numPages"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: page + 1}">{{page + 1}}</a></li>
-                <li *ngIf="page+2 < numPages"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: page + 2}">{{page + 2}}</a></li>
+                <li *ngIf="page - 1 > -1"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: page - 1, brand: brand}"><span uk-pagination-previous></span></a></li>
+                <li *ngIf="page - 1 > -1"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: page - 1, brand: brand}">{{page}}</a></li>
+                <li class="uk-active"><span>{{page + 1}}</span></li>
+                <li *ngIf="page+1 < numPages"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: page + 1, brand: brand}">{{page + 2}}</a></li>
+                <li *ngIf="page+2 < numPages"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: page + 2, brand: brand}">{{page + 3}}</a></li>
                 <li *ngIf="page+3 < numPages" class="uk-disabled"><span>...</span></li>
-                <li *ngIf="page !== numPages"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: numPages}">{{numPages}}</a></li>
-                <li *ngIf="page < numPages"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: page + 1}"><span uk-pagination-next></span></a></li>
+                <li *ngIf="page !== numPages"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: numPages, brand: brand}">{{numPages + 1}}</a></li>
+                <li *ngIf="page < numPages"><a (click)="scrollToTop()" [routerLink]="['/product']" [queryParams]="{category: parent_category, subcategory: sub_category, page: page + 1, brand: brand}"><span uk-pagination-next></span></a></li>
             </ul>
             
         </div>

@@ -19,7 +19,6 @@ export class ProductResolver implements Resolve<any> {
           return response.json();
         }))
         .then(d => {
-          console.log(d);
           return d;
         })
         .catch(err => {
@@ -53,17 +52,6 @@ export class ProductResolver implements Resolve<any> {
 @Injectable({providedIn: 'root'})
 export class ProductsResolver implements Resolve<any> {
   async getList(category: string, subcategory: string, q: string): Promise<any> {
-    console.log({
-      "filters": {
-          "name": q ? q: "",
-          "company": "",
-          "sizes": "",
-          "colors": "",
-          "price": "",
-          "category": category ?  [category] : [],
-          "subcategory": subcategory ? [subcategory] : []
-          }
-      })
     return fetch(`${homeRoute}/productbyfilter`, {
         method: 'POST',
         body: JSON.stringify({
@@ -84,7 +72,6 @@ export class ProductsResolver implements Resolve<any> {
             return response.json();
         })
             .then(products => {
-              console.log(products);
             return products;
             })
             .catch(err => {
@@ -109,19 +96,20 @@ export class ProductsResolver implements Resolve<any> {
 
 
 @Injectable({providedIn: 'root'})
-export class FeaturedProductsResolver implements Resolve<any> {
+export class RecentlyViewedResolver implements Resolve<any> {
     async getList(): Promise<any> {
       let cookieManagerService = new CookieManagerService();
         return fetch(`${homeRoute}/getfeaturedproduct`, {
             method: 'POST',
             body: JSON.stringify({
-                "placement_name":"recommended-ctr",
+                "placement_name":"recently_viewed_default",
                 "params":{
                           "dryRun": false,
                           "userEvent": {
                               "eventType": "home-page-view",
                               "userInfo": {
-                                  "visitorId": cookieManagerService.visitorId$.value
+                                  "visitorId": cookieManagerService.getCookie('_ga'),
+                                  "userId": cookieManagerService.visitorId$.value
                               }
                         }
                     }
@@ -135,7 +123,50 @@ export class FeaturedProductsResolver implements Resolve<any> {
                 return response.json();
             })
                 .then(products => {
-                  console.log(products);
+                return products;
+                })
+                .catch(err => {
+                console.log(err);
+                return products;
+                });
+    
+      }
+    
+      resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
+          Promise<any> {
+        return this.getList();
+      }
+}
+
+
+@Injectable({providedIn: 'root'})
+export class FeaturedProductsResolver implements Resolve<any> {
+    async getList(): Promise<any> {
+      let cookieManagerService = new CookieManagerService();
+        return fetch(`${homeRoute}/getfeaturedproduct`, {
+            method: 'POST',
+            body: JSON.stringify({
+                "placement_name":"recommended-ctr",
+                "params":{
+                          "dryRun": false,
+                          "userEvent": {
+                              "eventType": "home-page-view",
+                              "userInfo": {
+                                  "visitorId": cookieManagerService.getCookie('_ga'),
+                                  "userId": cookieManagerService.visitorId$.value
+                              }
+                        }
+                    }
+                }
+            ),
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'no-cors'}
+          }).then(response => {
+                if (!response.ok) {
+                throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+                .then(products => {
                 return products;
                 })
                 .catch(err => {
@@ -161,7 +192,6 @@ export class CategoriesResolver implements Resolve<any> {
                 return response.json();
             })
                 .then(categories => {
-                  console.log(categories);
                 return categories;
                 })
                 .catch(err => {
@@ -186,7 +216,6 @@ export class BrandsResolver implements Resolve<any> {
                 return response.json();
             })
                 .then(brand => {
-                  console.log(brand);
                 return brand;
                 })
                 .catch(err => {

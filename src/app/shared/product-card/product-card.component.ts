@@ -7,10 +7,15 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ProductCardComponent implements OnInit {
   @Input() product;
+  price: string;
   
   ngOnInit() {
     if(Object.keys(this.product).includes('IMAGE LINK')){
       this.product['IMAGE_LINK'] = this.product['IMAGE LINK'];
     }
+  }
+
+  getPrice(price) {
+    return price.toFixed(2);
   }
 }

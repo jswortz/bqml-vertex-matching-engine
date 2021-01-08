@@ -27,7 +27,8 @@ export class ProductComponent {
     "RECOMMENDATIONS": [],
     "DISCOUNT": false,
     "bought_together": [],
-    "recommended": []
+    "recommended": [],
+    "SIMILAR": []
   }
   sizeSelection = '' 
   recently_viewed = []
@@ -37,10 +38,16 @@ export class ProductComponent {
   constructor( private gtmService: GoogleTagManagerService,
     private readonly router: Router, private readonly route: ActivatedRoute, private readonly cookieManagerService:CookieManagerService) { 
       this.product = this.route.snapshot.data["Product"];
+      this.recently_viewed = this.route.snapshot.data["RecentlyViewed"];
       try {
-        console.log(this.product);
+        if(Object.keys(this.recently_viewed).includes('recommendationToken')) this.recently_viewed = []
+      } catch (error) {
+        console.log(error)
+      }
+      console.log(this.recently_viewed)
+      try {
         this.product = this.product[0];
-        this.product.bought_together = getRandomValues(this.product.RECOMMENDATIONS, 3);
+        this.product.bought_together = getRandomValues(this.product.SIMILAR, 3);
         this.product.recommended = getRandomValues(this.product.RECOMMENDATIONS, 3);
         this.colorSelection = this.product.COLOR
         
@@ -63,7 +70,8 @@ export class ProductComponent {
           "RECOMMENDATIONS": [],
           "DISCOUNT": false,
           "bought_together": [],
-          "recommended": []
+          "recommended": [], 
+          "SIMILAR": []
         }
       }
       this.router.events.forEach(item => {
@@ -72,14 +80,16 @@ export class ProductComponent {
             "automl": {
               "eventType": 'detail-page-view',
               "userInfo": {
-                "visitorId": cookieManagerService.visitorId$.value
+                "visitorId": cookieManagerService.visitorId$.value,
+                "userId": cookieManagerService.visitorId$.value
               },
               "productEventDetail": {
                 "productDetails": [
                   {
-                    "id": this.product.ID,
+                    "id": String(this.product.ID),
                     "originalPrice": this.product.PRICE,
                     "displayPrice": this.product.PRICE,
+                    "currencyCode":"USD",
                   }
                 ]
               }
@@ -101,6 +111,27 @@ export class ProductComponent {
   addBag() {
     if(this.sizeSelection) {
       this.cookieManagerService.addToBag(this.product);
+      const gtmTag = {
+        "automl": {
+          "eventType": 'add-to-cart',
+          "userInfo": {
+            "visitorId": this.cookieManagerService.visitorId$.value,
+            "userId": this.cookieManagerService.visitorId$.value
+          },
+          "productEventDetail": {
+            "productDetails": [
+              {
+                "id": String(this.product.ID),
+                "originalPrice": this.product.PRICE,
+                "displayPrice": this.product.PRICE,
+                "currencyCode":"USD",
+                "quantity": 1
+              }
+            ]
+          }
+        }
+      };
+      this.gtmService.pushTag(gtmTag);
     }
     else {
         UIkit.notification(

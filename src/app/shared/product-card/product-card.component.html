@@ -1,4 +1,4 @@
-<a [routerLink]="'/product/' + product.ID" class="uk-link-text" style="text-decoration: none; color: black">
+<a [href]="'/product/' + product.ID" class="uk-link-text" style="text-decoration: none; color: black">
     <div class="uk-text-center">
         <img [src]="product.IMAGE_LINK" [alt]="product.NAME" style="max-height: 150px;width: auto;">
         <p class="uk-margin-remove-bottom uk-text-bold">{{product.NAME}}</p>
@@ -6,11 +6,11 @@
         <ng-template *ngIf="product.DISCOUNT; then discount; else regular"></ng-template>
         <ng-template #discount>
             <p class="uk-text-bold uk-margin-remove-top">
-                <del>${{product.PRICE}}</del> <span class="uk-text-danger">${{product.DISCOUNT}}</span>
+                <del>${{getPrice(product.PRICE)}}</del> <span class="uk-text-danger">${{getPrice(product.DISCOUNT)}}</span>
             </p>
         </ng-template>
         <ng-template #regular>
-            <p class="uk-margin-remove-top">${{product.PRICE}}</p>
+            <p class="uk-margin-remove-top">${{getPrice(product.PRICE)}}</p>
         </ng-template>
     </div>
 </a>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { CookieManagerService } from '../../../utilities/services/cookie-manager.service'
 import {GoogleTagManagerService} from 'angular-google-tag-manager';
 
@@ -10,34 +10,46 @@ import {GoogleTagManagerService} from 'angular-google-tag-manager';
 })
 export class BagComponent {
   _bag = []
-  bagTotal = 0.0
-  bagSize = 0
+  bagTotal = '0.00'
   editBag;
   products = [];
   test = '';
   getCookie;
   setCookie;
+  recently_viewed = [];
+  recommended = [];
 
-  constructor(private readonly cookieManagerService: CookieManagerService, private readonly router: Router, private readonly gtmService: GoogleTagManagerService) { 
+  constructor(private readonly cookieManagerService: CookieManagerService, private readonly route: ActivatedRoute, private readonly router: Router, private readonly gtmService: GoogleTagManagerService) { 
+    this.recommended = this.route.snapshot.data["FeaturedProducts"];
+    this.recently_viewed = this.route.snapshot.data["RecentlyViewed"];
+    try {
+      if(Object.keys(this.recently_viewed).includes('recommendationToken')) this.recently_viewed = []
+    } catch (error) {
+      console.log(error)
+    }
     this.cookieManagerService.bag$.subscribe(val => {
       this._bag = val;
       this.products = [];
       val.forEach(item => {
         this.products.push({
-          "id": item.ID,
+          "id": String(item.ID),
+          "quantity": item.quantity,
           "originalPrice": item.PRICE,
           "displayPrice": item.PRICE,
+          "currencyCode":"USD",
         });
       });
-      console.log(this._bag);
     })
-    this.cookieManagerService.bagSize$.subscribe(val => {
-      this.bagSize = val;
+    this.cookieManagerService.bag$.subscribe(val => {
+      let total = 0.0;
+      val.forEach(i => total += i.quantity*i.PRICE);
+      this.bagTotal = total.toFixed(2);
     })
-    this.cookieManagerService.bagTotal$.subscribe(val => {
-      this.bagTotal = val;
-    })
-    this.editBag = this.cookieManagerService.editBag;
+    this.editBag = (index: number, newQuantity: number) => {
+      this.cookieManagerService.editBag(index, newQuantity);  
+      this.cookieManagerService._bag = this._bag;
+      this.cookieManagerService.bag = this._bag;
+    }
     this.getCookie = this.cookieManagerService.getCookie;
     this.setCookie = this.cookieManagerService.setCookie;
 
@@ -45,15 +57,13 @@ export class BagComponent {
       if (item instanceof NavigationEnd) {
         const gtmTag = {
           "automl": {
-            "eventType": 'detail-page-view',
+            "eventType": 'checkout-start',
             "userInfo": {
               "visitorId": cookieManagerService.visitorId$.value,
+              "userId": this.cookieManagerService.visitorId$.value
             },
             "productEventDetail": {
               "productDetails": this.products,
-              "purchaseTransaction": {
-                "revenue": this.bagTotal
-              }
             }
           }
         };

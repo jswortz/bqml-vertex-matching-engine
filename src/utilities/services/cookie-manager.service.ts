@@ -40,8 +40,8 @@ export class CookieManagerService {
   constructor() {
     this.bag = this.getCookie('bag') ? JSON.parse(this.getCookie('bag')) : [];
     this.login = this.getCookie('login') ? true : false;
-    this.bagTotal = this.getCookie('bagTotal') ? parseFloat(this.getCookie('bagTotal')) : 0.0;
-    this.bagSize = this.getCookie('bagSize') ? parseInt(this.getCookie('bagSize')) : 0;
+    this.bagTotal = this.getCookie('bagTotal') ? typeof this.getCookie('bagTotal') === 'string' ? parseFloat(this.getCookie('bagTotal')) : this.getCookie('bagTotal') : 0.0;
+    this.bagSize = this.getCookie('bagSize') ? typeof this.getCookie('bagSize') === 'string' ? parseInt(this.getCookie('bagSize')) : this.getCookie('bagSize') : 0;
     if(this.getCookie('visitorId')) {
       this.visitorId = this.getCookie('visitorId');
     }
@@ -112,8 +112,6 @@ export class CookieManagerService {
     this.bagSize = newSize;
     this.bagTotal = total.toFixed(2)
     this.setCookie('bag', JSON.stringify(current_bag), 100, '/')
-    this.setCookie('bagSize', this.bagSize, 100, '/')
-    this.setCookie('bagTotal', this.bagTotal, 100, '/')
   }
 
   addToBag = (product) => {
@@ -141,7 +139,5 @@ export class CookieManagerService {
     this.bagSize = bagSize+1;
     this.bagTotal = total.toFixed(2)
     this.setCookie('bag', JSON.stringify(current_bag), 100, '/')
-    this.setCookie('bagSize', this.bagSize, 100, '/')
-    this.setCookie('bagTotal', this.bagTotal, 100, '/')
   }
 }
