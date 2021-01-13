@@ -9,7 +9,7 @@ import {GoogleTagManagerService} from 'angular-google-tag-manager';
   styleUrls: ['./bag.component.scss']
 })
 export class BagComponent {
-  _bag = [{"ID":102,"NAME":"US Polo Assn. Juniors Solid Polo With Small Pony","SIZE":"XXL","COLOR":"RED","IMAGE_LINK":"https://storage.cloud.google.com/css-retail-images/subcat_tops_tees.png","PRICE":25,"quantity":1},{"ID":158,"NAME":"Plain Long Spaghetti Strap Tank Top Camis Basic Camisole Cotton","SIZE":"XXL","COLOR":"RED","IMAGE_LINK":"https://storage.cloud.google.com/css-retail-images/subcat_tops_tees.png","PRICE":8.35,"quantity":1}]
+  _bag = []
   bagTotal = '0.00'
   editBag;
   products = [];
@@ -70,7 +70,6 @@ export class BagComponent {
         this.gtmService.pushTag(gtmTag);
       }
     });
-    this._bag = [{"ID":102,"NAME":"US Polo Assn. Juniors Solid Polo With Small Pony","SIZE":"XXL","COLOR":"RED","IMAGE_LINK":"https://storage.cloud.google.com/css-retail-images/subcat_tops_tees.png","PRICE":25,"quantity":1},{"ID":158,"NAME":"Plain Long Spaghetti Strap Tank Top Camis Basic Camisole Cotton","SIZE":"XXL","COLOR":"RED","IMAGE_LINK":"https://storage.cloud.google.com/css-retail-images/subcat_tops_tees.png","PRICE":8.35,"quantity":1}];
   }
   help(item) {
     console.log(item);
