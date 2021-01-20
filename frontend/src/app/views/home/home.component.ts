@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
+import {getRandomValues} from '../../../utilities/helpers/getRandomValues';
 
 import {CookieManagerService} from '../../../utilities/services/cookie-manager.service'
 import {GoogleTagManagerService} from 'angular-google-tag-manager';
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
   login = false;
   products:any = [];
   recently_viewed:any = [];
+  getRandomValues = getRandomValues;
 
   constructor(private gtmService: GoogleTagManagerService, private readonly router: Router, private readonly route: ActivatedRoute, private readonly cookieManagerService: CookieManagerService) { 
     this.router.events.forEach(item => {
@@ -30,6 +32,7 @@ export class HomeComponent implements OnInit {
       }
     });
     this.products = this.route.snapshot.data["FeaturedProducts"];
+    this.products = this.getRandomValues(this.products, 5);
     this.recently_viewed = this.route.snapshot.data["RecentlyViewed"];
 
   }

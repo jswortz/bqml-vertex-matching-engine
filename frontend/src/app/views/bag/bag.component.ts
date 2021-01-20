@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { CookieManagerService } from '../../../utilities/services/cookie-manager.service'
 import {GoogleTagManagerService} from 'angular-google-tag-manager';
+import {getRandomValues} from '../../../utilities/helpers/getRandomValues';
 
 @Component({
   selector: 'app-bag',
@@ -18,9 +19,12 @@ export class BagComponent {
   setCookie;
   recently_viewed = [];
   recommended = [];
+  getRandomValues = getRandomValues;
+
 
   constructor(private readonly cookieManagerService: CookieManagerService, private readonly route: ActivatedRoute, private readonly router: Router, private readonly gtmService: GoogleTagManagerService) { 
     this.recommended = this.route.snapshot.data["FeaturedProducts"];
+    this.recommended = this.getRandomValues(this.recommended, 5);
     this.recently_viewed = this.route.snapshot.data["RecentlyViewed"];
     try {
       if(Object.keys(this.recently_viewed).includes('recommendationToken')) this.recently_viewed = []

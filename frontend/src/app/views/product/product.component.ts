@@ -47,8 +47,8 @@ export class ProductComponent {
       console.log(this.recently_viewed)
       try {
         this.product = this.product[0];
-        this.product.bought_together = getRandomValues(this.product.SIMILAR, 3);
-        this.product.recommended = getRandomValues(this.product.RECOMMENDATIONS, 3);
+        this.product.bought_together = getRandomValues(this.product.SIMILAR, 5);
+        this.product.recommended = getRandomValues(this.product.RECOMMENDATIONS, 5);
         this.colorSelection = this.product.COLOR
         
       } catch (error) {

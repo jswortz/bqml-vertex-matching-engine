@@ -38,12 +38,12 @@
                 Add to Bag
             </button>
             <p class="uk-text-bold" style="color: #333; font-size: 1.25rem">Description</p>
-                <p class="">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
+                <p class="">This is a sample description of {{product.NAME}}</p>
             <ul uk-accordion="multiple: true">
                 <li>
                     <span class="uk-accordion-title uk-text-bold" style="cursor: pointer">Reviews</span>
                     <div class="uk-accordion-content">
-                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
+                        <p>This is a sample review of {{product.NAME}}</p>
                     </div>
                 </li>
             </ul>
@@ -53,7 +53,7 @@
                 <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
             
                     <ul class="uk-slider-items uk-child-width-1-3 uk-grid">
-                        <li *ngFor="let rec of product.SIMILAR">
+                        <li *ngFor="let rec of product.bought_together">
                             <app-product-card [product]="rec"></app-product-card>
                         </li>
                     </ul>
@@ -74,7 +74,7 @@
             <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
         
                 <ul class="uk-slider-items uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-3@s uk-grid">
-                    <li *ngFor="let rec of product.RECOMMENDATIONS">
+                    <li *ngFor="let rec of product.recommended">
                         <app-product-card [product]="rec"></app-product-card>
                     </li>
                 </ul>
