@@ -120,15 +120,6 @@ def productbyfilter():
     return response
 
 
-@app.route('/')
-def index():
-    try:
-        email = dict(session)['profile']['email']
-        return {"access_token": dict(session)["token"]["id_token"]}
-    except:
-        return '<h1>Not logge</h1>'
-
-
 @app.route('/login')
 def login():
     google = oauth.create_client('google')  # create the google oauth client
