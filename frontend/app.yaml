@@ -6,7 +6,7 @@ automatic_scaling:
 
 handlers:
 - url: /
-  static_files: dist/index.html
-  upload: dist/index.html
+  static_files: dist/retail/index.html
+  upload: dist/retail/index.html
 - url: /
-  static_dir: dist
+  static_dir: dist/retail
