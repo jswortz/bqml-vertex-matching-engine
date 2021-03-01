@@ -5,8 +5,9 @@ automatic_scaling:
   min_instances: 3
 
 handlers:
-- url: /
+- url: /(.*\.(js|css|svg|png)(|\.map))$
+  static_files: dist/retail/\1
+  upload: dist/retail/(.*)(|\.map)
+- url: /.*
   static_files: dist/retail/index.html
-  upload: dist/retail/index.html
-- url: /
-  static_dir: dist/retail
+  upload: dist/retail/.*
