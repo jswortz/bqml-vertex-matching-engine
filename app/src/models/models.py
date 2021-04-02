@@ -1,9 +1,11 @@
 from src.utils import db_connection
 from src.data_layer import query_source, cloumn_information as ci
 from src.utils import utils
+from google.cloud import dialogflow
 import requests
 import json
 
+PROJECT_ID = 'css-storeops'
 
 class Models():
     def __init__(self, prod_id="", request_data=''):
@@ -110,5 +112,16 @@ class Models():
         self.client.close()
         return utils.convet_result_to_dataframe(result,columns, "records")
 
+    def fetch_chatbot_response(self, session_id, query_string):
+        session_client = dialogflow.SessionsClient()
+        session = session_client.session_path(PROJECT_ID, session_id)
 
+        text_input = dialogflow.TextInput(text=query_string, language_code="en-US")
+        query_input = dialogflow.QueryInput(text=text_input)
+
+        response = session_client.detect_intent(
+            request={"session": session, "query_input": query_input}
+        )
+
+        return response.query_result.fulfillment_text
 

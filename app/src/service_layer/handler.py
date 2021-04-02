@@ -114,3 +114,13 @@ def get_user_detail():
     except Exception as e:
         print(e)
     return final_output
+
+def get_chatbot_response(session_id, query_string):
+    final_output = {}
+    try:
+        model_obj = models.Models()
+        final_output = model_obj.fetch_chatbot_response(session_id, query_string)
+    except Exception as e:
+        print(e)
+
+    return final_output

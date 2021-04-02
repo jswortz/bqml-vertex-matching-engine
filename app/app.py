@@ -157,6 +157,24 @@ def logout():
         session.pop(key)
     return redirect('/')
 
+@app.route('/chatbot', methods=["POST"])
+def chatbot_interaction():
+    if request.method == "POST":
+        token_access = request.headers.get('Authorization')
+
+        if auth.verify_token(token_access) or True:
+            data = request.json
+
+            # Validate request body
+            if ("session_id" in data) == False or ("query_string" in data) == False:
+                return "Missing required parameters in body", 400
+
+            response = handler.get_chatbot_response(data["session_id"], data["query_string"])
+        else:
+            response = {"error": "Not a valid Auth"}
+    else:
+        return {}, 404
+    return response
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
