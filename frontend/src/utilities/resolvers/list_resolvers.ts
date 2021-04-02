@@ -6,7 +6,7 @@ import { brands } from '../../assets/sample/brands'
 import {Observable, of} from 'rxjs';
 import { CookieManagerService } from '../services/cookie-manager.service';
 
-let homeRoute = 'https://backend-q-dot-css-storeops.uc.r.appspot.com' // update the backend app engine site you just deployed
+let homeRoute = 'http://127.0.0.1:5000' // update the backend app engine site you just deployed
 
 @Injectable({providedIn: 'root'})
 export class ProductResolver implements Resolve<any> {
