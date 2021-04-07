@@ -162,7 +162,7 @@ def chatbot_interaction():
     if request.method == "POST":
         token_access = request.headers.get('Authorization')
 
-        if auth.verify_token(token_access) or True:
+        if auth.verify_token(token_access):
             data = request.json
 
             # Validate request body
