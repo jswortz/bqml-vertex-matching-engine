@@ -45,3 +45,6 @@ Thumbs.db
 __pycache__/
 # Ignored by the build system
 setup.cfg
+
+#Cloud SQL util
+cloud_sql_proxy

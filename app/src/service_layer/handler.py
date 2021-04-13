@@ -8,6 +8,7 @@ def getproduct(pro_id):
     try:
         default_parameters = default_params.PARAMS
         default_parameters['params']['userEvent']['productEventDetail']['productDetails'][0]['id'] = pro_id
+        default_parameters['placement_name'] = 'frequently-ctr' ## frequently bought together placement id
         model_obj = models.Models(pro_id, default_parameters)
         default_parameters['placement_name'] = 'others-ctr' ## others you may like placement id
         similar_obj = models.Models(pro_id, default_parameters)
