@@ -2,6 +2,7 @@ from src.auth import auth
 from src.data_layer import auth_client
 from src.service_layer import handler
 from src import retail
+from src import chatbot
 
 from authlib.integrations.flask_client import OAuth
 from flask import Flask, request, session, url_for, redirect, render_template
@@ -149,7 +150,7 @@ def search():
             return {'error': f"Unknown field '{arg}'"}, 400
 
     if body.get('benchmark') == True:
-        return retail.search_benchmark(**body), 200
+        return retail.search_benchmark(**body).json, 200
 
     return {'error': f"'benchmark' != true is not yet supported"}, 400
     # return retail.search(**body), 200
@@ -216,6 +217,16 @@ def chatbot_interaction():
     else:
         return {}, 404
     return response
+
+@app.route('/chatbot_webhook', methods=['POST'])
+def chatbot_webhook():
+    auth = request.authorization
+
+    if not chatbot.authorize(auth.username, auth.password):
+        return {'error': 'Unauthorized'}, 401
+
+    body = request.json
+    return chatbot.handle_webhook(body)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)

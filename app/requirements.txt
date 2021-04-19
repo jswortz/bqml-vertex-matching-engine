@@ -5,6 +5,7 @@ cffi==1.14.3
 chardet==3.0.4
 click==7.1.2
 cryptography==3.2.1
+dialogflow-fulfillment==0.4.2
 elasticsearch>=7.0.0,<8.0.0
 elasticsearch_dsl>=7.0.0,<8.0.0
 Flask==1.1.2
