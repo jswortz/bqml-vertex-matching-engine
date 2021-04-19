@@ -1,5 +1,4 @@
 from src.retail import search_benchmark
-from src.service_layer import handler
 
 from dialogflow_fulfillment import Card
 
