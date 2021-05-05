@@ -2,7 +2,7 @@ import os
 
 is_prod = True if 'GAE_DEPLOYMENT_ID' in os.environ else False
 
-
+PROJECT_NUMBER = '569181271116'
 ELASTICSEARCH_INDEX = 'products'
 
 #TODO: move secrets to SecretManager
