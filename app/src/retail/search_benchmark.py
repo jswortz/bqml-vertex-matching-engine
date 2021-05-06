@@ -2,6 +2,7 @@ from src.config import ELASTICSEARCH_CLOUD_ID
 from src.config import ELASTICSEARCH_INDEX
 from src.config import ELASTICSEARCH_USER
 from src.config import ELASTICSEARCH_PASSWORD
+from src.retail.config import MAX_PAGE_SIZE
 from src.types.retail import SearchResponse
 from src.types.retail import SearchProduct
 
@@ -14,7 +15,6 @@ _client = Elasticsearch(
     cloud_id = ELASTICSEARCH_CLOUD_ID,
     http_auth = (ELASTICSEARCH_USER, ELASTICSEARCH_PASSWORD))
 
-_MAX_PAGE_SIZE = 120
 _SEARCH_FIELD = 'NAME'
 
 def _autocorrect(user_query):
@@ -44,7 +44,7 @@ def search_benchmark(
     **kwargs):
 
     page = max(page, 1)
-    page_size = min(pageSize, _MAX_PAGE_SIZE)
+    page_size = min(pageSize, MAX_PAGE_SIZE)
     corrected_query = _autocorrect(query) if autocorrect else query
 
     raw_results = (
