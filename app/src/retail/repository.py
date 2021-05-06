@@ -82,7 +82,7 @@ def get_product(
     
     url = PRODUCT_URL_TMPL.substitute(product_path=resource)
 
-    return _request(url, method='GET')
+    return _request(uri=url, method='GET')
 
 def list_products():
     raise NotImplementedError
@@ -136,7 +136,7 @@ def search_products(
         **kwargs
     })
 
-    return _request(url, method='POST', body=body)
+    return _request(uri=url, method='POST', body=body)
 
 def complete_query(
     query,
@@ -156,7 +156,7 @@ def complete_query(
     params = urlencode({'query': query, **kwargs})
     url = f'{COMPLETEQUERY_URL_TMPL.substitute(catalog=resource)}?{params}'
 
-    return _request(url, method='GET')
+    return _request(uri=url, method='GET')
 
 def recommend(
     placement_id,
@@ -182,4 +182,4 @@ def recommend(
         **kwargs
     })
 
-    return _request(url, method='POST', body=body)
+    return _request(uri=url, method='POST', body=body)
