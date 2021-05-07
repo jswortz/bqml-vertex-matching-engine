@@ -152,8 +152,8 @@ def search():
     if body.get('benchmark') == True:
         return retail.search_benchmark(**body).json, 200
 
-    # return {'error': f"'benchmark' != true is not yet supported"}, 400
-    return retail.search(**body), 200
+    return {'error': f"'benchmark' != true is not yet supported"}, 400
+    # return retail.search(**body), 200
 
 
 @app.route('/login')
@@ -230,8 +230,3 @@ def chatbot_webhook():
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
-    # from src.retail.repository import search_products, complete_query, recommend
-
-    # # print(search_products('jeans', 'dev_test'))
-    # # print(complete_query('jea'))
-    # # print()
