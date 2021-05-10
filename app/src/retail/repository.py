@@ -143,7 +143,7 @@ def complete_query(
     project_number=PROJECT_NUMBER,
     location=DEFAULT_LOCATION,
     catalog=DEFAULT_CATALOG,
-    **kwargs):
+    **kwargs):     
 
     client = AuthorizedHttp(_creds)
 
@@ -165,6 +165,21 @@ def recommend(
     location=DEFAULT_LOCATION,
     catalog=DEFAULT_CATALOG,
     **kwargs):
+    """Makes product recommendations.
+    
+    Args:
+        placement_id (str): Recommendation model placement id
+        userEvent (dict): Context about the user. Required keys: 'eventType' and 'visitorId'. Available keys can be found
+            here: https://cloud.google.com/retail/search/docs/reference/rest/v2alpha/projects.locations.catalogs.userEvents#UserEvent
+        project_number (str | int): Google Cloud Platform project number
+        location (str): Resource location
+        catalog (str): Catalog id
+        **kwargs: Extra keyword arguments passed directly to 
+            PredictRequest body (https://cloud.google.com/retail/search/docs/reference/rest/v2alpha/projects.locations.catalogs.placements/predict#request-body)
+            excluding 'userEvent'.
+    Returns:
+        PredictionResponse (dict): https://cloud.google.com/retail/search/docs/reference/rest/v2alpha/projects.locations.catalogs.placements/predict#response-body
+        """
 
     client = AuthorizedHttp(_creds)
 
@@ -178,7 +193,6 @@ def recommend(
 
     body = json.dumps({
         'userEvent': userEvent,
-        'validateOnly': True,
         **kwargs
     })
 
