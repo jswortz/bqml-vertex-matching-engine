@@ -1,10 +1,13 @@
-from flask import Flask, request, session, url_for, redirect, render_template
-from src.service_layer import handler
-from authlib.integrations.flask_client import OAuth
-import logging
 from src.auth import auth
-from flask_cors import CORS
 from src.data_layer import auth_client
+from src.service_layer import handler
+from src import retail
+from src import chatbot
+
+from authlib.integrations.flask_client import OAuth
+from flask import Flask, request, session, url_for, redirect, render_template
+from flask_cors import CORS
+import logging
 import os
 
 app = Flask(__name__)
@@ -120,6 +123,39 @@ def productbyfilter():
     return response
 
 
+@app.route('/search', methods=['POST'])
+def search():
+    body = request.json
+
+    required_args = [
+        'query',
+        'visitorId'
+    ]
+    optional_args = [
+        'benchmark',
+        'autocorrect',
+        'pageSize',
+        'page'
+    ]
+
+    for arg in required_args:
+        if arg not in body:
+            return {'error': f"Required field '{arg}' not found"}, 400
+
+    if len(body.get('query')) == 0:
+        return {'error': f"Field 'query' cannot be empty"}, 400
+
+    for arg in body:
+        if arg not in required_args + optional_args:
+            return {'error': f"Unknown field '{arg}'"}, 400
+
+    if body.get('benchmark') == True:
+        return retail.search_benchmark(**body).json, 200
+
+    return {'error': f"'benchmark' != true is not yet supported"}, 400
+    # return retail.search(**body), 200
+
+
 @app.route('/login')
 def login():
     google = oauth.create_client('google')  # create the google oauth client
@@ -142,13 +178,19 @@ def authorize():
     return redirect('/')
 
 
-@app.errorhandler(500)
-def server_error(e):
+@app.errorhandler(Exception)
+def handle_internal_server_error(e):
     logging.exception('An error occurred during a request.')
     return """
     An internal error occurred: <pre>{}</pre>
     See logs for full stacktrace.
     """.format(e), 500
+
+
+@app.errorhandler(400)
+def handle_bad_request(e):
+    logging.warning(e)
+    return {'error': e.description}, 400
 
 
 @app.route('/logout')
@@ -157,6 +199,34 @@ def logout():
         session.pop(key)
     return redirect('/')
 
+@app.route('/chatbot', methods=["POST"])
+def chatbot_interaction():
+    if request.method == "POST":
+        token_access = request.headers.get('Authorization')
+
+        if auth.verify_token(token_access):
+            data = request.json
+
+            # Validate request body
+            if ("session_id" in data) == False or ("query_string" in data) == False:
+                return "Missing required parameters in body", 400
+
+            response = handler.get_chatbot_response(data["session_id"], data["query_string"])
+        else:
+            response = {"error": "Not a valid Auth"}
+    else:
+        return {}, 404
+    return response
+
+@app.route('/chatbot_webhook', methods=['POST'])
+def chatbot_webhook():
+    auth = request.authorization
+
+    if not chatbot.authorize(auth.username, auth.password):
+        return {'error': 'Unauthorized'}, 401
+
+    body = request.json
+    return chatbot.handle_webhook(body)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
