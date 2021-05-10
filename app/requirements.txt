@@ -5,6 +5,7 @@ elasticsearch_dsl>=7.0.0,<8.0.0
 Flask
 Flask-Cors
 google-auth
+google-auth-httplib2
 google-cloud-dialogflow
 google-cloud-retail
 pandas
