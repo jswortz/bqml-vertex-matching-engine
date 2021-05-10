@@ -18,7 +18,7 @@ provider "google" {
 
 resource "google_app_engine_application" "app" {
  project     = "PROJECT-ID"   # PROJECT ID goes here
-  location_id = "us-central1"             #location id goes here
+  location_id = "us-central"             #location id goes here
 }
 
 
