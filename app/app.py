@@ -228,5 +228,10 @@ def chatbot_webhook():
     body = request.json
     return chatbot.handle_webhook(body)
 
+@app.route('/_ah/start', methods=['GET'])
+def app_engine_startup():
+    """Required startup route for manual scaling app engine services."""
+    return 'OK', 200
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
