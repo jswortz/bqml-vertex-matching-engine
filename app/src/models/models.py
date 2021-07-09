@@ -79,7 +79,7 @@ class Models():
             payload = ""
         url = "https://recommendationengine.googleapis.com/v1beta1/projects/babrams-recai-demo/locations" \
               "/global/catalogs/default_catalog/eventStores/default_event_store/placements/"+placementName+":predict?key" \
-              "=877ee0585a818cae79bd1e43475347a74ec397bc" ## add recommendation ai secret key
+              "=AIzaSyAptd6M3SUokdQKMgCAssv-adCOP7fO8s8" ## add recommendation ai secret key
 
         payload = payload
         headers = {

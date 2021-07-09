@@ -2600,7 +2600,7 @@ class FeaturedProductsResolver {
             return fetch(`${homeRoute}/getfeaturedproduct`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    "placement_name": "recommended-ctr",
+                    "placement_name": "homepage",
                     "params": {
                         "dryRun": false,
                         "userEvent": {
@@ -2929,7 +2929,7 @@ StoreInfoService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/nvurdien/css-retail-frontend/frontend/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /usr/local/google/home/babrams/repo/css-retail-frontend/frontend/src/main.ts */"./src/main.ts");
 
 
 /***/ })
