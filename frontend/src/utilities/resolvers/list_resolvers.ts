@@ -6,7 +6,7 @@ import { brands } from '../../assets/sample/brands'
 import {Observable, of} from 'rxjs';
 import { CookieManagerService } from '../services/cookie-manager.service';
 
-let homeRoute = 'https://backend-q-dot-css-storeops.uc.r.appspot.com' // update the backend app engine site you just deployed
+let homeRoute = 'https://backend-q-dot-babrams-recai-demo.uc.r.appspot.com' // update the backend app engine site you just deployed
 
 @Injectable({providedIn: 'root'})
 export class ProductResolver implements Resolve<any> {
@@ -135,9 +135,9 @@ export class RecentlyViewedResolver implements Resolve<any> {
                 console.log(err);
                 return products;
                 });
-    
+
       }
-    
+
       resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
           Promise<any> {
         return this.getList();
@@ -152,7 +152,7 @@ export class FeaturedProductsResolver implements Resolve<any> {
         return fetch(`${homeRoute}/getfeaturedproduct`, {
             method: 'POST',
             body: JSON.stringify({
-                "placement_name":"recommended-ctr",  // Update to your recommended placement name
+                "placement_name":"homepage",  // Update to your recommended placement name
                 "params":{
                           "dryRun": false,
                           "userEvent": {
@@ -179,9 +179,9 @@ export class FeaturedProductsResolver implements Resolve<any> {
                 console.log(err);
                 return products;
                 });
-    
+
       }
-    
+
       resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
           Promise<any> {
         return this.getList();
@@ -205,7 +205,7 @@ export class CategoriesResolver implements Resolve<any> {
                 return categories;
                 });
       }
-    
+
       resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
           Promise<any> {
         return this.getList();
@@ -229,7 +229,7 @@ export class BrandsResolver implements Resolve<any> {
                 return brands;
                 });
       }
-    
+
       resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
           Promise<any> {
         return this.getList();

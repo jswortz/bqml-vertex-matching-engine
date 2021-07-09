@@ -1,2 +1,2 @@
 ng build
-gcloud app deploy --project=css-storeops  # update to your project id
+gcloud app deploy --project=babrams-recai-demo  # update to your project id

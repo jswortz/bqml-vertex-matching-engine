@@ -64,7 +64,7 @@ class AppModule {
 }
 AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_views_app_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]] });
 AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [
-        { provide: 'googleTagManagerId', useValue: 'GTM-5328V3D' } //update tag manager container id
+        { provide: 'googleTagManagerId', useValue: 'GTM-W3FXLZ6' } //update tag manager container id
     ], imports: [[
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
             _views_base_app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
@@ -101,7 +101,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _utilities_services_services_module__WEBPACK_IMPORTED_MODULE_11__["ServicesModule"]
                 ],
                 providers: [
-                    { provide: 'googleTagManagerId', useValue: 'GTM-5328V3D' } //update tag manager container id
+                    { provide: 'googleTagManagerId', useValue: 'GTM-W3FXLZ6' } //update tag manager container id
                 ],
                 bootstrap: [_views_app_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
             }]
@@ -2452,7 +2452,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let homeRoute = 'https://backend-q-dot-css-storeops.uc.r.appspot.com'; // update the backend app engine site you just deployed
+let homeRoute = 'https://backend-q-dot-babrams-recai-demo.uc.r.appspot.com'; // update the backend app engine site you just deployed
 class ProductResolver {
     getList(productId) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {

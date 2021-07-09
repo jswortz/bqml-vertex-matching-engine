@@ -11,13 +11,13 @@ terraform {
 provider "google" {
   
   region      = "us-central1"            #region goes here
-  project = "PROJECT-ID"                   #project ID goes here
+  project = "babrams-recai-demo"                   #project ID goes here
 }
 
 
 
 resource "google_app_engine_application" "app" {
- project     = "PROJECT-ID"   # PROJECT ID goes here
+ project     = "babrams-recai-demo"   # PROJECT ID goes here
   location_id = "us-central"             #location id goes here
 }
 
@@ -26,7 +26,7 @@ resource "google_app_engine_application" "app" {
 provider "google-beta" {
  region = "us-west1"
   zone   = "us-west1-a"
-project = "PROJECT-ID"   # project id goes here
+project = "babrams-recai-demo"   # project id goes here
 }
 
 

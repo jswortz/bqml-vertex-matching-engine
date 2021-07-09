@@ -5,7 +5,7 @@ from google.cloud import dialogflow
 import requests
 import json
 
-PROJECT_ID = 'css-storeops'
+PROJECT_ID = 'babrams-recai-demo'
 
 class Models():
     def __init__(self, prod_id="", request_data=''):
@@ -77,9 +77,9 @@ class Models():
         else:
             placementName = ""
             payload = ""
-        url = "https://recommendationengine.googleapis.com/v1beta1/projects/css-storeops/locations" \
+        url = "https://recommendationengine.googleapis.com/v1beta1/projects/babrams-recai-demo/locations" \
               "/global/catalogs/default_catalog/eventStores/default_event_store/placements/"+placementName+":predict?key" \
-              "=AIzaSyCDLp6NtCObbhAksvKVGS4EkJH-FKqIz9Q" ## add recommendation ai secret key
+              "=877ee0585a818cae79bd1e43475347a74ec397bc" ## add recommendation ai secret key
 
         payload = payload
         headers = {

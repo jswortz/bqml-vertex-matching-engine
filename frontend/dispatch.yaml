@@ -1,5 +1,5 @@
 dispatch:
-  - url: "css-storeops.uc.r.appspot.com/*"
+  - url: "babrams-recai-demo.uc.r.appspot.com/*"
     service: front-rec-ai
-  - url: "css-storeops.uc.r.appspot.com/*"
+  - url: "babrams-recai-demo.uc.r.appspot.com/*"
     service: backend-q

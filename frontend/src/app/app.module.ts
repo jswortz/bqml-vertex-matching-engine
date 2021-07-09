@@ -30,8 +30,8 @@ import { SearchComponent } from './views/search/search.component'
     AppRoutingModule,
     ServicesModule
   ],
-  providers: [  
-    {provide: 'googleTagManagerId', useValue: 'GTM-5328V3D'} //update tag manager container id
+  providers: [
+    {provide: 'googleTagManagerId', useValue: 'GTM-W3FXLZ6'} //update tag manager container id
   ],
   bootstrap: [AppComponent]
 })

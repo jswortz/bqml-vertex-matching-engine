@@ -1,5 +1,5 @@
 PARAMS = {
-    "placement_name":"recommended-ctr", ## update to recommendation placement
+    "placement_name":"homepage", ## update to recommendation placement
     "params":{
                     "dryRun": "false",
                     "userEvent": {

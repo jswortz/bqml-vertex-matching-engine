@@ -1,4 +1,5 @@
 service: backend-q
+#service: default
 runtime: python37
 env: standard
 entrypoint: gunicorn -b :$PORT app:app
@@ -6,9 +7,9 @@ entrypoint: gunicorn -b :$PORT app:app
 runtime_config:
   python_version: 3
 manual_scaling:
-  instances: 3
+  instances: 1
 vpc_access_connector:
-  name: projects/css-storeops/locations/us-central1/connectors/css-retail-server   #network name
+  name: projects/babrams-recai-demo/locations/us-central1/connectors/recai-demo-serverless-vpc   #network name
 
 resources:
   cpu: 1
