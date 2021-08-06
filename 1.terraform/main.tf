@@ -94,7 +94,7 @@ resource "google_vpc_access_connector" "connector" {
   region = var.region
   name = "recai-demo-connector"
   ip_cidr_range = "10.1.1.0/28"
-  network = google_compute_network.private_network
+  network = google_compute_network.private_network.id
 }
 
 # Application resource configuration
@@ -118,7 +118,7 @@ resource "google_sql_database_instance" "retail" {
 }
 resource "google_sql_database" "retail" {
   name = "Retail"
-  instance = google_sql_database_instance.retail
+  instance = google_sql_database_instance.retail.id
 }
 
 # Data resource configuration
@@ -135,9 +135,27 @@ resource "google_storage_bucket" "recai_demo_data_bq_exports" {
 data "google_iam_policy" "cloud_sql_admin" {
   binding {
     members = [
-      "user:babrams@google.com"
+      "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
     ]
     role = "roles/cloudsql.owner"
+  }
+  binding {
+    members = [
+      "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
+    ]
+    role = "roles/storage.objectAdmin"
+  }
+  binding {
+    members = [
+      "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
+    ]
+    role = "roles/storage.legacyObjectOwner"
+  }
+  binding {
+    members = [
+      "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
+    ]
+    role = "roles/storage.legacyBucketOwner"
   }
 }
 resource "google_storage_bucket_iam_policy" "bq_exports" {
