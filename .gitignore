@@ -49,3 +49,8 @@ setup.cfg
 
 #Cloud SQL util
 cloud_sql_proxy
+
+#Terraform files
+**/*.hcl
+**/.terraform*
+**/terraform.tfstate
