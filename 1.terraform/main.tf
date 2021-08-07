@@ -38,11 +38,6 @@ resource "google_service_account_iam_member" "recai-demo-sa-recai-admin" {
   role               = "roles/automlrecommendations.admin"
   member             = "serviceAccount:${google_service_account.recai-demo-sa.email}}"
 }
-resource "google_service_account" "recai-sql-sa" {
-  provider = google
-  account_id = "recai-sql-sa"
-  display_name = "RecAI SQL"
-}
 
 
 # Networking configurations
@@ -74,7 +69,6 @@ resource "google_compute_firewall" "default" {
     ports    = ["22"]
   }
 }
-# Cloud SQL configuration
 resource "google_compute_global_address" "private_ip_address" {
   provider      = google-beta
   name          = "private-ip-address"
@@ -126,7 +120,6 @@ resource "google_bigquery_dataset" "css_retail" {
   provider   = google
   dataset_id = "css_retail"
 }
-
 resource "google_storage_bucket" "recai_demo_data_bq_exports" {
   provider = google
   name     = "bq_exports"
@@ -162,7 +155,6 @@ resource "google_storage_bucket_iam_policy" "bq_exports" {
   bucket = google_storage_bucket.recai_demo_data_bq_exports.name
   policy_data = data.google_iam_policy.cloud_sql_admin.policy_data
 }
-
 resource "google_storage_bucket" "model_export" {
   provider = google
   name     = "model_exports"
