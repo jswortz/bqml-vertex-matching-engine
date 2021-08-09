@@ -14,3 +14,5 @@ export PREDICT_KEY=AIzaSyAptd6M3SUokdQKMgCAssv-adCOP7fO8s8
 export HP_PLACEMENT='homepage'  # homepage placement id
 export FBT_PLACEMENT='copurchased'  # frequently bought together placement id
 export OYML_PLACEMENT='pdp'  # others you may like placement id
+
+gclcoud config set project "${RECAI_PROJECT}"
