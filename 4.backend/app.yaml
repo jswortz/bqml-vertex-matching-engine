@@ -17,12 +17,12 @@ resources:
   disk_size_gb: 10
 
 env_variables:
-  HP_PLACEMENT: "homepage"
-  OYML_PLACEMENT: "pdp"
-  FBT_PLACEMENT: "copurchased"
   RECAI_PROJECT: "babrams-recai-demo"
   PROJECT_NUMBER: "52337824704"
   PREDICT_KEY: "AIzaSyAptd6M3SUokdQKMgCAssv-adCOP7fO8s8"
   OAUTH_CLIENT: "52337824704-t9jfkcn0evvbinsimkaedd88toonvdjl.apps.googleusercontent.com"
   OAUTH_KEY: "WIGEV2j1ESI6TVHnZhjAnJGA"
   CLOUD_SQL_IP: "10.40.0.3"
+  HP_PLACEMENT: "homepage"
+  OYML_PLACEMENT: "pdp"
+  FBT_PLACEMENT: "copurchased"

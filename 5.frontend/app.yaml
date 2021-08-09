@@ -11,3 +11,10 @@ handlers:
 - url: /.*
   static_files: dist/retail/index.html
   upload: dist/retail/.*
+
+env_variables:
+  RECAI_PROJECT: "babrams-recai-demo"
+  HP_PLACEMENT: "homepage"
+  OYML_PLACEMENT: "pdp"
+  FBT_PLACEMENT: "copurchased"
+  RVD_PLACEMENT: "recently_viewed_default"

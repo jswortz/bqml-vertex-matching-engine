@@ -5,10 +5,11 @@ import { categories } from '../../assets/sample/categories';
 import { brands } from '../../assets/sample/brands';
 import {Observable, of} from 'rxjs';
 import { CookieManagerService } from '../services/cookie-manager.service';
+import { environment } from '../../environments/environment';
 
-const homeRoute = 'https://backend-q-dot-babrams-recai-demo.uc.r.appspot.com'; // update the backend app engine site you just deployed
-const recentlyViewedPlacement = 'recently_viewed_default';  // Update to your recently viewed placement name
-const homepagePlacement = 'homepage';  // Update to your recommended placement name
+const homeRoute = 'https://backend-q-dot-' + environment.RECAI_PROJECT + '.uc.r.appspot.com'; // update the backend app engine site you just deployed
+const recentlyViewedPlacement = environment.RVD_PLACEMENT;  // Update to your recently viewed placement name
+const homepagePlacement = environment.HP_PLACEMENT;  // Update to your recommended placement name
 
 @Injectable({providedIn: 'root'})
 export class ProductResolver implements Resolve<any> {

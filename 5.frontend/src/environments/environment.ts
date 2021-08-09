@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  RECAI_PROJECT: 'babrams-recai-demo',
+  HP_PLACEMENT: 'homepage',
+  OYML_PLACEMENT: 'pdp',
+  FBT_PLACEMENT: 'copurchased',
+  RVD_PLACEMENT: 'recently_viewed_default'
 };
 
 /*
