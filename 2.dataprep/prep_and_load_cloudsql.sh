@@ -1,9 +1,12 @@
 #!/bin/bash
 
 source ../0.setup/env_vars.sh
-USERNAME=babrams
 
-mysql -h 127.0.0.1 -u ${USERNAME} --port 3308 < schema.sql
+# Upload schema script to GCS Bucket and import to create schema in Cloud SQL
+gsutil cp ./cloudsql_schema-ddl.sql gs://data_transfers/
+gcloud sql import sql pso-css-retail gs://data_transfers/cloudsql_schema-ddl.sql \
+--database=Retail
 
-gcloud sql import csv pso-css-retail gs://bq_exports/products.csv.gz \
+# Import product data into Cloud SQL table
+gcloud sql import csv pso-css-retail gs://data_transfers/css_retail_products.csv.gz \
 --database=Retail --table=products

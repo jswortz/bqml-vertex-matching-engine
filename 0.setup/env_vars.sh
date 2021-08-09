@@ -16,3 +16,6 @@ export FBT_PLACEMENT='copurchased'  # frequently bought together placement id
 export OYML_PLACEMENT='pdp'  # others you may like placement id
 
 gclcoud config set project "${RECAI_PROJECT}"
+
+# Creating Terraform variables sourced from above where possible
+export TF_VAR_project="${RECAI_PROJECT}"

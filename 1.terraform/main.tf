@@ -125,9 +125,9 @@ resource "google_bigquery_dataset" "css_retail" {
   provider   = google
   dataset_id = "css_retail"
 }
-resource "google_storage_bucket" "recai_demo_data_bq_exports" {
+resource "google_storage_bucket" "recai_demo_data_transfers" {
   provider = google
-  name     = "bq_exports"
+  name     = "data_transfers"
   location = "US"
 }
 data "google_iam_policy" "cloud_sql_admin" {
@@ -157,7 +157,7 @@ data "google_iam_policy" "cloud_sql_admin" {
   }
 }
 resource "google_storage_bucket_iam_policy" "bq_exports" {
-  bucket = google_storage_bucket.recai_demo_data_bq_exports.name
+  bucket = google_storage_bucket.recai_demo_data_transfers.name
   policy_data = data.google_iam_policy.cloud_sql_admin.policy_data
 }
 resource "google_storage_bucket" "model_export" {

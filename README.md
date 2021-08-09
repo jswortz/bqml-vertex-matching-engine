@@ -35,8 +35,6 @@ ___
 > Create schema in Cloud SQL and copy the css_retail dataset in Big Query
 1. Execute Big Query copy and export script  
    `bash copy_retail_dataset_bigquery.sh`
-1. Update username in prep_and_load_cloudsql.sh to allow schema creation  
-   `vi prep_and_load_cloudsql.sh`
 2. Execute the Cloud SQL prep script to build the schema and load the product dataset  
    `bash prep_and_load_cloudsql.sh`
 
@@ -48,7 +46,7 @@ ___
    `bash prediction_key.sh`
 2. Configure Google Tag Manager
 3. Load Product Catalog and User events into Recommendations AI
-4. Configure and build Recomendations AI models
+4. Configure and build Recommendations AI models
    
 ### 4.backend
 > Consult original demo instructions document for various items to be updated

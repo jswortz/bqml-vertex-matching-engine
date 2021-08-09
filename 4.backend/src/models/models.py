@@ -4,9 +4,10 @@ from src.utils import utils
 from google.cloud import dialogflow
 import requests
 import json
+import os
 
-PROJECT_ID = 'babrams-recai-demo'
-PREDICT_KEY = 'AIzaSyAptd6M3SUokdQKMgCAssv-adCOP7fO8s8'
+PROJECT_ID = os.environ.get('RECAI_PROJECT') if 'RECAI_PROJECT' in os.environ else 'babrams-recai-demo'
+PREDICT_KEY = os.environ.get('PREDICT_KEY') if 'PREDICT_KEY' in os.environ else 'AIzaSyAptd6M3SUokdQKMgCAssv-adCOP7fO8s8'
 
 class Models():
     def __init__(self, prod_id="", request_data=''):

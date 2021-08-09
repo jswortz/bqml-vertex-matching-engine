@@ -1,9 +1,10 @@
 from src.models import models
 from src.data_layer import default_params
 import json
+import os
 
-FBT_PLACEMENT = 'copurchased'  # frequently bought together placement id
-OYML_PLACEMENT = 'pdp'  # others you may like placement id
+FBT_PLACEMENT = os.environ.get('FBT_PLACEMENT') if 'FBT_PLACEMENT' in os.environ else 'copurchased'  # frequently bought together placement id
+OYML_PLACEMENT = os.environ.get('OYML_PLACEMENT') if 'OYML_PLACEMENT' in os.environ else 'pdp'  # others you may like placement id
 
 def getproduct(pro_id):
     final_output = {}

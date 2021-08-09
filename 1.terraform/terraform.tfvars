@@ -1,4 +1,6 @@
-project = "babrams-recai-demo"
+# Desire for variables to be set in ../0.setup/env_vars.sh
+# but can be set here for overrides
+#project = "babrams-recai-demo"
 
 location = "us-central"
 region = "us-central1"
