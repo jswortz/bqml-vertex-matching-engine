@@ -6,6 +6,7 @@ import requests
 import json
 
 PROJECT_ID = 'babrams-recai-demo'
+PREDICT_KEY = 'AIzaSyAptd6M3SUokdQKMgCAssv-adCOP7fO8s8'
 
 class Models():
     def __init__(self, prod_id="", request_data=''):
@@ -77,9 +78,9 @@ class Models():
         else:
             placementName = ""
             payload = ""
-        url = "https://recommendationengine.googleapis.com/v1beta1/projects/babrams-recai-demo/locations" \
+        url = "https://recommendationengine.googleapis.com/v1beta1/projects/"+PROJECT_ID+"/locations" \
               "/global/catalogs/default_catalog/eventStores/default_event_store/placements/"+placementName+":predict?key" \
-              "=AIzaSyAptd6M3SUokdQKMgCAssv-adCOP7fO8s8" ## add recommendation ai secret key
+              "="+PREDICT_KEY
 
         payload = payload
         headers = {

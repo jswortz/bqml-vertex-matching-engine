@@ -2,11 +2,13 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, ActivatedRoute, Resolve, RouterStateSnapshot} from '@angular/router';
 import { product, products } from '../../assets/sample/product';
 import { categories } from '../../assets/sample/categories';
-import { brands } from '../../assets/sample/brands'
+import { brands } from '../../assets/sample/brands';
 import {Observable, of} from 'rxjs';
 import { CookieManagerService } from '../services/cookie-manager.service';
 
-let homeRoute = 'https://backend-q-dot-babrams-recai-demo.uc.r.appspot.com' // update the backend app engine site you just deployed
+const homeRoute = 'https://backend-q-dot-babrams-recai-demo.uc.r.appspot.com'; // update the backend app engine site you just deployed
+const recentlyViewedPlacement = 'recently_viewed_default';  // Update to your recently viewed placement name
+const homepagePlacement = 'homepage';  // Update to your recommended placement name
 
 @Injectable({providedIn: 'root'})
 export class ProductResolver implements Resolve<any> {
@@ -90,7 +92,7 @@ export class ProductsResolver implements Resolve<any> {
     category = route.queryParamMap.get('category') ? route.queryParamMap.get('category').trim() : '';
     subcategory = route.queryParamMap.get('subcategory') ? route.queryParamMap.get('subcategory').trim() : '';
     q = route.queryParamMap.get('q') ? route.queryParamMap.get('q').trim() : '';
-    console.log(category, subcategory, q)
+    console.log(category, subcategory, q);
     return this.getList(category, subcategory, q);
   }
 }
@@ -103,7 +105,7 @@ export class RecentlyViewedResolver implements Resolve<any> {
         return fetch(`${homeRoute}/getfeaturedproduct`, {
             method: 'POST',
             body: JSON.stringify({
-                "placement_name":"recently_viewed_default",  // Update to your recently viewed placement name
+                "placement_name": recentlyViewedPlacement,
                 "params":{
                           "dryRun": false,
                           "userEvent": {
@@ -152,7 +154,7 @@ export class FeaturedProductsResolver implements Resolve<any> {
         return fetch(`${homeRoute}/getfeaturedproduct`, {
             method: 'POST',
             body: JSON.stringify({
-                "placement_name":"homepage",  // Update to your recommended placement name
+                "placement_name": homepagePlacement,
                 "params":{
                           "dryRun": false,
                           "userEvent": {

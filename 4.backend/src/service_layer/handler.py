@@ -2,15 +2,17 @@ from src.models import models
 from src.data_layer import default_params
 import json
 
+FBT_PLACEMENT = 'copurchased'  # frequently bought together placement id
+OYML_PLACEMENT = 'pdp'  # others you may like placement id
 
 def getproduct(pro_id):
     final_output = {}
     try:
         default_parameters = default_params.PARAMS
         default_parameters['params']['userEvent']['productEventDetail']['productDetails'][0]['id'] = pro_id
-        default_parameters['placement_name'] = 'copurchased' ## frequently bought together placement id
+        default_parameters['placement_name'] = FBT_PLACEMENT
         model_obj = models.Models(pro_id, default_parameters)
-        default_parameters['placement_name'] = 'pdp' ## others you may like placement id
+        default_parameters['placement_name'] = OYML_PLACEMENT
         similar_obj = models.Models(pro_id, default_parameters)
         final_output = json.loads(model_obj.get_product_recommendation_custom())
         similar_output = json.loads(similar_obj.get_product_recommendation_custom())

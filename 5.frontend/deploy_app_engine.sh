@@ -1,2 +1,6 @@
+#!/bin/bash
+
+source ../0.setup/env_vars.sh
+
 ng build
-gcloud app deploy --project=babrams-recai-demo  # update to your project id
+gcloud app deploy --project="${RECAI_PROJECT}"

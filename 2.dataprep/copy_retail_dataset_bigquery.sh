@@ -1,19 +1,14 @@
 #!/bin/bash
 
 # This script assumes all API and permission requirements are already in place
-
-if [ "$#" -ne 1 ]; then
-  echo "Need a GCP project id specified as an input parameter"
-  exit
-fi
+source ../0.setup/env_vars.sh
 
 SOURCE_PROJECT=css-storeops
 SOURCE_DS=css_retail
-TARGET_PROJECT=${1}
 TARGET_DS=css_retail
 
 echo "Copying source dataset to target dataset"
-bq mk --transfer_config --project_id="${TARGET_PROJECT}" \
+bq mk --transfer_config --project_id="${RECAI_PROJECT}" \
 --data_source=cross_region_copy --target_dataset="${TARGET_DS}" \
 --display_name=seed_css_retail \
 --params='{"source_project_id":"'"${SOURCE_PROJECT}"'",source_dataset_id":"'"${SOURCE_DS}"'"}'
@@ -21,9 +16,9 @@ bq mk --transfer_config --project_id="${TARGET_PROJECT}" \
 for TABLE in ['detail_page_view' 'home_page_view' 'purchase_complete' 'add_to_cart'];do
   echo 'Updating date in table ' "${TABLE}"
   YEAR=$(date +%Y)
-  QUERY='update `'"${TARGET_PROJECT}"'.'"${TARGET_DS}"'.'"${TABLE}"'` set eventTime = REGEXP_REPLACE(eventTime, "2019", "'"${YEAR}"'") where eventTime is not null'
+  QUERY='update `'"${RECAI_PROJECT}"'.'"${TARGET_DS}"'.'"${TABLE}"'` set eventTime = REGEXP_REPLACE(eventTime, "2019", "'"${YEAR}"'") where eventTime is not null'
   bq query "${QUERY}"
-  QUERY='update `'"${TARGET_PROJECT}"'.'"${TARGET_DS}"'.'"${TABLE}"'` set eventTime = REGEXP_REPLACE(eventTime, "2020", "'"${YEAR}"'") where eventTime is not null'
+  QUERY='update `'"${RECAI_PROJECT}"'.'"${TARGET_DS}"'.'"${TABLE}"'` set eventTime = REGEXP_REPLACE(eventTime, "2020", "'"${YEAR}"'") where eventTime is not null'
   bq query "${QUERY}"
 done
 

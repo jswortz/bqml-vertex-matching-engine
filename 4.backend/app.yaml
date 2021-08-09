@@ -9,7 +9,7 @@ runtime_config:
 manual_scaling:
   instances: 1
 vpc_access_connector:
-  name: projects/babrams-recai-demo/locations/us-central1/connectors/recai-demo-serverless-vpc   #network name
+  name: projects/${RECAI_PROJECT}/locations/us-central1/connectors/recai-demo-serverless-vpc   #network name
 
 resources:
   cpu: 1

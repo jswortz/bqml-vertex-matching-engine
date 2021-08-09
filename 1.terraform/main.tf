@@ -86,7 +86,7 @@ resource "google_service_networking_connection" "private_vpc_connection" {
 resource "google_vpc_access_connector" "connector" {
   provider = google
   region = var.region
-  name = "recai-demo-connector"
+  name = "recai-demo-serverless-vpc"
   ip_cidr_range = "10.1.1.0/28"
   network = google_compute_network.private_network.id
 }
@@ -114,7 +114,12 @@ resource "google_sql_database" "retail" {
   name = "Retail"
   instance = google_sql_database_instance.retail.id
 }
-
+resource "google_sql_user" "recai-demo" {
+  name = "recai-demo"
+  instance = google_sql_database_instance.retail.name
+  host = "%"
+  password = "demopass"
+}
 # Data resource configuration
 resource "google_bigquery_dataset" "css_retail" {
   provider   = google
