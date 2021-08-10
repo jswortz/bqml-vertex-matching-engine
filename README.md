@@ -27,9 +27,10 @@ ___
    compute.googleapis.com \
    servicenetworking.googleapis.com \
    appengine.googleapis.com \
-   sqladmin.googleapis.com
-   recommendationengine.googleapis.com
-   bigquerydatatransfer.googleapis.com`
+   sqladmin.googleapis.com \
+   recommendationengine.googleapis.com \
+   bigquerydatatransfer.googleapis.com
+   ml.googleapis.com`
 5. Manually create service account in Cloud Console and download json key file
 6. Ensure service account previously created has the following permissions  
    `Owner`
@@ -58,12 +59,11 @@ ___
 > Two scripts here, one to update RecAI for the newly minted API key for prediction calls
 > and another script to delete an api key, which is not likely required but provided for convenience.  
 > Consult original demo instructions for Recommendations AI interactions
-1. Enable Recommendation AI API
-2. Execute the prediction key script  
+1. Execute the prediction key script  
     `bash prediction_key.sh`
-3. Configure Google Tag Manager
-4. Load Product Catalog and User events into Recommendations AI
-5. Configure and build Recommendations AI models
+2. Configure Google Tag Manager
+3. Load Product Catalog and User events into Recommendations AI
+4. Configure and build Recommendations AI models
    
 ### 4.backend
 > Consult original demo instructions document for various items to be updated
@@ -76,3 +76,13 @@ ___
 1. Update various configurations and variables in assorted files, including dispatch.yaml
 2. Execute deploy script
     `bash deploy_app_engine.sh`
+   
+### 6.bqml
+> Build, deploy, and call your own BQML Matrix Factorization model
+> This will require flex slot reservations in Big Query along with associated costs
+1. Execute the build script
+    `bash build_mf_model.sh`
+2. Deploy the model to AI Platform
+    `bash deploy_mf_model.sh`
+3. Update the service account for prediction request in the script and execute
+    `bash call_mf_model.sh`

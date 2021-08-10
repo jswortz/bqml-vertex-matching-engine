@@ -1,5 +1,5 @@
 from src.utils import db_connection
-from src.data_layer import query_source, cloumn_information as ci
+from src.data_layer import query_source, column_information as ci
 from src.utils import utils
 from google.cloud import dialogflow
 import requests

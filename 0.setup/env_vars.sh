@@ -22,3 +22,6 @@ gcloud config set project "${RECAI_PROJECT}"
 # Creating Terraform variables sourced from above where possible
 export TF_VAR_project="${RECAI_PROJECT}"
 export TF_VAR_myaccount="${MY_ACCOUNT}"
+
+# Custom BQML variables
+export BQML_NAME="mf_model"
