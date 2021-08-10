@@ -83,7 +83,6 @@ resource "google_compute_subnetwork" "css-retail1" {
   project       = var.project
   name          = "css-retail-sub"  #name of the second subnet
   ip_cidr_range = "10.0.0.0/16"         #IP_CIDR range of the second subnet
-  #region        = var.region
   network       = google_compute_network.private_network.id
 }
 resource "google_compute_firewall" "default" {
@@ -130,8 +129,7 @@ resource "google_sql_database_instance" "retail" {
   provider         = google-beta
   project          = var.project
   name             = "pso-css-retail"       #name of the MySQl cloud instance. Can be changed as per the requirements.
-  database_version = "MySQL_8_0"
-  #region           = var.region
+  database_version = "MYSQL_8_0"
   deletion_protection = false
   depends_on = [google_service_networking_connection.private_vpc_connection]
   settings {
@@ -163,7 +161,33 @@ resource "google_storage_bucket" "recai_demo_data_transfers" {
   project  = var.project
   name     = "${var.project}_data_transfers"
   location = "US"
+  uniform_bucket_level_access = true
 }
+resource "google_storage_bucket" "model_export" {
+  provider = google
+  project  = var.project
+  name     = "${var.project}_model_exports"
+  location = "US"
+  uniform_bucket_level_access = true
+}
+
+resource "google_storage_bucket_iam_member" "bq_exports_storage_admin" {
+  bucket = google_storage_bucket.recai_demo_data_transfers.name
+  role = "roles/storage.admin"
+  member = "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
+}
+resource "google_storage_bucket_iam_member" "bq_exports_storage_legacy_bucket_owner" {
+  bucket = google_storage_bucket.recai_demo_data_transfers.name
+  role = "roles/storage.legacyBucketOwner"
+  member = "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
+}
+resource "google_storage_bucket_iam_member" "bq_exports_storage_legacy_object_owner" {
+  bucket = google_storage_bucket.recai_demo_data_transfers.name
+  role = "roles/storage.legacyObjectOwner"
+  member = "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
+}
+
+/*
 data "google_iam_policy" "cloud_sql_admin" {
   binding {
     members = [
@@ -193,10 +217,4 @@ data "google_iam_policy" "cloud_sql_admin" {
 resource "google_storage_bucket_iam_policy" "bq_exports" {
   bucket      = google_storage_bucket.recai_demo_data_transfers.name
   policy_data = data.google_iam_policy.cloud_sql_admin.policy_data
-}
-resource "google_storage_bucket" "model_export" {
-  provider = google
-  project  = var.project
-  name     = "${var.project}_model_exports"
-  location = "US"
-}
+}*/
