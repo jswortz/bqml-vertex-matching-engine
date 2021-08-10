@@ -2,6 +2,9 @@
 
 source ../0.setup/env_vars.sh
 
+#export LOADER_KEY=AIzaSyAZANO4X3DYLtK1KD15T9I7VufKgJabNvY
+#export PREDICT_KEY=AIzaSyAptd6M3SUokdQKMgCAssv-adCOP7fO8s8
+
 curl -X POST \
  -H "Authorization: Bearer $(gcloud auth print-access-token ${RECAI_SA}@${RECAI_PROJECT}.iam.gserviceaccount.com)" \
  -H "Content-Type: application/json; charset=utf-8" \

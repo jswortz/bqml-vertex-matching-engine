@@ -21,33 +21,58 @@ provider "google-beta" {
 }
 
 # Service Accounts
+/*
 resource "google_service_account" "recai-demo-sa" {
-  provider = google
-  account_id = "recai-demo-sa"
+  provider     = google
+  project      = var.project
+  account_id   = "recai-demo-sa"
   display_name = "RecAI Demo"
 }
-resource "google_service_account_iam_member" "recai-demo-sa-automl-admin" {
-  provider = google
+data "google_iam_policy" "ml_admin" {
+  binding {
+    members = ["serviceAccount:${google_service_account.recai-demo-sa.name}"]
+    role = "roles/automl.admin"
+  }
+  binding {
+    members = ["serviceAccount:${google_service_account.recai-demo-sa.name}"]
+    role = "roles/automlrecommendations.admin"
+  }
+}
+*/
+#resource "google_service_account_iam_policy" "recai-demo-sa-ml-admin" {
+#  service_account_id = google_service_account.recai-demo-sa.name
+#  policy_data = data.google_iam_policy.ml_admin.policy_data
+#}
+/*
+resource "google_service_account_iam_binding" "recai-demo-sa-automl-admin" {
+  provider           = google
+  depends_on = [google_service_account.recai-demo-sa]
   service_account_id = google_service_account.recai-demo-sa.name
   role               = "roles/automl.admin"
-  member             = "serviceAccount:${google_service_account.recai-demo-sa.email}}"
+  #member             = "serviceAccount:${google_service_account.recai-demo-sa.email}}"
+  members             = ["user:${var.myaccount}"]
 }
-resource "google_service_account_iam_member" "recai-demo-sa-recai-admin" {
-  provider = google
+resource "google_service_account_iam_binding" "recai-demo-sa-recai-admin" {
+  provider           = google
+  depends_on = [google_service_account.recai-demo-sa]
   service_account_id = google_service_account.recai-demo-sa.name
   role               = "roles/automlrecommendations.admin"
-  member             = "serviceAccount:${google_service_account.recai-demo-sa.email}}"
+  #member             = "serviceAccount:${google_service_account.recai-demo-sa.email}}"
+  members             = ["user:${var.myaccount}"]
 }
+*/
 
 
 # Networking configurations
 resource "google_compute_network" "private_network" {
   provider                = google-beta                #provider to be set as per region and zone
+  project                 = var.project
   name                    = "css-retail"                   #name of VPC
   auto_create_subnetworks = false
 }
 resource "google_compute_subnetwork" "css-retail" {
   provider      = google-beta
+  project       = var.project
   name          = "css-retail-uc"    #name of the first subnet
   ip_cidr_range = "10.1.0.0/24"        #IP_CIDR range of the first subnet
   #region        = var.beta-region
@@ -55,6 +80,7 @@ resource "google_compute_subnetwork" "css-retail" {
 }
 resource "google_compute_subnetwork" "css-retail1" {
   provider      = google
+  project       = var.project
   name          = "css-retail-sub"  #name of the second subnet
   ip_cidr_range = "10.0.0.0/16"         #IP_CIDR range of the second subnet
   #region        = var.region
@@ -62,8 +88,9 @@ resource "google_compute_subnetwork" "css-retail1" {
 }
 resource "google_compute_firewall" "default" {
   provider = google
-  name    = "ssh-into-vm-instance"                       #name of the firewall can be specified over here
-  network = google_compute_network.private_network.name
+  project  = var.project
+  name     = "ssh-into-vm-instance"                       #name of the firewall can be specified over here
+  network  = google_compute_network.private_network.name
   allow {
     protocol = "tcp"
     ports    = ["22"]
@@ -71,6 +98,7 @@ resource "google_compute_firewall" "default" {
 }
 resource "google_compute_global_address" "private_ip_address" {
   provider      = google-beta
+  project       = var.project
   name          = "private-ip-address"
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
@@ -84,23 +112,27 @@ resource "google_service_networking_connection" "private_vpc_connection" {
   reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
 }
 resource "google_vpc_access_connector" "connector" {
-  provider = google
-  region = var.region
-  name = "recai-demo-serverless-vpc"
+  provider      = google
+  project       = var.project
+  region        = var.region
+  name          = "recai-demo-vpc"
   ip_cidr_range = "10.1.1.0/28"
-  network = google_compute_network.private_network.id
+  network       = google_compute_network.private_network.name
 }
 
 # Application resource configuration
 resource "google_app_engine_application" "retail-site" {
   provider    = google
+  project     = var.project
   location_id = var.location
 }
 resource "google_sql_database_instance" "retail" {
   provider         = google-beta
+  project          = var.project
   name             = "pso-css-retail"       #name of the MySQl cloud instance. Can be changed as per the requirements.
   database_version = "MySQL_8_0"
   #region           = var.region
+  deletion_protection = false
   depends_on = [google_service_networking_connection.private_vpc_connection]
   settings {
     tier = "db-f1-micro"
@@ -111,23 +143,25 @@ resource "google_sql_database_instance" "retail" {
   }
 }
 resource "google_sql_database" "retail" {
-  name = "Retail"
+  name     = "Retail"
   instance = google_sql_database_instance.retail.id
 }
 resource "google_sql_user" "recai-demo" {
-  name = "recai-demo"
+  name     = "recai-demo"
   instance = google_sql_database_instance.retail.name
-  host = "%"
+  host     = "%"
   password = "demopass"
 }
 # Data resource configuration
 resource "google_bigquery_dataset" "css_retail" {
   provider   = google
+  project    = var.project
   dataset_id = "css_retail"
 }
 resource "google_storage_bucket" "recai_demo_data_transfers" {
   provider = google
-  name     = "data_transfers"
+  project  = var.project
+  name     = "${var.project}_data_transfers"
   location = "US"
 }
 data "google_iam_policy" "cloud_sql_admin" {
@@ -157,11 +191,12 @@ data "google_iam_policy" "cloud_sql_admin" {
   }
 }
 resource "google_storage_bucket_iam_policy" "bq_exports" {
-  bucket = google_storage_bucket.recai_demo_data_transfers.name
+  bucket      = google_storage_bucket.recai_demo_data_transfers.name
   policy_data = data.google_iam_policy.cloud_sql_admin.policy_data
 }
 resource "google_storage_bucket" "model_export" {
   provider = google
-  name     = "model_exports"
+  project  = var.project
+  name     = "${var.project}_model_exports"
   location = "US"
 }

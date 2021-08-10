@@ -54,3 +54,4 @@ cloud_sql_proxy
 **/*.hcl
 **/.terraform*
 **/terraform.tfstate
+**/service_account.json

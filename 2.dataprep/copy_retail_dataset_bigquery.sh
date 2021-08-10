@@ -24,4 +24,4 @@ done
 
 # Extract products data to GCS
 bq extract --compression=GZIP --destination_format=CSV --field_delimiter=, \
-${TARGET_DS}.products gs://data_transfers/${TARGET_DS}_products.csv.gz
+${TARGET_DS}.products gs://${RECAI_PROJECT}_data_transfers/${TARGET_DS}_products.csv.gz
