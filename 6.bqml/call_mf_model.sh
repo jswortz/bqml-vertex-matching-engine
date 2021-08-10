@@ -11,7 +11,7 @@ source ../0.setup/env_vars.sh
 
 export PREDICT_SA="babrams@google.com"
 # Curl version
-curl -H "Content-Type: application/json; charset=utf-8" -H "Authorization: Bearer $(gcloud auth print-access-token "${PREDICT_SA}")" -X POST "https://${REGION}-ml.googleapis.com/v1/projects/${RECAI_PROJECT}/models/${BQML_NAME}/versions/v1:predict" --data '{"instances": [{"visitorId":"123"}]}'
+curl -H "Content-Type: application/json; charset=utf-8" -H "Authorization: Bearer $(gcloud auth print-access-token "${PREDICT_SA}")" -X POST "https://${PRIMARY_REGION}-ml.googleapis.com/v1/projects/${RECAI_PROJECT}/models/${BQML_NAME}/versions/v1:predict" --data '{"instances": [{"visitorId":"123"}]}'
 
 #quick load test
 #ctr=0
