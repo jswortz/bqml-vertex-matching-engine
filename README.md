@@ -28,7 +28,8 @@ ___
    servicenetworking.googleapis.com \
    appengine.googleapis.com \
    sqladmin.googleapis.com
-   recommendationengine.googleapis.com`
+   recommendationengine.googleapis.com
+   bigquerydatatransfer.googleapis.com`
 5. Manually create service account in Cloud Console and download json key file
 6. Ensure service account previously created has the following permissions  
    `Owner`
