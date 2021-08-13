@@ -16,11 +16,15 @@ def verify(session, access_token):
 
 
 def verify_token(token):
-        CLIENT_ID = auth_client.CLIENT_ID
-        try:
-            idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
-            userid = idinfo['sub']
-            return True
-        except Exception as e:
-            print(e)
-            return False
+    client_id = auth_client.CLIENT_ID
+    try:
+        idinfo = id_token.verify_oauth2_token(
+            token,
+            requests.Request(),
+            client_id
+        )
+        userid = idinfo['sub']
+        return True
+    except Exception as e:
+        print(e)
+        return False

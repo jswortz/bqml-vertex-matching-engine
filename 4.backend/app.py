@@ -3,7 +3,6 @@ from src.data_layer import auth_client
 from src.service_layer import handler
 from src import retail
 from src import chatbot
-
 from authlib.integrations.flask_client import OAuth
 from flask import Flask, request, session, url_for, redirect, render_template
 from flask_cors import CORS
@@ -34,10 +33,10 @@ def getproduct(pro_id):
     response = {}
     token_access = request.args.get("access_token")
     if auth.verify_token(token_access):
-        response = handler.getproduct(pro_id)
+        response = handler.get_product(pro_id)
     else:
         response = {"error": "Not a valid Auth"}
-    response = handler.getproduct(pro_id)
+    response = handler.get_product(pro_id)
     return response
 
 
@@ -50,14 +49,14 @@ def gettopproductadv():
         if auth.verify_token(token_access):
             try:
                 request_data = request.json
-                response = handler.gettopproductdemo(request_data)
+                response = handler.get_top_product_demo(request_data)
             except Exception as e:
                 print(e)
         else:
             response = {"error": "Not a valid Auth"}
     try:
         request_data = request.json
-        response = handler.gettopproductdemo(request_data)
+        response = handler.get_top_product_demo(request_data)
     except Exception as e:
         print(e)
     return response
@@ -68,10 +67,10 @@ def getbrand():
     token_access = request.args.get("access_token")
     response = {}
     if auth.verify_token(token_access):
-        response = handler.getbrand()
+        response = handler.get_brand()
     else:
         response = {"error": "Not a valid Auth"}
-    response = handler.getbrand()
+    response = handler.get_brand()
     return response
 
 
@@ -80,10 +79,10 @@ def getcategory():
     token_access = request.args.get("access_token")
     response = {}
     if auth.verify_token(token_access):
-        response = handler.getcategory()
+        response = handler.get_category()
     else:
         response = {"error": "Not a valid Auth"}
-    response = handler.getcategory()
+    response = handler.get_category()
     return response
 
 
@@ -92,10 +91,10 @@ def getsales():
     token_access = request.args.get("access_token")
     response = {}
     if auth.verify_token(token_access):
-        response = handler.getsales()
+        response = handler.get_sales()
     else:
         response = {"error": "Not a valid Auth"}
-    response = handler.getsales()
+    response = handler.get_sales()
     return response
 
 
@@ -149,7 +148,7 @@ def search():
         if arg not in required_args + optional_args:
             return {'error': f"Unknown field '{arg}'"}, 400
 
-    if body.get('benchmark') == True:
+    if body.get('benchmark'):
         return retail.search_benchmark(**body).json, 200
 
     return {'error': f"'benchmark' != true is not yet supported"}, 400
@@ -199,6 +198,7 @@ def logout():
         session.pop(key)
     return redirect('/')
 
+
 @app.route('/chatbot', methods=["POST"])
 def chatbot_interaction():
     if request.method == "POST":
@@ -211,12 +211,16 @@ def chatbot_interaction():
             if ("session_id" in data) == False or ("query_string" in data) == False:
                 return "Missing required parameters in body", 400
 
-            response = handler.get_chatbot_response(data["session_id"], data["query_string"])
+            response = handler.get_chatbot_response(
+                data["session_id"],
+                data["query_string"]
+            )
         else:
             response = {"error": "Not a valid Auth"}
     else:
         return {}, 404
     return response
+
 
 @app.route('/chatbot_webhook', methods=['POST'])
 def chatbot_webhook():
@@ -228,10 +232,12 @@ def chatbot_webhook():
     body = request.json
     return chatbot.handle_webhook(body)
 
+
 @app.route('/_ah/start', methods=['GET'])
 def app_engine_startup():
     """Required startup route for manual scaling app engine services."""
     return 'OK', 200
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)

@@ -1,5 +1,4 @@
 """Exposes raw, business-logic free Retail API methods"""
-
 from src.config import PROJECT_NUMBER
 #TODO: migrate to google.cloud.retail official client after retail search release
 from google_auth_httplib2 import AuthorizedHttp
@@ -27,8 +26,10 @@ SEARCH_URL_TMPL = Template(f'{BASE_URL}/$placement:search')
 COMPLETEQUERY_URL_TMPL = Template(f'{BASE_URL}/$catalog:completeQuery')
 RECOMMEND_URL_TMPL = Template(f'{BASE_URL}/$placement:predict')
 
+
 class RetailRequestError(Exception):
     pass
+
 
 def _request(credentials=_creds, *args, **kwargs):
     """Makes a service account authenticated http call passing args and kwargs 
@@ -52,12 +53,14 @@ def _request(credentials=_creds, *args, **kwargs):
     
     return data
 
+
 def get_product(
     product_id,
     project_number=PROJECT_NUMBER,
     location=DEFAULT_LOCATION,
     catalog=DEFAULT_CATALOG,
-    branch=DEFAULT_BRANCH):
+    branch=DEFAULT_BRANCH
+):
     """Retrieves a Retail API Product instance given it's id.
     
     Args:
@@ -84,23 +87,26 @@ def get_product(
 
     return _request(uri=url, method='GET')
 
+
 def list_products():
     raise NotImplementedError
 
+
 def search_products(
     query,
-    visitorId,
+    visitor_id,
     project_number=PROJECT_NUMBER,
     location=DEFAULT_LOCATION,
     catalog=DEFAULT_CATALOG,
     placement=DEFAULT_SEARCH_PLACEMENT,
     branch=DEFAULT_BRANCH,
-    **kwargs):
+    **kwargs
+):
     """Searches for products.
     
     Args:
         query (str): User query
-        visitorId (str): Unique user identifier
+        visitor_id (str): Unique user identifier
         project_number (str | int): Google Cloud Platform project number
         location (str): Resource location
         catalog (str): Catalog id
@@ -131,19 +137,21 @@ def search_products(
 
     body = json.dumps({
         'query': query,
-        'visitorId': visitorId,
+        'visitorId': visitor_id,
         'branch': branch_path,
         **kwargs
     })
 
     return _request(uri=url, method='POST', body=body)
 
+
 def complete_query(
     query,
     project_number=PROJECT_NUMBER,
     location=DEFAULT_LOCATION,
     catalog=DEFAULT_CATALOG,
-    **kwargs):     
+    **kwargs
+):
 
     client = AuthorizedHttp(_creds)
 
@@ -158,18 +166,20 @@ def complete_query(
 
     return _request(uri=url, method='GET')
 
+
 def recommend(
     placement_id,
-    userEvent,
+    user_event,
     project_number=PROJECT_NUMBER,
     location=DEFAULT_LOCATION,
     catalog=DEFAULT_CATALOG,
-    **kwargs):
+    **kwargs
+):
     """Makes product recommendations.
     
     Args:
         placement_id (str): Recommendation model placement id
-        userEvent (dict): Context about the user. Required keys: 'eventType' and 'visitorId'. Available keys can be found
+        user_event (dict): Context about the user. Required keys: 'eventType' and 'visitorId'. Available keys can be found
             here: https://cloud.google.com/retail/search/docs/reference/rest/v2alpha/projects.locations.catalogs.userEvents#UserEvent
         project_number (str | int): Google Cloud Platform project number
         location (str): Resource location
@@ -192,7 +202,7 @@ def recommend(
     url = RECOMMEND_URL_TMPL.substitute(placement=resource)
 
     body = json.dumps({
-        'userEvent': userEvent,
+        'userEvent': user_event,
         **kwargs
     })
 

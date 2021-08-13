@@ -21,7 +21,7 @@ def generate_subcategory_list(sub_category):
     return final_list_of_subcat
 
 
-def convet_result_to_dataframe(query_result, columns, orient_value):
+def convert_result_to_dataframe(query_result, columns, orient_value):
     df = pd.DataFrame(query_result, columns=columns)
     return df.to_json(orient=orient_value)
 

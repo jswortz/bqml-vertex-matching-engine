@@ -1,12 +1,11 @@
 from src.retail import search_benchmark
-
 from dialogflow_fulfillment import Card
 
-def product_search(agent):
 
+def product_search(agent):
     query = agent.parameters.get('query')
 
-    #TODO response = search(query=query, pageSize=3)
+    # TODO response = search(query=query, pageSize=3)
     response = search_benchmark(query=query, pageSize=3)
 
     if not response.results:

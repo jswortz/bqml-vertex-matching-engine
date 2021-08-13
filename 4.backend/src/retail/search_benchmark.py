@@ -5,17 +5,18 @@ from src.config import ELASTICSEARCH_PASSWORD
 from src.retail.config import MAX_PAGE_SIZE
 from src.types.retail import SearchResponse
 from src.types.retail import SearchProduct
-
 from datetime import datetime, timedelta
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 import math 
 
 _client = Elasticsearch(
-    cloud_id = ELASTICSEARCH_CLOUD_ID,
-    http_auth = (ELASTICSEARCH_USER, ELASTICSEARCH_PASSWORD))
+    cloud_id=ELASTICSEARCH_CLOUD_ID,
+    http_auth=(ELASTICSEARCH_USER, ELASTICSEARCH_PASSWORD)
+)
 
 _SEARCH_FIELD = 'NAME'
+
 
 def _autocorrect(user_query):
     
@@ -40,11 +41,12 @@ def search_benchmark(
     query='',
     autocorrect=True,
     page=1,
-    pageSize=50,
-    **kwargs):
+    page_size=50,
+    **kwargs
+):
 
     page = max(page, 1)
-    page_size = min(pageSize, MAX_PAGE_SIZE)
+    page_size = min(page_size, MAX_PAGE_SIZE)
     corrected_query = _autocorrect(query) if autocorrect else query
 
     raw_results = (

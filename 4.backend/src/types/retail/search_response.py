@@ -1,5 +1,6 @@
 from src.types.retail.search_product import SearchProduct
 
+
 class SearchResponse:
     """SearchResponse type for service consumption standardization."""
 

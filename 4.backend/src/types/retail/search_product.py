@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import math
 
+
 class SearchProduct:
     """SearchProduct type for standardization between different data models."""
 
@@ -14,16 +15,28 @@ class SearchProduct:
         'image_link': 'image_url',
         'NAME': 'name',
         'RETAIL_PRICE': 'price',
-        #'review' field not joined with 'products' table in
+        # 'review' field not joined with 'products' table in
         # elasticsearch because 'review' table is empty
-        #'REVIEW': 'review',
+        # 'REVIEW': 'review',
         'SIZE': 'size',
         'SUB_CATEGORY': 'sub_category'
     }
 
-    def __init__(self, product_id=None, name=None, availability=None, brand=None, 
-    category=None, sub_category=None, color=None, days_to_deliver=None,
-    image_url=None, price=None, review=None, size=None):
+    def __init__(
+        self,
+        product_id=None,
+        name=None,
+        availability=None,
+        brand=None,
+        category=None,
+        sub_category=None,
+        color=None,
+        days_to_deliver=None,
+        image_url=None,
+        price=None,
+        review=None,
+        size=None
+    ):
         self.availability = availability
         self.brand = brand
         self.category = category
