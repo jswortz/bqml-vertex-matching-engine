@@ -1,7 +1,8 @@
 # Recommendations AI Demo Project
 ___
 > Refactored code base sourced from
-> [go/recommendation-ai-demo-instructions](http://go/recommendation-ai-demo-instructions)
+> [go/recommendation-ai-demo-instructions](http://go/recommendation-ai-demo-instructions)  
+> Most interactions are now scripted and modification to one configuration file in 0.setup
 
 
 
@@ -22,37 +23,35 @@ ___
 3. Export variables for continued usage in subsequent steps  
     `source env_vars.sh`
 4. Ensure  the following API's are enabled in Google Cloud Console  
-   `gcloud services enable 
-   iam.googleapis.com 
-   cloudresourcemanager.googleapis.com 
-   vpcaccess.googleapis.com 
-   compute.googleapis.com 
-   servicenetworking.googleapis.com 
-   appengine.googleapis.com 
-   sqladmin.googleapis.com 
-   recommendationengine.googleapis.com 
-   bigquerydatatransfer.googleapis.com 
-   ml.googleapis.com 
-   retail.googleapis.com 
-   aiplatform.googleapis.com 
-   cloudbuild.googleapis.com`
+    `gcloud services enable 
+    iam.googleapis.com 
+    cloudresourcemanager.googleapis.com 
+    vpcaccess.googleapis.com 
+    compute.googleapis.com 
+    servicenetworking.googleapis.com 
+    appengine.googleapis.com 
+    sqladmin.googleapis.com 
+    recommendationengine.googleapis.com 
+    bigquerydatatransfer.googleapis.com 
+    ml.googleapis.com 
+    retail.googleapis.com 
+    aiplatform.googleapis.com 
+    cloudbuild.googleapis.com`
 5. Manually create service account in Cloud Console and download json key file.
    Key file should be named `service_account.json`
 6. Ensure service account previously created has the following permissions  
-   `Owner`
+    `Owner`
 7. Export Service Account Credentials path variable  
     `export GOOGLE_APPLICATION_CREDENTIALS=./service_account.json`
 
 
 ### 1.terraform
 > main.tf is configured to build Service Accounts, Networking, AppEngine, Cloud SQL, Storage buckets, and Big Query Datasets
-1. Configure terraform.tfvars with required parameters  
-    `vi terraform.tfvars`
-2. Initialize terraform for the current project  
+1. Initialize terraform for the current project  
     `terraform init`
-3. Execute the plan step to review the full set of changes to be applied  
+2. Execute the plan step to review the full set of changes to be applied  
     `terraform plan`
-4. After review, apply terraform spec to build the environment  
+3. After review, apply terraform spec to build the environment  
     `terraform apply`
 
 
@@ -67,7 +66,9 @@ ___
 ### 3.recommendation_ai
 > Two scripts here, one to update RecAI for the newly minted API key for prediction calls
 > and another script to delete an api key, which is not likely required but provided for convenience.  
-> Consult original demo instructions for Recommendations AI interactions
+> Consult original demo instructions for Recommendations AI interactions.  
+> Note: Model training will take a few days.
+> While waiting, the site will not function correctly due to invalid RecAI API calls.  
 1. Load Product Catalog and User events into Recommendations AI
 2. Configure and build Recommendations AI models
 3. Configure Google Tag Manager
