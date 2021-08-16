@@ -18,17 +18,17 @@ variable "zone" {
   description = "GCP zone used in deployment configuration"
 }
 
-variable "beta-location" {
+variable "beta_location" {
   type        = string
   description = "GCP location"
 }
 
-variable "beta-region" {
+variable "beta_region" {
   type        = string
   description = "GCP region used in deployment configuration"
 }
 
-variable "beta-zone" {
+variable "beta_zone" {
   type        = string
   description = "GCP zone used in deployment configuration"
 }

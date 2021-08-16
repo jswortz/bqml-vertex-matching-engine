@@ -16,8 +16,8 @@ provider "google" {
 # Use this provider only if app engine and VPC,Cloud SQL are in separate region
 provider "google-beta" {
   project = var.project
-  region  = var.beta-region
-  zone    = var.beta-zone
+  region  = var.beta_region
+  zone    = var.beta_zone
 }
 
 # Service Accounts

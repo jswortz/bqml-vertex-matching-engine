@@ -8,7 +8,7 @@ runtime_config:
 manual_scaling:
   instances: 1
 vpc_access_connector:
-  name: projects/{{ env['RECAI_PROJECT'] }}/locations/us-central1/connectors/recai-demo-vpc   #network name
+  name: projects/{{ env['RECAI_PROJECT'] }}/locations/{{ env['PRIMARY_REGION'] }}/connectors/recai-demo-vpc
 
 resources:
   cpu: 1
