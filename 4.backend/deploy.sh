@@ -1,11 +1,17 @@
 #!/bin/bash
 
-source ../0.setup/env_vars.sh
+source ./add_env_vars.sh
 
-PROJECT_NUMBER=$(gcloud projects describe "${RECAI_PROJECT}" | grep projectNumber | cut -d\' -f2)
-export PROJECT_NUMBER
+# Check if a service has already been deployed, if not deploy default service
+existing_service_count=$(gcloud app services list | cut -d" " -f1 | grep -v SERVICE | wc -l)
+if [ ${existing_service_count} -lt 1 ]; then
+  # Initial deployment with default service name as required by App Engine on clean install
+  export APP_ENGINE_SERVICE="default"
+  python3 build_app_yaml.py
+  gcloud app deploy --project="${RECAI_PROJECT}"
+fi
 
-CLOUD_SQL_IP=$(gcloud sql instances describe pso-css-retail | grep -i ipAddress: | cut -d: -f2 | cut -d" " -f2)
-export CLOUD_SQL_IP
-
+# Actual deployment to be used by site
+export APP_ENGINE_SERVICE="backend-q"
+python3 build_app_yaml.py
 gcloud app deploy --project="${RECAI_PROJECT}"

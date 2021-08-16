@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import {CookieManagerService} from '../../../utilities/services/cookie-manager.service'
+import {CookieManagerService} from '../../../utilities/services/cookie-manager.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,29 +10,30 @@ import {CookieManagerService} from '../../../utilities/services/cookie-manager.s
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  @Input() store_name = "";
-  signed_in = false;
+  @Input() storeName = '';
+  signedIn = false;
   bagSize = 0;
   @Input() categories = [];
   myControl = new FormControl();
 
-  constructor(private readonly cookieManagerService: CookieManagerService, private readonly router: Router) { 
+  constructor(private readonly cookieManagerService: CookieManagerService, private readonly router: Router) {
     this.cookieManagerService.bag$.subscribe(val => {
       this.bagSize = 0;
       val.map(item => {
-        this.bagSize += Number(item['quantity']); 
-      })
-    })
+        this.bagSize += Number(item['quantity']);
+      });
+    });
   }
 
-  goToSearch(event: KeyboardEvent) {
+  goToSearch(event: KeyboardEvent): void {
     event.preventDefault();
     this.router.navigate(
-        ['product'], {queryParams: {q: (event.target as HTMLInputElement).value}});
+        ['product'], {queryParams: {q: (event.target as HTMLInputElement).value}}
+        );
   }
 
-  login() {
-    this.signed_in = !this.signed_in;
+  login(): void {
+    this.signedIn = !this.signedIn;
   }
 
 }

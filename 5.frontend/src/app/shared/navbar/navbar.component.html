@@ -5,22 +5,22 @@
     <div class="nav" >
         <div class="uk-padding uk-padding-remove-vertical uk-clearfix">
             <div class="uk-float-left">
-                    <a routerLink="" style="text-decoration: none"><h1 class='uk-text-lead uk-text-bolder uk-margin-small-top'>{{store_name}}</h1></a>
+                    <a routerLink="" style="text-decoration: none"><h1 class='uk-text-lead uk-text-bolder uk-margin-small-top'>{{storeName}}</h1></a>
             </div>
             <div class="uk-float-right">
                     <div class="uk-search uk-search-default">
                         <span uk-search-icon=""></span>
-                        <input 
-                        class="uk-search-input" 
-                        placeholder="Search..." 
+                        <input
+                        class="uk-search-input"
+                        placeholder="Search..."
                         (keyup.enter)="goToSearch($event)" />
                     </div>
-                    <button 
-                    class="uk-margin-left uk-button uk-button-text" 
+                    <button
+                    class="uk-margin-left uk-button uk-button-text"
                     style="font-size: small"
                     (click)="login()"
                     >
-                        <ng-template *ngIf="signed_in; then sign_out; else sign_in"></ng-template>
+                        <ng-template *ngIf="signedIn; then sign_out; else sign_in"></ng-template>
                         <ng-template #sign_out>SIGN OUT</ng-template>
                         <ng-template #sign_in>SIGN IN</ng-template>
                     </button>
@@ -47,6 +47,6 @@
                 <div class="uk-navbar-right uk-hidden@s"><button class='uk-navbar-toggle' uk-navbar-toggle-icon=""
                                                                 uk-toggle="target: #offcanvas-navbar"></button></div>
             </div>
-        </nav> 
-    </div>           
+        </nav>
+    </div>
 </div>

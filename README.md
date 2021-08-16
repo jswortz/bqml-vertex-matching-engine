@@ -32,7 +32,8 @@ ___
    bigquerydatatransfer.googleapis.com \
    ml.googleapis.com \
    retail.googleapis.com \
-   aiplatform.googleapis.com`
+   aiplatform.googleapis.com \
+   cloudbuild.googleapis.com`
 5. Manually create service account in Cloud Console and download json key file
 6. Ensure service account previously created has the following permissions  
    `Owner`
@@ -69,7 +70,10 @@ ___
    
 ### 4.backend
 > Consult original demo instructions document for various items to be updated
-1. Update various configurations and variables in assorted files
+1. Update add_env_vars.sh with relevant configuration items
+    `vi add_env_vars.sh`
+2. Bring new variables to your env
+    `source add_env_vars.sh`
 2. Execute deploy script
     `bash deploy.sh`
 

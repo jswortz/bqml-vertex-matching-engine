@@ -53,7 +53,7 @@ def put_single_quotes(word):
 
 
 def get_ids_instr(json_data):
-    results=json_data["results"]
+    results = json_data["results"]
     output_list = []
     for each_id in results:
         output_list.append(each_id['id'])

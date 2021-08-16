@@ -12,25 +12,28 @@ import { CookieManagerService } from '../../../utilities/services/cookie-manager
 export class BaseComponent implements AfterViewInit {
   isLoading = true;
   categories = [];
-  store_name = "";
-  bag_size = 0;
+  storeName = '';
+  bagSize = 0;
   login;
 
   constructor(
-    private readonly router: Router, private readonly route: ActivatedRoute, private readonly storeInfoService: StoreInfoService, private readonly cookieManagerService: CookieManagerService) {
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly storeInfoService: StoreInfoService,
+    private readonly cookieManagerService: CookieManagerService) {
       this.categories = this.route.snapshot.data["Categories"];
-      storeInfoService.store_name$.subscribe(val => {
-        this.store_name = val;
+      storeInfoService.storeName$.subscribe(val => {
+        this.storeName = val;
       });
       cookieManagerService.bagSize$.subscribe(val => {
-        this.bag_size = val;
-      })
+        this.bagSize = val;
+      });
       cookieManagerService.login$.subscribe(val => {
         this.login = val;
-      })
+      });
     }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {

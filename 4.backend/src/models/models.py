@@ -1,4 +1,4 @@
-from src.utils import db_connection
+from src.utils import dbconnection
 from src.data_layer import query_source, column_information as ci
 from src.utils import utils
 from google.cloud import dialogflow
@@ -20,7 +20,7 @@ class Models:
     def __init__(self, prod_id="", request_data=''):
         self.product_id = prod_id
         self.requested_data = request_data
-        self.connection_object = db_connection.DbConnection()
+        self.connection_object = dbconnection.DbConnection()
         self.client = self.connection_object.get_client_ref()
 
     def fetch_product_id(self):

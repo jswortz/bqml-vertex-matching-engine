@@ -21,7 +21,7 @@
                     <ng-template #regular>
                         <h3 class="uk-text-large uk-text-bold uk-margin-remove">${{product.PRICE}}</h3>
                     </ng-template>
-                        
+
                     <p class="uk-text-small uk-margin-remove">{{colorSelection}}</p>
                         <span class="circle" [style.background-color]="product['COLOR']" (click)="setColor(product['COLOR'])">
                             <span class="circle_inner" [class.active]="colorSelection === product['COLOR']"></span>
@@ -49,9 +49,9 @@
             </ul>
             <p class="uk-text-bold"  style="color: #333; font-size: 1.25rem">Frequently Bought Together</p>
             <div class="uk-slider-container-offset" uk-slider="autoplay: true">
-    
+
                 <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
-            
+
                     <ul class="uk-slider-items uk-child-width-1-3 uk-grid">
                         <li *ngFor="let rec of product.bought_together">
                             <app-product-card [product]="rec"></app-product-card>
@@ -60,7 +60,7 @@
                     <a style="color: black;" class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
                     <a style="color: black;" class="uk-position-center-right-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
                 </div>
-        
+
             </div>
         </div>
     </div>
@@ -72,7 +72,7 @@
         <div class="uk-slider-container-offset" uk-slider="autoplay: true">
 
             <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
-        
+
                 <ul class="uk-slider-items uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-3@s uk-grid">
                     <li *ngFor="let rec of product.recommended">
                         <app-product-card [product]="rec"></app-product-card>
@@ -81,15 +81,15 @@
                 <a style="color: black;" class="uk-position-center-left-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
                 <a style="color: black;" class="uk-position-center-right-out uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
             </div>
-    
+
         </div>
     </div>
-    <div *ngIf="recently_viewed.length > 0" class="uk-container">
+    <div *ngIf="recentlyViewed.length > 0" class="uk-container">
         <h3 class="uk-text-bold">Recently Viewed</h3>
         <div class="uk-slider-container-offset" uk-slider="autoplay: true">
             <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
                 <ul class="uk-slider-items uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-3@s uk-grid">
-                    <li *ngFor="let rec of recently_viewed">
+                    <li *ngFor="let rec of recentlyViewed">
                         <app-product-card  [product]="rec"></app-product-card>
                     </li>
                 </ul>

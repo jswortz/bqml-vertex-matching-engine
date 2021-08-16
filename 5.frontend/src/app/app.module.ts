@@ -11,8 +11,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ProductCardComponent } from './shared/product-card/product-card.component';
 import { ServicesModule } from '../utilities/services/services_module';
 import { SearchComponent } from './views/search/search.component';
+import { environment } from '../environments/environment';
 
-const tagManagerContainer = 'GTM-W3FXLZ6';  // update tag manager container id
+const tagManagerContainer = environment.GTM_CONTAINER_ID;
 
 @NgModule({
   declarations: [

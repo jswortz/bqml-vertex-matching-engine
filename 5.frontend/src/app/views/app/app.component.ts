@@ -12,7 +12,7 @@ export class AppComponent implements AfterViewInit {
   constructor(private readonly router: Router) {
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationEnd:

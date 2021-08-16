@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import {getRandomValues} from '../../../utilities/helpers/getRandomValues';
-
-import {CookieManagerService} from '../../../utilities/services/cookie-manager.service'
+import {CookieManagerService} from '../../../utilities/services/cookie-manager.service';
 import {GoogleTagManagerService} from 'angular-google-tag-manager';
 
 @Component({
@@ -12,19 +11,22 @@ import {GoogleTagManagerService} from 'angular-google-tag-manager';
 })
 export class HomeComponent implements OnInit {
   login = false;
-  products:any = [];
-  recently_viewed:any = [];
+  products: any = [];
+  recentlyViewed: any = [];
   getRandomValues = getRandomValues;
 
-  constructor(private gtmService: GoogleTagManagerService, private readonly router: Router, private readonly route: ActivatedRoute, private readonly cookieManagerService: CookieManagerService) { 
+  constructor(private gtmService: GoogleTagManagerService,
+              private readonly router: Router,
+              private readonly route: ActivatedRoute,
+              private readonly cookieManagerService: CookieManagerService) {
     this.router.events.forEach(item => {
       if (item instanceof NavigationEnd) {
         const gtmTag = {
-          "automl": {
-            "eventType": 'home-page-view',
-            "userInfo": {
-              "visitorId": cookieManagerService.visitorId$.value,
-              "userId": cookieManagerService.visitorId$.value
+          automl: {
+            eventType: 'home-page-view',
+            userInfo: {
+              visitorId: cookieManagerService.visitorId$.value,
+              userId: cookieManagerService.visitorId$.value
             }
           }
         };
@@ -33,7 +35,7 @@ export class HomeComponent implements OnInit {
     });
     this.products = this.route.snapshot.data["FeaturedProducts"];
     this.products = this.getRandomValues(this.products, 5);
-    this.recently_viewed = this.route.snapshot.data["RecentlyViewed"];
+    this.recentlyViewed = this.route.snapshot.data["RecentlyViewed"];
 
   }
 

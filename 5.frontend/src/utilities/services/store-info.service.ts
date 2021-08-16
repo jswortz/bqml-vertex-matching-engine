@@ -5,19 +5,19 @@ import {BehaviorSubject} from 'rxjs';
   providedIn: 'root'
 })
 export class StoreInfoService {
-  store_name$ = new BehaviorSubject<string>('store');
-  primary_color$ = new BehaviorSubject<string>('');
-  secondary_color$ = new BehaviorSubject<string>('');
+  storeName$ = new BehaviorSubject<string>('store');
+  primaryColor$ = new BehaviorSubject<string>('');
+  secondaryColor$ = new BehaviorSubject<string>('');
 
-  set store_name(value: string){
-    this.store_name$.next(value)
+  set storeName(value: string){
+    this.storeName$.next(value);
   }
 
-  set primary_color(value: string){
-    this.primary_color$.next(value)
+  set primaryColor(value: string){
+    this.primaryColor$.next(value);
   }
 
-  set secondary_color(value: string){
-    this.secondary_color$.next(value)
+  set secondaryColor(value: string){
+    this.secondaryColor$.next(value);
   }
 }

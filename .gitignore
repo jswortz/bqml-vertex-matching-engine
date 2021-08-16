@@ -50,6 +50,9 @@ setup.cfg
 #Cloud SQL util
 cloud_sql_proxy
 
+#Deployment artifacts
+**/app.yaml
+
 #Terraform files
 **/*.hcl
 **/.terraform*
