@@ -12,6 +12,7 @@ ___
 > Most configuration has been pushed into `./0.setup/env_vars.sh` and `./0.setup/install_packages.sh`  
 > Each section assumes you are executing commands from the relative directory of each section
 
+
 ### 0.setup
 > Install packages and update variables
 1. Install cloud sdk, git, npm, and angular cli  
@@ -21,25 +22,27 @@ ___
 3. Export variables for continued usage in subsequent steps  
     `source env_vars.sh`
 4. Ensure  the following API's are enabled in Google Cloud Console  
-   `gcloud services enable \
-   iam.googleapis.com \
-   cloudresourcemanager.googleapis.com \
-   vpcaccess.googleapis.com \
-   compute.googleapis.com \
-   servicenetworking.googleapis.com \
-   appengine.googleapis.com \
-   sqladmin.googleapis.com \
-   recommendationengine.googleapis.com \
-   bigquerydatatransfer.googleapis.com \
-   ml.googleapis.com \
-   retail.googleapis.com \
-   aiplatform.googleapis.com \
+   `gcloud services enable 
+   iam.googleapis.com 
+   cloudresourcemanager.googleapis.com 
+   vpcaccess.googleapis.com 
+   compute.googleapis.com 
+   servicenetworking.googleapis.com 
+   appengine.googleapis.com 
+   sqladmin.googleapis.com 
+   recommendationengine.googleapis.com 
+   bigquerydatatransfer.googleapis.com 
+   ml.googleapis.com 
+   retail.googleapis.com 
+   aiplatform.googleapis.com 
    cloudbuild.googleapis.com`
-5. Manually create service account in Cloud Console and download json key file
+5. Manually create service account in Cloud Console and download json key file.
+   Key file should be named `service_account.json`
 6. Ensure service account previously created has the following permissions  
    `Owner`
 7. Export Service Account Credentials path variable  
     `export GOOGLE_APPLICATION_CREDENTIALS=./service_account.json`
+
 
 ### 1.terraform
 > main.tf is configured to build Service Accounts, Networking, AppEngine, Cloud SQL, Storage buckets, and Big Query Datasets
@@ -52,12 +55,14 @@ ___
 4. After review, apply terraform spec to build the environment  
     `terraform apply`
 
+
 ### 2.dataprep
 > Create schema in Cloud SQL and copy the css_retail dataset in Big Query
 1. Execute Big Query copy and export script  
     `bash copy_retail_dataset_bigquery.sh`
 2. Execute the Cloud SQL prep script to build the schema and load the product dataset  
     `bash prep_and_load_cloudsql.sh`
+
 
 ### 3.recommendation_ai
 > Two scripts here, one to update RecAI for the newly minted API key for prediction calls
@@ -71,17 +76,20 @@ ___
    `bash add_env_vars.sh`
 5. Execute the prediction key script  
     `bash prediction_key.sh`
-   
+  
+ 
 ### 4.backend
 > Consult original demo instructions document for various items to be updated
 1. Execute deploy script
     `bash deploy.sh`
+
 
 ### 5.frontend
 > Consult original demo instructions document for various items to be updated
 1. Execute deploy script
     `bash deploy_app_engine.sh`
    
+
 ### 6.bqml
 > Build, deploy, and call your own BQML Matrix Factorization model
 > This will require flex slot reservations in Big Query along with associated costs
