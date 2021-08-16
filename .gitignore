@@ -51,7 +51,7 @@ setup.cfg
 cloud_sql_proxy
 
 #Deployment artifacts
-**/app.yaml
+**/*.yaml
 
 #Terraform files
 **/*.hcl

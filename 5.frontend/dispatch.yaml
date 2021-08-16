@@ -1,5 +1,0 @@
-dispatch:
-  - url: "babrams-recai-demo.uc.r.appspot.com/*"
-    service: front-rec-ai
-  - url: "babrams-recai-demo.uc.r.appspot.com/*"
-    service: backend-q

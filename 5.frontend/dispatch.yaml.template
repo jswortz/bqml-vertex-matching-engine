@@ -1,0 +1,5 @@
+dispatch:
+  - url: "{{ env['RECAI_PROJECT'] }}.uc.r.appspot.com/*"
+    service: front-rec-ai
+  - url: "{{ env['RECAI_PROJECT'] }}.uc.r.appspot.com/*"
+    service: backend-q
