@@ -9,7 +9,8 @@ ___
 
 ---
 > General flow is to step through the directories, update the configurations and execute scripts and process.  
-> Most configuration has been pushed into `./0.setup/env_vars.sh` and `./0.setup/install_packages.sh`
+> Most configuration has been pushed into `./0.setup/env_vars.sh` and `./0.setup/install_packages.sh`  
+> Each section assumes you are executing commands from the relative directory of each section
 
 ### 0.setup
 > Install packages and update variables
@@ -62,24 +63,25 @@ ___
 > Two scripts here, one to update RecAI for the newly minted API key for prediction calls
 > and another script to delete an api key, which is not likely required but provided for convenience.  
 > Consult original demo instructions for Recommendations AI interactions
-1. Execute the prediction key script  
+1. Load Product Catalog and User events into Recommendations AI
+2. Configure and build Recommendations AI models
+3. Configure Google Tag Manager
+4. Update and export additional variables from previous steps
+   `vi add_env_vars.sh`
+   `bash add_env_vars.sh`
+5. Execute the prediction key script  
     `bash prediction_key.sh`
-2. Configure Google Tag Manager
-3. Load Product Catalog and User events into Recommendations AI
-4. Configure and build Recommendations AI models
    
 ### 4.backend
 > Consult original demo instructions document for various items to be updated
-1. Update add_env_vars.sh with relevant configuration items
-    `vi add_env_vars.sh`
-2. Bring new variables to your env
-    `source add_env_vars.sh`
-2. Execute deploy script
+1. Execute deploy script
     `bash deploy.sh`
 
 ### 5.frontend
 > Consult original demo instructions document for various items to be updated
-1. Update various configurations and variables in assorted files, including dispatch.yaml
+1. Update src/environments/* with required variables substituted
+    `vi ./src/environments/environments.ts`
+    `vi ./src/environments/environments.prod.ts`
 2. Execute deploy script
     `bash deploy_app_engine.sh`
    

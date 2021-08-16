@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source ./add_env_vars.sh
+source ../0.setup/env_vars.sh
+source ../3.recommendation_ai_add_env_vars.sh
 
 # Check if a service has already been deployed, if not deploy default service
 existing_service_count=$(gcloud app services list | cut -d" " -f1 | grep -v SERVICE | wc -l)
