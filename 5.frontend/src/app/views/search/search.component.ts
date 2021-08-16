@@ -35,7 +35,7 @@ export class SearchComponent {
       this.brands = this.route.snapshot.data['Brands'].sort();
       this.categories = this.route.snapshot.data['Categories'];
       this.route.data.subscribe(val => {
-        if(this.onlyPage){
+        if (this.onlyPage){
           this.onlyPage = false;
           return;
         }

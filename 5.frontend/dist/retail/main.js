@@ -46,6 +46,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_product_card_product_card_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./shared/product-card/product-card.component */ "./src/app/shared/product-card/product-card.component.ts");
 /* harmony import */ var _utilities_services_services_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../utilities/services/services_module */ "./src/utilities/services/services_module.ts");
 /* harmony import */ var _views_search_search_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./views/search/search.component */ "./src/app/views/search/search.component.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
 
 
 
@@ -60,11 +61,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+const tagManagerContainer = _environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].GTM_CONTAINER_ID;
 class AppModule {
 }
 AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_views_app_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]] });
 AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [
-        { provide: 'googleTagManagerId', useValue: 'GTM-W3FXLZ6' } //update tag manager container id
+        { provide: 'googleTagManagerId', useValue: tagManagerContainer }
     ], imports: [[
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
             _views_base_app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
@@ -101,7 +104,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _utilities_services_services_module__WEBPACK_IMPORTED_MODULE_11__["ServicesModule"]
                 ],
                 providers: [
-                    { provide: 'googleTagManagerId', useValue: 'GTM-W3FXLZ6' } //update tag manager container id
+                    { provide: 'googleTagManagerId', useValue: tagManagerContainer }
                 ],
                 bootstrap: [_views_app_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
             }]
@@ -125,11 +128,11 @@ __webpack_require__.r(__webpack_exports__);
 
 class FooterComponent {
     constructor() {
-        this.store_name = '';
+        this.storeName = '';
     }
 }
 FooterComponent.ɵfac = function FooterComponent_Factory(t) { return new (t || FooterComponent)(); };
-FooterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: FooterComponent, selectors: [["app-footer"]], inputs: { store_name: "store_name" }, decls: 68, vars: 4, consts: [[1, "uk-section", "uk-section-secondary"], [1, "uk-container"], ["uk-grid", "", 1, "uk-child-width-1-2"], [1, "uk-text-bold"], [1, "uk-column-1-3"], [1, "uk-list"], ["href", "/", 1, "uk-link-muted"], [1, "uk-margin-medium-top"], ["href", "https://www.youtube.com/", "aria-label", "youtube link", "target", "_blank", "rel", "noopener noreferrer", "uk-icon", "icon: youtube", "uk-tooltip", "pos: left", 1, "uk-margin-small-right", "uk-icon-button", 3, "title"], ["href", "https://www.twitter.com/", "aria-label", "twitter link", "target", "_blank", "rel", "noopener noreferrer", "uk-icon", "icon: twitter", "uk-tooltip", "pos: top", 1, "uk-margin-small-right", "uk-icon-button", 3, "title"], ["href", "https://www.facebook.com/groups/", "aria-label", "facebook group link", "rel", "noopener noreferrer", "target", "_blank", "uk-icon", "icon: facebook", "uk-tooltip", "pos: bottom", 1, "uk-margin-small-right", "uk-icon-button", 3, "title"], ["href", "https://www.instagram.com/", "aria-label", "instagram link", "target", "_blank", "rel", "noopener noreferrer", "uk-icon", "icon: instagram", "uk-tooltip", "pos: right", 1, "uk-margin-small-right", "uk-icon-button", 3, "title"]], template: function FooterComponent_Template(rf, ctx) { if (rf & 1) {
+FooterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: FooterComponent, selectors: [["app-footer"]], inputs: { storeName: "storeName" }, decls: 68, vars: 4, consts: [[1, "uk-section", "uk-section-secondary"], [1, "uk-container"], ["uk-grid", "", 1, "uk-child-width-1-2"], [1, "uk-text-bold"], [1, "uk-column-1-3"], [1, "uk-list"], ["href", "/", 1, "uk-link-muted"], [1, "uk-margin-medium-top"], ["href", "https://www.youtube.com/", "aria-label", "youtube link", "target", "_blank", "rel", "noopener noreferrer", "uk-icon", "icon: youtube", "uk-tooltip", "pos: left", 1, "uk-margin-small-right", "uk-icon-button", 3, "title"], ["href", "https://www.twitter.com/", "aria-label", "twitter link", "target", "_blank", "rel", "noopener noreferrer", "uk-icon", "icon: twitter", "uk-tooltip", "pos: top", 1, "uk-margin-small-right", "uk-icon-button", 3, "title"], ["href", "https://www.facebook.com/groups/", "aria-label", "facebook group link", "rel", "noopener noreferrer", "target", "_blank", "uk-icon", "icon: facebook", "uk-tooltip", "pos: bottom", 1, "uk-margin-small-right", "uk-icon-button", 3, "title"], ["href", "https://www.instagram.com/", "aria-label", "instagram link", "target", "_blank", "rel", "noopener noreferrer", "uk-icon", "icon: instagram", "uk-tooltip", "pos: right", 1, "uk-margin-small-right", "uk-icon-button", 3, "title"]], template: function FooterComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
@@ -245,13 +248,13 @@ FooterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](45);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", "@" + ctx.store_name);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", "@" + ctx.storeName);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", "@" + ctx.store_name);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", "@" + ctx.storeName);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", "/group/" + ctx.store_name);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", "/group/" + ctx.storeName);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", "@" + ctx.store_name);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("title", "@" + ctx.storeName);
     } }, styles: [".uk-section-secondary[_ngcontent-%COMP%] {\n  background: black !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL2Zvb3Rlci9mb290ZXIuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSw0QkFBQTtBQUNKIiwiZmlsZSI6InNyYy9hcHAvc2hhcmVkL2Zvb3Rlci9mb290ZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudWstc2VjdGlvbi1zZWNvbmRhcnkge1xuICAgIGJhY2tncm91bmQ6IGJsYWNrICFpbXBvcnRhbnQ7XG59Il19 */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](FooterComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
@@ -260,7 +263,7 @@ FooterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
                 templateUrl: './footer.component.html',
                 styleUrls: ['./footer.component.scss']
             }]
-    }], function () { return []; }, { store_name: [{
+    }], function () { return []; }, { storeName: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
         }] }); })();
 
@@ -364,8 +367,8 @@ class NavbarComponent {
     constructor(cookieManagerService, router) {
         this.cookieManagerService = cookieManagerService;
         this.router = router;
-        this.store_name = "";
-        this.signed_in = false;
+        this.storeName = '';
+        this.signedIn = false;
         this.bagSize = 0;
         this.categories = [];
         this.myControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]();
@@ -381,11 +384,11 @@ class NavbarComponent {
         this.router.navigate(['product'], { queryParams: { q: event.target.value } });
     }
     login() {
-        this.signed_in = !this.signed_in;
+        this.signedIn = !this.signedIn;
     }
 }
 NavbarComponent.ɵfac = function NavbarComponent_Factory(t) { return new (t || NavbarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_utilities_services_cookie_manager_service__WEBPACK_IMPORTED_MODULE_2__["CookieManagerService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"])); };
-NavbarComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NavbarComponent, selectors: [["app-navbar"]], inputs: { store_name: "store_name", categories: "categories" }, decls: 29, vars: 6, consts: [["uk-alert", "", 1, "uk-background-secondary", 2, "background-color", "black", "color", "white", "text-align", "center"], ["uk-sticky", "", 2, "background-color", "white", "z-index", "980"], [1, "nav"], [1, "uk-padding", "uk-padding-remove-vertical", "uk-clearfix"], [1, "uk-float-left"], ["routerLink", "", 2, "text-decoration", "none"], [1, "uk-text-lead", "uk-text-bolder", "uk-margin-small-top"], [1, "uk-float-right"], [1, "uk-search", "uk-search-default"], ["uk-search-icon", ""], ["placeholder", "Search...", 1, "uk-search-input", 3, "keyup.enter"], [1, "uk-margin-left", "uk-button", "uk-button-text", 2, "font-size", "small", 3, "click"], [4, "ngIf", "ngIfThen", "ngIfElse"], ["sign_out", ""], ["sign_in", ""], ["routerLink", "bag", 1, "uk-margin", "notification", "uk-link-muted"], ["uk-icon", "icon: lock; ratio: 1.25", 1, "uk-margin-left"], ["class", "badge", 4, "ngIf"], ["uk-navbar", "", 1, "uk-navbar-container", "uk-light", 2, "position", "relative", "z-index", "980"], [1, "uk-navbar-center"], [1, "uk-navbar-nav", "uk-visible@s"], [4, "ngFor", "ngForOf"], [1, "uk-navbar-right", "uk-hidden@s"], ["uk-navbar-toggle-icon", "", "uk-toggle", "target: #offcanvas-navbar", 1, "uk-navbar-toggle"], [1, "badge"], [4, "ngIf"], [1, "uk-button", "uk-button-text", 2, "color", "white", 3, "routerLink", "queryParams"], ["class", "uk-navbar-dropdown", "uk-drop", "pos: bottom-justify; boundary: nav; boundary-align: true; offset: -1;", 4, "ngIf"], ["uk-drop", "pos: bottom-justify; boundary: nav; boundary-align: true; offset: -1;", 1, "uk-navbar-dropdown"], [1, "uk-nav", "uk-navbar-dropdown-nav"], [3, "routerLink", "queryParams"]], template: function NavbarComponent_Template(rf, ctx) { if (rf & 1) {
+NavbarComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NavbarComponent, selectors: [["app-navbar"]], inputs: { storeName: "storeName", categories: "categories" }, decls: 29, vars: 6, consts: [["uk-alert", "", 1, "uk-background-secondary", 2, "background-color", "black", "color", "white", "text-align", "center"], ["uk-sticky", "", 2, "background-color", "white", "z-index", "980"], [1, "nav"], [1, "uk-padding", "uk-padding-remove-vertical", "uk-clearfix"], [1, "uk-float-left"], ["routerLink", "", 2, "text-decoration", "none"], [1, "uk-text-lead", "uk-text-bolder", "uk-margin-small-top"], [1, "uk-float-right"], [1, "uk-search", "uk-search-default"], ["uk-search-icon", ""], ["placeholder", "Search...", 1, "uk-search-input", 3, "keyup.enter"], [1, "uk-margin-left", "uk-button", "uk-button-text", 2, "font-size", "small", 3, "click"], [4, "ngIf", "ngIfThen", "ngIfElse"], ["sign_out", ""], ["sign_in", ""], ["routerLink", "bag", 1, "uk-margin", "notification", "uk-link-muted"], ["uk-icon", "icon: lock; ratio: 1.25", 1, "uk-margin-left"], ["class", "badge", 4, "ngIf"], ["uk-navbar", "", 1, "uk-navbar-container", "uk-light", 2, "position", "relative", "z-index", "980"], [1, "uk-navbar-center"], [1, "uk-navbar-nav", "uk-visible@s"], [4, "ngFor", "ngForOf"], [1, "uk-navbar-right", "uk-hidden@s"], ["uk-navbar-toggle-icon", "", "uk-toggle", "target: #offcanvas-navbar", 1, "uk-navbar-toggle"], [1, "badge"], [4, "ngIf"], [1, "uk-button", "uk-button-text", 2, "color", "white", 3, "routerLink", "queryParams"], ["class", "uk-navbar-dropdown", "uk-drop", "pos: bottom-justify; boundary: nav; boundary-align: true; offset: -1;", 4, "ngIf"], ["uk-drop", "pos: bottom-justify; boundary: nav; boundary-align: true; offset: -1;", 1, "uk-navbar-dropdown"], [1, "uk-nav", "uk-navbar-dropdown-nav"], [3, "routerLink", "queryParams"]], template: function NavbarComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "This is a demo retail site.");
@@ -436,9 +439,9 @@ NavbarComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         const _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](17);
         const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](19);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.store_name);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.storeName);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.signed_in)("ngIfThen", _r1)("ngIfElse", _r3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.signedIn)("ngIfThen", _r1)("ngIfElse", _r3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.bagSize);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
@@ -451,7 +454,7 @@ NavbarComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
                 templateUrl: './navbar.component.html',
                 styleUrls: ['./navbar.component.scss']
             }]
-    }], function () { return [{ type: _utilities_services_cookie_manager_service__WEBPACK_IMPORTED_MODULE_2__["CookieManagerService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }]; }, { store_name: [{
+    }], function () { return [{ type: _utilities_services_cookie_manager_service__WEBPACK_IMPORTED_MODULE_2__["CookieManagerService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }]; }, { storeName: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
         }], categories: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
@@ -762,7 +765,7 @@ function BagComponent_div_54_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r3.recently_viewed);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r3.recentlyViewed);
 } }
 class BagComponent {
     constructor(cookieManagerService, route, router, gtmService) {
@@ -770,33 +773,34 @@ class BagComponent {
         this.route = route;
         this.router = router;
         this.gtmService = gtmService;
-        this._bag = [];
+        this.bag = [];
         this.bagTotal = '0.00';
         this.products = [];
         this.test = '';
-        this.recently_viewed = [];
+        this.recentlyViewed = [];
         this.recommended = [];
         this.getRandomValues = _utilities_helpers_getRandomValues__WEBPACK_IMPORTED_MODULE_2__["getRandomValues"];
-        this.recommended = this.route.snapshot.data["FeaturedProducts"];
+        this.recommended = this.route.snapshot.data['FeaturedProducts'];
         this.recommended = this.getRandomValues(this.recommended, 5);
-        this.recently_viewed = this.route.snapshot.data["RecentlyViewed"];
+        this.recentlyViewed = this.route.snapshot.data['RecentlyViewed'];
         try {
-            if (Object.keys(this.recently_viewed).includes('recommendationToken'))
-                this.recently_viewed = [];
+            if (Object.keys(this.recentlyViewed).includes('recommendationToken')) {
+                this.recentlyViewed = [];
+            }
         }
         catch (error) {
             console.log(error);
         }
         this.cookieManagerService.bag$.subscribe(val => {
-            this._bag = val;
+            this.bag = val;
             this.products = [];
             val.forEach(item => {
                 this.products.push({
-                    "id": String(item.ID),
-                    "quantity": item.quantity,
-                    "originalPrice": item.PRICE,
-                    "displayPrice": item.PRICE,
-                    "currencyCode": "USD",
+                    id: String(item.ID),
+                    quantity: item.quantity,
+                    originalPrice: item.PRICE,
+                    displayPrice: item.PRICE,
+                    currencyCode: 'USD',
                 });
             });
         });
@@ -807,22 +811,21 @@ class BagComponent {
         });
         this.editBag = (index, newQuantity) => {
             this.cookieManagerService.editBag(index, newQuantity);
-            this.cookieManagerService._bag = this._bag;
-            this.cookieManagerService.bag = this._bag;
+            this.cookieManagerService.bag = this.bag;
         };
         this.getCookie = this.cookieManagerService.getCookie;
         this.setCookie = this.cookieManagerService.setCookie;
         this.router.events.forEach(item => {
             if (item instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
                 const gtmTag = {
-                    "automl": {
-                        "eventType": 'checkout-start',
-                        "userInfo": {
-                            "visitorId": cookieManagerService.visitorId$.value,
-                            "userId": this.cookieManagerService.visitorId$.value
+                    automl: {
+                        eventType: 'checkout-start',
+                        userInfo: {
+                            visitorId: cookieManagerService.visitorId$.value,
+                            userId: this.cookieManagerService.visitorId$.value
                         },
-                        "productEventDetail": {
-                            "productDetails": this.products,
+                        productEventDetail: {
+                            productDetails: this.products,
                         }
                     }
                 };
@@ -927,9 +930,9 @@ BagComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](16);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx._bag);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.bag);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx._bag.length < 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.bag.length < 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](11);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("$", ctx.bagTotal, "");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](15);
@@ -937,7 +940,7 @@ BagComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.recommended);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.recently_viewed.length > 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.recentlyViewed.length > 0);
     } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"], _shared_product_card_product_card_component__WEBPACK_IMPORTED_MODULE_6__["ProductCardComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2JhZy9iYWcuY29tcG9uZW50LnNjc3MifQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](BagComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
@@ -1074,14 +1077,14 @@ class BaseComponent {
         this.cookieManagerService = cookieManagerService;
         this.isLoading = true;
         this.categories = [];
-        this.store_name = "";
-        this.bag_size = 0;
+        this.storeName = '';
+        this.bagSize = 0;
         this.categories = this.route.snapshot.data["Categories"];
-        storeInfoService.store_name$.subscribe(val => {
-            this.store_name = val;
+        storeInfoService.storeName$.subscribe(val => {
+            this.storeName = val;
         });
         cookieManagerService.bagSize$.subscribe(val => {
-            this.bag_size = val;
+            this.bagSize = val;
         });
         cookieManagerService.login$.subscribe(val => {
             this.login = val;
@@ -1107,14 +1110,14 @@ class BaseComponent {
     }
 }
 BaseComponent.ɵfac = function BaseComponent_Factory(t) { return new (t || BaseComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_utilities_services_store_info_service__WEBPACK_IMPORTED_MODULE_2__["StoreInfoService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_utilities_services_cookie_manager_service__WEBPACK_IMPORTED_MODULE_3__["CookieManagerService"])); };
-BaseComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: BaseComponent, selectors: [["app-base"]], decls: 3, vars: 3, consts: [[3, "store_name", "categories"], [3, "store_name"]], template: function BaseComponent_Template(rf, ctx) { if (rf & 1) {
+BaseComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: BaseComponent, selectors: [["app-base"]], decls: 3, vars: 3, consts: [[3, "storeName", "categories"], [3, "storeName"]], template: function BaseComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-navbar", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "router-outlet");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "app-footer", 1);
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("store_name", ctx.store_name)("categories", ctx.categories);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("storeName", ctx.storeName)("categories", ctx.categories);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("store_name", ctx.store_name);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("storeName", ctx.storeName);
     } }, directives: [_shared_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_4__["NavbarComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterOutlet"], _shared_footer_footer_component__WEBPACK_IMPORTED_MODULE_5__["FooterComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2Jhc2UvYmFzZS5jb21wb25lbnQuc2NzcyJ9 */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](BaseComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
@@ -1208,7 +1211,7 @@ function HomeComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r0.products);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r0.recently_viewed);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r0.recentlyViewed);
 } }
 function HomeComponent_div_7_li_5_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "li");
@@ -1243,16 +1246,16 @@ class HomeComponent {
         this.cookieManagerService = cookieManagerService;
         this.login = false;
         this.products = [];
-        this.recently_viewed = [];
+        this.recentlyViewed = [];
         this.getRandomValues = _utilities_helpers_getRandomValues__WEBPACK_IMPORTED_MODULE_2__["getRandomValues"];
         this.router.events.forEach(item => {
             if (item instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
                 const gtmTag = {
-                    "automl": {
-                        "eventType": 'home-page-view',
-                        "userInfo": {
-                            "visitorId": cookieManagerService.visitorId$.value,
-                            "userId": cookieManagerService.visitorId$.value
+                    automl: {
+                        eventType: 'home-page-view',
+                        userInfo: {
+                            visitorId: cookieManagerService.visitorId$.value,
+                            userId: cookieManagerService.visitorId$.value
                         }
                     }
                 };
@@ -1261,7 +1264,7 @@ class HomeComponent {
         });
         this.products = this.route.snapshot.data["FeaturedProducts"];
         this.products = this.getRandomValues(this.products, 5);
-        this.recently_viewed = this.route.snapshot.data["RecentlyViewed"];
+        this.recentlyViewed = this.route.snapshot.data["RecentlyViewed"];
     }
     ngOnInit() {
     }
@@ -1282,11 +1285,11 @@ HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx.recently_viewed.length > 0 ? "Welcome Back!" : "Welcome!", " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx.recentlyViewed.length > 0 ? "Welcome Back!" : "Welcome!", " ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.recently_viewed.length > 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.recentlyViewed.length > 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.recently_viewed.length === 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.recentlyViewed.length === 0);
     } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _shared_product_card_product_card_component__WEBPACK_IMPORTED_MODULE_6__["ProductCardComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2hvbWUvaG9tZS5jb21wb25lbnQuc2NzcyJ9 */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](HomeComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
@@ -1403,7 +1406,7 @@ function ProductComponent_div_70_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r7.recently_viewed);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r7.recentlyViewed);
 } }
 const _c0 = function () { return ["/product"]; };
 const _c1 = function (a0) { return { category: a0 }; };
@@ -1415,38 +1418,39 @@ class ProductComponent {
         this.route = route;
         this.cookieManagerService = cookieManagerService;
         this.product = {
-            "ID": 0,
-            "NAME": "",
-            "SIZE": "",
-            "COLOR": "",
-            "COMPANY": "",
-            "CATEGORY": "",
-            "SUB_CATEGORY": "",
-            "IMAGE_LINK": "",
-            "REVIEW": null,
-            "AVAILABILITY": 0,
-            "ESTIMATE_DELIVERY_AT": 0,
-            "PRICE": 0.0,
-            "RECOMMENDATIONS": [],
-            "DISCOUNT": false,
-            "bought_together": [],
-            "recommended": [],
-            "SIMILAR": []
+            ID: 0,
+            NAME: '',
+            SIZE: '',
+            COLOR: '',
+            COMPANY: '',
+            CATEGORY: '',
+            SUB_CATEGORY: '',
+            IMAGE_LINK: '',
+            REVIEW: null,
+            AVAILABILITY: 0,
+            ESTIMATE_DELIVERY_AT: 0,
+            PRICE: 0.0,
+            RECOMMENDATIONS: [],
+            DISCOUNT: false,
+            bought_together: [],
+            recommended: [],
+            SIMILAR: []
         };
         this.sizeSelection = '';
-        this.recently_viewed = [];
+        this.recentlyViewed = [];
         this.colorSelection = '';
         this.getRandomValues = _utilities_helpers_getRandomValues__WEBPACK_IMPORTED_MODULE_3__["getRandomValues"];
         this.product = this.route.snapshot.data["Product"];
-        this.recently_viewed = this.route.snapshot.data["RecentlyViewed"];
+        this.recentlyViewed = this.route.snapshot.data["RecentlyViewed"];
         try {
-            if (Object.keys(this.recently_viewed).includes('recommendationToken'))
-                this.recently_viewed = [];
+            if (Object.keys(this.recentlyViewed).includes('recommendationToken')) {
+                this.recentlyViewed = [];
+            }
         }
         catch (error) {
             console.log(error);
         }
-        console.log(this.recently_viewed);
+        console.log(this.recentlyViewed);
         try {
             this.product = this.product[0];
             this.product.bought_together = Object(_utilities_helpers_getRandomValues__WEBPACK_IMPORTED_MODULE_3__["getRandomValues"])(this.product.SIMILAR, 5);
@@ -1457,41 +1461,41 @@ class ProductComponent {
             console.log(error);
             console.log(this.product);
             this.product = {
-                "ID": 0,
-                "NAME": "",
-                "SIZE": "",
-                "COLOR": "",
-                "COMPANY": "",
-                "CATEGORY": "",
-                "SUB_CATEGORY": "",
-                "IMAGE_LINK": "",
-                "REVIEW": null,
-                "AVAILABILITY": 0,
-                "ESTIMATE_DELIVERY_AT": 0,
-                "PRICE": 0.0,
-                "RECOMMENDATIONS": [],
-                "DISCOUNT": false,
-                "bought_together": [],
-                "recommended": [],
-                "SIMILAR": []
+                ID: 0,
+                NAME: '',
+                SIZE: '',
+                COLOR: '',
+                COMPANY: '',
+                CATEGORY: '',
+                SUB_CATEGORY: '',
+                IMAGE_LINK: '',
+                REVIEW: null,
+                AVAILABILITY: 0,
+                ESTIMATE_DELIVERY_AT: 0,
+                PRICE: 0.0,
+                RECOMMENDATIONS: [],
+                DISCOUNT: false,
+                bought_together: [],
+                recommended: [],
+                SIMILAR: []
             };
         }
         this.router.events.forEach(item => {
             if (item instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
                 const gtmTag = {
-                    "automl": {
-                        "eventType": 'detail-page-view',
-                        "userInfo": {
-                            "visitorId": cookieManagerService.visitorId$.value,
-                            "userId": cookieManagerService.visitorId$.value
+                    automl: {
+                        eventType: 'detail-page-view',
+                        userInfo: {
+                            visitorId: cookieManagerService.visitorId$.value,
+                            userId: cookieManagerService.visitorId$.value
                         },
-                        "productEventDetail": {
-                            "productDetails": [
+                        productEventDetail: {
+                            productDetails: [
                                 {
-                                    "id": String(this.product.ID),
-                                    "originalPrice": this.product.PRICE,
-                                    "displayPrice": this.product.PRICE,
-                                    "currencyCode": "USD",
+                                    id: String(this.product.ID),
+                                    originalPrice: this.product.PRICE,
+                                    displayPrice: this.product.PRICE,
+                                    currencyCode: 'USD',
                                 }
                             ]
                         }
@@ -1511,20 +1515,20 @@ class ProductComponent {
         if (this.sizeSelection) {
             this.cookieManagerService.addToBag(this.product);
             const gtmTag = {
-                "automl": {
-                    "eventType": 'add-to-cart',
-                    "userInfo": {
-                        "visitorId": this.cookieManagerService.visitorId$.value,
-                        "userId": this.cookieManagerService.visitorId$.value
+                automl: {
+                    eventType: 'add-to-cart',
+                    userInfo: {
+                        visitorId: this.cookieManagerService.visitorId$.value,
+                        userId: this.cookieManagerService.visitorId$.value
                     },
-                    "productEventDetail": {
-                        "productDetails": [
+                    productEventDetail: {
+                        productDetails: [
                             {
-                                "id": String(this.product.ID),
-                                "originalPrice": this.product.PRICE,
-                                "displayPrice": this.product.PRICE,
-                                "currencyCode": "USD",
-                                "quantity": 1
+                                id: String(this.product.ID),
+                                originalPrice: this.product.PRICE,
+                                displayPrice: this.product.PRICE,
+                                currencyCode: 'USD',
+                                quantity: 1
                             }
                         ]
                     }
@@ -1533,7 +1537,7 @@ class ProductComponent {
             this.gtmService.pushTag(gtmTag);
         }
         else {
-            uikit__WEBPACK_IMPORTED_MODULE_2___default.a.notification('Please select a size', { status: "danger" });
+            uikit__WEBPACK_IMPORTED_MODULE_2___default.a.notification('Please select a size', { status: 'danger' });
         }
     }
 }
@@ -1695,7 +1699,7 @@ ProductComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineC
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](10);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.product.recommended);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.recently_viewed.length > 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.recentlyViewed.length > 0);
     } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterLinkWithHref"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgForOf"], _shared_product_card_product_card_component__WEBPACK_IMPORTED_MODULE_7__["ProductCardComponent"]], styles: [".circle[_ngcontent-%COMP%] {\n  height: 25px;\n  width: 25px;\n  border-radius: 50%;\n  display: inline-block;\n  border: 1px solid black;\n}\n\n.sizeCircle[_ngcontent-%COMP%] {\n  height: 30px;\n  width: 30px;\n  border-radius: 50%;\n  display: inline-block;\n  border: 1px solid black;\n}\n\n.sizeCircle.active[_ngcontent-%COMP%] {\n  background-color: black;\n  color: white;\n}\n\n.sizeCircle[_ngcontent-%COMP%]:hover {\n  background-color: black;\n  color: white;\n}\n\n.circle[_ngcontent-%COMP%]   .active[_ngcontent-%COMP%] {\n  border: 1px solid white;\n}\n\n.circle_inner[_ngcontent-%COMP%]:hover {\n  height: 13px;\n  width: 13px;\n  padding: 5px;\n  border-radius: 50%;\n  display: inline-block;\n  border: 1px solid white;\n}\n\n.circle_inner[_ngcontent-%COMP%] {\n  height: 13px;\n  width: 13px;\n  padding: 5px;\n  border-radius: 50%;\n  display: inline-block;\n  border: 1px solid black;\n}\n\nbutton.uk-link-muted[_ngcontent-%COMP%] {\n  color: black;\n}\n\nbutton.uk-link-muted[_ngcontent-%COMP%]:hover, button.uk-link-muted[_ngcontent-%COMP%]:focus {\n  color: #666;\n}\n\n.innerCircle[_ngcontent-%COMP%] {\n  padding: 5px;\n  font-size: 12px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvcHJvZHVjdC9wcm9kdWN0LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBQTtFQUNBLFdBQUE7RUFDQSxrQkFBQTtFQUNBLHFCQUFBO0VBQ0EsdUJBQUE7QUFDSjs7QUFFRTtFQUNFLFlBQUE7RUFDQSxXQUFBO0VBQ0Esa0JBQUE7RUFDQSxxQkFBQTtFQUNBLHVCQUFBO0FBQ0o7O0FBRUU7RUFDRSx1QkFBQTtFQUNBLFlBQUE7QUFDSjs7QUFFRTtFQUNFLHVCQUFBO0VBQ0EsWUFBQTtBQUNKOztBQUVFO0VBQ0UsdUJBQUE7QUFDSjs7QUFFRTtFQUNFLFlBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtFQUNBLGtCQUFBO0VBQ0EscUJBQUE7RUFDQSx1QkFBQTtBQUNKOztBQUVFO0VBQ0UsWUFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0Esa0JBQUE7RUFDQSxxQkFBQTtFQUNBLHVCQUFBO0FBQ0o7O0FBRUk7RUFDRSxZQUFBO0FBQ047O0FBRUU7RUFDRSxXQUFBO0FBQ0o7O0FBRUU7RUFDRSxZQUFBO0VBQ0EsZUFBQTtBQUNKIiwiZmlsZSI6InNyYy9hcHAvdmlld3MvcHJvZHVjdC9wcm9kdWN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNpcmNsZSB7XG4gICAgaGVpZ2h0OiAyNXB4O1xuICAgIHdpZHRoOiAyNXB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gICAgYm9yZGVyOiAxcHggc29saWQgYmxhY2s7XG4gIH1cbiAgXG4gIC5zaXplQ2lyY2xlIHtcbiAgICBoZWlnaHQ6IDMwcHg7XG4gICAgd2lkdGg6IDMwcHg7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcbiAgfVxuICBcbiAgLnNpemVDaXJjbGUuYWN0aXZlIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbiAgICBjb2xvcjogd2hpdGU7XG4gIH1cbiAgXG4gIC5zaXplQ2lyY2xlOmhvdmVyIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbiAgICBjb2xvcjogd2hpdGU7XG4gIH1cbiAgXG4gIC5jaXJjbGUgLmFjdGl2ZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgd2hpdGU7XG4gIH1cbiAgXG4gIC5jaXJjbGVfaW5uZXI6aG92ZXIge1xuICAgIGhlaWdodDogMTNweDtcbiAgICB3aWR0aDogMTNweDtcbiAgICBwYWRkaW5nOjVweDtcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgIGJvcmRlcjogMXB4IHNvbGlkIHdoaXRlO1xuICB9XG4gIFxuICAuY2lyY2xlX2lubmVyIHtcbiAgICBoZWlnaHQ6IDEzcHg7XG4gICAgd2lkdGg6IDEzcHg7XG4gICAgcGFkZGluZzo1cHg7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcbiAgfVxuICBcbiAgICBidXR0b24udWstbGluay1tdXRlZCB7XG4gICAgICBjb2xvcjogYmxhY2s7XG4gIH1cbiAgXG4gIGJ1dHRvbi51ay1saW5rLW11dGVkOmhvdmVyLCBidXR0b24udWstbGluay1tdXRlZDpmb2N1cyB7XG4gICAgY29sb3I6ICM2NjY7XG4gIH1cbiAgXG4gIC5pbm5lckNpcmNsZSB7XG4gICAgcGFkZGluZzogNXB4O1xuICAgIGZvbnQtc2l6ZTogMTJweDtcbiAgfSJdfQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ProductComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
@@ -1746,9 +1750,9 @@ function SearchComponent_li_4_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c1, ctx_r0.parent_category));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c1, ctx_r0.parentCategory));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r0.parent_category);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r0.parentCategory);
 } }
 const _c2 = function (a0, a1) { return { category: a0, subcategory: a1 }; };
 function SearchComponent_li_5_Template(rf, ctx) { if (rf & 1) {
@@ -1762,9 +1766,9 @@ function SearchComponent_li_5_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](4, _c2, ctx_r1.parent_category, ctx_r1.sub_category));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](4, _c2, ctx_r1.parentCategory, ctx_r1.subCategory));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r1.sub_category);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r1.subCategory);
 } }
 function SearchComponent_14_ng_template_0_Template(rf, ctx) { }
 function SearchComponent_14_Template(rf, ctx) { if (rf & 1) {
@@ -1781,9 +1785,9 @@ function SearchComponent_ng_template_15_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c1, ctx_r4.parent_category));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](4, _c1, ctx_r4.parentCategory));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" view all ", ctx_r4.parent_category, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" view all ", ctx_r4.parentCategory, " ");
 } }
 function SearchComponent_ng_template_17_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainer"](0);
@@ -1794,7 +1798,7 @@ function SearchComponent_ng_template_17_Template(rf, ctx) { if (rf & 1) {
     const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     const _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](20);
     const _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](22);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r6.parent_category)("ngIfThen", _r7)("ngIfElse", _r9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r6.parentCategory)("ngIfThen", _r7)("ngIfElse", _r9);
 } }
 function SearchComponent_ng_template_19_li_0_Template(rf, ctx) { if (rf & 1) {
     const _r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -1808,8 +1812,8 @@ function SearchComponent_ng_template_19_li_0_Template(rf, ctx) { if (rf & 1) {
     const subcategory_r30 = ctx.$implicit;
     const ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("uk-active", ctx_r29.sub_category === subcategory_r30.name);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](5, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](6, _c2, ctx_r29.parent_category, subcategory_r30.name));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("uk-active", ctx_r29.subCategory === subcategory_r30.name);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](5, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](6, _c2, ctx_r29.parentCategory, subcategory_r30.name));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", subcategory_r30.name, " ");
 } }
@@ -1817,7 +1821,7 @@ function SearchComponent_ng_template_19_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, SearchComponent_ng_template_19_li_0_Template, 3, 9, "li", 24);
 } if (rf & 2) {
     const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r8.entire_category.category["subcategories"]);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r8.entireCategory.category["subcategories"]);
 } }
 function SearchComponent_ng_template_21_ng_container_0_li_1_li_4_Template(rf, ctx) { if (rf & 1) {
     const _r39 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -1914,7 +1918,7 @@ function SearchComponent_li_35_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](2, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](3, _c3, ctx_r14.parent_category, ctx_r14.sub_category, ctx_r14.page - 1, ctx_r14.brand));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](2, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](3, _c3, ctx_r14.parentCategory, ctx_r14.subCategory, ctx_r14.page - 1, ctx_r14.brand));
 } }
 function SearchComponent_li_36_Template(rf, ctx) { if (rf & 1) {
     const _r50 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -1927,7 +1931,7 @@ function SearchComponent_li_36_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](4, _c3, ctx_r15.parent_category, ctx_r15.sub_category, ctx_r15.page - 1, ctx_r15.brand));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](4, _c3, ctx_r15.parentCategory, ctx_r15.subCategory, ctx_r15.page - 1, ctx_r15.brand));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r15.page);
 } }
@@ -1942,7 +1946,7 @@ function SearchComponent_li_40_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](4, _c3, ctx_r16.parent_category, ctx_r16.sub_category, ctx_r16.page + 1, ctx_r16.brand));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](4, _c3, ctx_r16.parentCategory, ctx_r16.subCategory, ctx_r16.page + 1, ctx_r16.brand));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r16.page + 2);
 } }
@@ -1957,7 +1961,7 @@ function SearchComponent_li_41_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](4, _c3, ctx_r17.parent_category, ctx_r17.sub_category, ctx_r17.page + 2, ctx_r17.brand));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](4, _c3, ctx_r17.parentCategory, ctx_r17.subCategory, ctx_r17.page + 2, ctx_r17.brand));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r17.page + 3);
 } }
@@ -1979,7 +1983,7 @@ function SearchComponent_li_43_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r19 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](4, _c3, ctx_r19.parent_category, ctx_r19.sub_category, ctx_r19.numPages, ctx_r19.brand));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](4, _c3, ctx_r19.parentCategory, ctx_r19.subCategory, ctx_r19.numPages, ctx_r19.brand));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r19.numPages + 1);
 } }
@@ -1994,7 +1998,7 @@ function SearchComponent_li_44_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](2, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](3, _c3, ctx_r20.parent_category, ctx_r20.sub_category, ctx_r20.page + 1, ctx_r20.brand));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](2, _c0))("queryParams", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction4"](3, _c3, ctx_r20.parentCategory, ctx_r20.subCategory, ctx_r20.page + 1, ctx_r20.brand));
 } }
 class SearchComponent {
     constructor(cookieManagerService, router, route, gtmService) {
@@ -2006,12 +2010,12 @@ class SearchComponent {
         this.productList = [];
         this.brands = [];
         this.categories = [];
-        this.brand = "";
-        this.parent_category = "";
-        this.sub_category = "";
-        this.query = "";
+        this.brand = '';
+        this.parentCategory = '';
+        this.subCategory = '';
+        this.query = '';
         this.page = 0;
-        this.entire_category = { category: { name: '', subcategories: [] } };
+        this.entireCategory = { category: { name: '', subcategories: [] } };
         this.rowHeight = 50;
         this.startIndex = 0;
         this.endIndex = 0;
@@ -2032,11 +2036,11 @@ class SearchComponent {
         // disable router reuse on param change
         this.route.queryParams.subscribe(params => {
             var _a, _b, _c, _d;
-            if (this.parent_category === params['category'] && this.sub_category === params['subcategory'] && this.query === params['q']) {
+            if (this.parentCategory === params['category'] && this.subCategory === params['subcategory'] && this.query === params['q']) {
                 this.onlyPage = true;
             }
-            this.parent_category = (_a = params['category']) !== null && _a !== void 0 ? _a : params['category'];
-            this.sub_category = (_b = params['subcategory']) !== null && _b !== void 0 ? _b : params['subcategory'];
+            this.parentCategory = (_a = params['category']) !== null && _a !== void 0 ? _a : params['category'];
+            this.subCategory = (_b = params['subcategory']) !== null && _b !== void 0 ? _b : params['subcategory'];
             this.query = (_c = params['q']) !== null && _c !== void 0 ? _c : params['q'];
             this.brand = (_d = params['brand']) !== null && _d !== void 0 ? _d : params['brand'];
             this.page = params['page'] ? parseInt(params['page']) : 0;
@@ -2044,22 +2048,22 @@ class SearchComponent {
             this.numPages = Math.floor(this.productList.length / this.rowHeight);
             this.itemsInView = this.productList.slice(this.page * this.rowHeight, this.page * this.rowHeight + this.rowHeight);
             this.categories.some(category => {
-                if (category.category.name === this.parent_category) {
-                    this.entire_category = category;
+                if (category.category.name === this.parentCategory) {
+                    this.entireCategory = category;
                     return true;
                 }
             });
             this.router.events.forEach(item => {
                 if (item instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
                     const gtmTag = {
-                        "automl": {
-                            "eventType": 'search',
-                            "userInfo": {
-                                "visitorId": cookieManagerService.visitorId$.value,
-                                "userId": this.cookieManagerService.visitorId$.value
+                        automl: {
+                            eventType: 'search',
+                            userInfo: {
+                                visitorId: cookieManagerService.visitorId$.value,
+                                userId: this.cookieManagerService.visitorId$.value
                             },
-                            "productEventDetail": {
-                                "searchQuery": this.query + " " + this.parent_category + " " + this.sub_category,
+                            productEventDetail: {
+                                searchQuery: this.query + ' ' + this.parentCategory + ' ' + this.subCategory,
                             }
                         }
                     };
@@ -2148,15 +2152,15 @@ SearchComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](16);
         const _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](18);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx.sub_category ? ctx.sub_category : ctx.parent_category ? ctx.parent_category : ctx.query ? ctx.query : "Search", " - Store\n");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx.subCategory ? ctx.subCategory : ctx.parentCategory ? ctx.parentCategory : ctx.query ? ctx.query : "Search", " - Store\n");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.parent_category);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.parentCategory);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.sub_category);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.subCategory);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx.query ? ctx.query : ctx.sub_category ? ctx.sub_category : ctx.parent_category ? ctx.parent_category : "Search", " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx.query ? ctx.query : ctx.subCategory ? ctx.subCategory : ctx.parentCategory ? ctx.parentCategory : "Search", " ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.sub_category)("ngIfThen", _r3)("ngIfElse", _r5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.subCategory)("ngIfThen", _r3)("ngIfElse", _r5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](13);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.brands);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
@@ -2203,12 +2207,12 @@ SearchComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "brands", function() { return brands; });
 const brands = [
-    { "BRAND": "Seven7" },
-    { "BRAND": "Calvin Klein" },
-    { "BRAND": "Calvin Klein Jeans" },
-    { "BRAND": "Bailey 44" },
-    { "BRAND": "Anne Klein" },
-    { "BRAND": "Wilt" }
+    { BRAND: 'Seven7' },
+    { BRAND: 'Calvin Klein' },
+    { BRAND: 'Calvin Klein Jeans' },
+    { BRAND: 'Bailey 44' },
+    { BRAND: 'Anne Klein' },
+    { BRAND: 'Wilt' }
 ];
 
 
@@ -2226,16 +2230,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "categories", function() { return categories; });
 const categories = [
     {
-        "Department": "Women",
-        "CATEGORY": "Clothing",
-        "SUB_CATEGORY": "Tops & Tees",
-        "NAME": "Seven7 Women's Long Sleeve Stripe Belted Top"
+        Department: 'Women',
+        CATEGORY: 'Clothing',
+        SUB_CATEGORY: 'Tops & Tees',
+        NAME: 'Seven7 Women\'s Long Sleeve Stripe Belted Top'
     },
     {
-        "Department": "Women",
-        "CATEGORY": "Clothing",
-        "SUB_CATEGORY": "Tops & Tees",
-        "NAME": "Calvin Klein Women's MSY Crew Neck Roll Sleeve"
+        Department: 'Women',
+        CATEGORY: 'Clothing',
+        SUB_CATEGORY: 'Tops & Tees',
+        NAME: 'Calvin Klein Women\'s MSY Crew Neck Roll Sleeve'
     }
 ];
 
@@ -2254,89 +2258,89 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "product", function() { return product; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "products", function() { return products; });
 const product = {
-    "NAME": "Low Profile Dyed Cotton Twill Cap - Navy W39S55D",
-    "SIZE": "XXL",
-    "COLOR": "RED",
-    "COMPANY": "MG",
-    "CATEGORY": "Accessories",
-    "SUB_CATEGORY": "Accessories",
-    "IMAGE_LINK": "",
-    "REVIEW": null,
-    "AVAILABILITY": 10,
-    "ESTIMATE_DELIVERY_AT": 1607212800000
+    NAME: 'Low Profile Dyed Cotton Twill Cap - Navy W39S55D',
+    SIZE: 'XXL',
+    COLOR: 'RED',
+    COMPANY: 'MG',
+    CATEGORY: 'Accessories',
+    SUB_CATEGORY: 'Accessories',
+    IMAGE_LINK: '',
+    REVIEW: null,
+    AVAILABILITY: 10,
+    ESTIMATE_DELIVERY_AT: 1607212800000
 };
 const products = [
     {
-        "NAME": "Quicksilver Men's Diamond Dobby Knock Boardshorts-Black",
-        "SIZE": "XXL",
-        "COLOR": "RED",
-        "COMPANY": "Quiksilver",
-        "CATEGORY": "Swim",
-        "SUB_CATEGORY": "Swim",
-        "IMAGE_LINK": "",
-        "REVIEW": null,
-        "AVAILABILITY": 10,
-        "ESTIMATE_DELIVERY_AT": 1607212800000,
-        "RECOMMENDATIONS": [
+        NAME: 'Quicksilver Men\'s Diamond Dobby Knock Boardshorts-Black',
+        SIZE: 'XXL',
+        COLOR: 'RED',
+        COMPANY: 'Quiksilver',
+        CATEGORY: 'Swim',
+        SUB_CATEGORY: 'Swim',
+        IMAGE_LINK: '',
+        REVIEW: null,
+        AVAILABILITY: 10,
+        ESTIMATE_DELIVERY_AT: 1607212800000,
+        RECOMMENDATIONS: [
             {
-                "NAME": "US Polo Assn. Juniors Solid Polo With Small Pony",
-                "SIZE": "XXL",
-                "COLOR": "RED",
-                "COMPANY": "U.S. Polo Assn.",
-                "CATEGORY": "Clothing",
-                "SUB_CATEGORY": "Tops & Tees",
-                "IMAGE_LINK": "",
-                "REVIEW": null,
-                "AVAILABILITY": 10,
-                "ESTIMATE_DELIVERY_AT": 1607212800000
+                NAME: 'US Polo Assn. Juniors Solid Polo With Small Pony',
+                SIZE: 'XXL',
+                COLOR: 'RED',
+                COMPANY: 'U.S. Polo Assn.',
+                CATEGORY: 'Clothing',
+                SUB_CATEGORY: 'Tops & Tees',
+                IMAGE_LINK: '',
+                REVIEW: null,
+                AVAILABILITY: 10,
+                ESTIMATE_DELIVERY_AT: 1607212800000
             },
             {
-                "NAME": "Patty Women Stunning 2-in-1 Hoodie Casual Blouse Top",
-                "SIZE": "XXL",
-                "COLOR": "RED",
-                "COMPANY": "Patty",
-                "CATEGORY": "Clothing",
-                "SUB_CATEGORY": "Tops & Tees",
-                "IMAGE_LINK": "",
-                "REVIEW": null,
-                "AVAILABILITY": 10,
-                "ESTIMATE_DELIVERY_AT": 1607212800000
+                NAME: 'Patty Women Stunning 2-in-1 Hoodie Casual Blouse Top',
+                SIZE: 'XXL',
+                COLOR: 'RED',
+                COMPANY: 'Patty',
+                CATEGORY: 'Clothing',
+                SUB_CATEGORY: 'Tops & Tees',
+                IMAGE_LINK: '',
+                REVIEW: null,
+                AVAILABILITY: 10,
+                ESTIMATE_DELIVERY_AT: 1607212800000
             },
             {
-                "NAME": "Patty Women Stunning Trimmed Boat Neck Long Sleeve Blouse Knit Top",
-                "SIZE": "XXL",
-                "COLOR": "RED",
-                "COMPANY": "Patty",
-                "CATEGORY": "Clothing",
-                "SUB_CATEGORY": "Tops & Tees",
-                "IMAGE_LINK": "",
-                "REVIEW": null,
-                "AVAILABILITY": 10,
-                "ESTIMATE_DELIVERY_AT": 1607212800000
+                NAME: 'Patty Women Stunning Trimmed Boat Neck Long Sleeve Blouse Knit Top',
+                SIZE: 'XXL',
+                COLOR: 'RED',
+                COMPANY: 'Patty',
+                CATEGORY: 'Clothing',
+                SUB_CATEGORY: 'Tops & Tees',
+                IMAGE_LINK: '',
+                REVIEW: null,
+                AVAILABILITY: 10,
+                ESTIMATE_DELIVERY_AT: 1607212800000
             },
             {
-                "NAME": "Allegra K Ladies Boat Neck Button Detail Autumn Shirt Fuchsia M",
-                "SIZE": "XXL",
-                "COLOR": "RED",
-                "COMPANY": "Allegra K",
-                "CATEGORY": "Clothing",
-                "SUB_CATEGORY": "Tops & Tees",
-                "IMAGE_LINK": "",
-                "REVIEW": null,
-                "AVAILABILITY": 10,
-                "ESTIMATE_DELIVERY_AT": 1607212800000
+                NAME: 'Allegra K Ladies Boat Neck Button Detail Autumn Shirt Fuchsia M',
+                SIZE: 'XXL',
+                COLOR: 'RED',
+                COMPANY: 'Allegra K',
+                CATEGORY: 'Clothing',
+                SUB_CATEGORY: 'Tops & Tees',
+                IMAGE_LINK: '',
+                REVIEW: null,
+                AVAILABILITY: 10,
+                ESTIMATE_DELIVERY_AT: 1607212800000
             },
             {
-                "NAME": "Allegra K Lady Round Neck Batwing Sleeve Applique Shirt Top New",
-                "SIZE": "XXL",
-                "COLOR": "RED",
-                "COMPANY": "Allegra K",
-                "CATEGORY": "Clothing",
-                "SUB_CATEGORY": "Tops & Tees",
-                "IMAGE_LINK": "",
-                "REVIEW": null,
-                "AVAILABILITY": 10,
-                "ESTIMATE_DELIVERY_AT": 1607212800000
+                NAME: 'Allegra K Lady Round Neck Batwing Sleeve Applique Shirt Top New',
+                SIZE: 'XXL',
+                COLOR: 'RED',
+                COMPANY: 'Allegra K',
+                CATEGORY: 'Clothing',
+                SUB_CATEGORY: 'Tops & Tees',
+                IMAGE_LINK: '',
+                REVIEW: null,
+                AVAILABILITY: 10,
+                ESTIMATE_DELIVERY_AT: 1607212800000
             }
         ]
     }
@@ -2355,20 +2359,15 @@ const products = [
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
 const environment = {
-    production: false
+    production: false,
+    RECAI_PROJECT: 'babrams-recai-demo-test',
+    HP_PLACEMENT: 'homepage',
+    OYML_PLACEMENT: 'pdp',
+    FBT_PLACEMENT: 'copurchased',
+    RVD_PLACEMENT: 'recently_viewed_default',
+    GTM_CONTAINER_ID: ''
 };
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
 
 /***/ }),
@@ -2410,11 +2409,14 @@ _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().boot
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRandomValues", function() { return getRandomValues; });
 function getRandomValues(arr, n) {
-    var result = new Array(n), len = arr.length, taken = new Array(len);
-    if (n > len)
-        throw new RangeError("getRandom: more elements taken than available");
+    const result = new Array(n);
+    let len = arr.length;
+    const taken = new Array(len);
+    if (n > len) {
+        throw new RangeError('getRandom: more elements taken than available');
+    }
     while (n--) {
-        var x = Math.floor(Math.random() * len);
+        const x = Math.floor(Math.random() * len);
         result[n] = arr[x in taken ? taken[x] : x];
         taken[x] = --len in taken ? taken[len] : len;
     }
@@ -2445,6 +2447,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_sample_categories__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/sample/categories */ "./src/assets/sample/categories.ts");
 /* harmony import */ var _assets_sample_brands__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/sample/brands */ "./src/assets/sample/brands.ts");
 /* harmony import */ var _services_cookie_manager_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/cookie-manager.service */ "./src/utilities/services/cookie-manager.service.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
 
 
 
@@ -2452,21 +2455,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let homeRoute = 'https://backend-q-dot-babrams-recai-demo.uc.r.appspot.com'; // update the backend app engine site you just deployed
+
+const homeRoute = 'https://backend-q-dot-' + _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].RECAI_PROJECT + '.uc.r.appspot.com'; // update the backend app engine site you just deployed
+const recentlyViewedPlacement = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].RVD_PLACEMENT; // Update to your recently viewed placement name
+const homepagePlacement = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].HP_PLACEMENT; // Update to your recommended placement name
 class ProductResolver {
     getList(productId) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            return fetch(`${homeRoute}/getproduct/${productId}`, { headers: { 'Access-Control-Allow-Origin': 'no-cors' } })
-                .then((response => {
+            return fetch(`${homeRoute}/getproduct/${productId}`, { headers: { 'Access-Control-Allow-Origin': 'no-cors' }
+            }).then((response => {
                 if (!response.ok) {
                     throw new Error(response.statusText);
                 }
                 return response.json();
-            }))
-                .then(d => {
+            })).then(d => {
                 return d;
-            })
-                .catch(err => {
+            }).catch(err => {
                 console.log(err);
                 return _assets_sample_product__WEBPACK_IMPORTED_MODULE_2__["products"][productId - 1];
             });
@@ -2499,14 +2503,14 @@ class ProductsResolver {
             return fetch(`${homeRoute}/productbyfilter`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    "filters": {
-                        "name": q ? q : "",
-                        "company": "",
-                        "sizes": "",
-                        "colors": "",
-                        "price": "",
-                        "category": category ? [category] : [],
-                        "subcategory": subcategory ? [subcategory] : []
+                    filters: {
+                        name: q ? q : '',
+                        company: '',
+                        sizes: '',
+                        colors: '',
+                        price: '',
+                        category: category ? [category] : [],
+                        subcategory: subcategory ? [subcategory] : []
                     }
                 }),
                 headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'no-cors' }
@@ -2515,11 +2519,9 @@ class ProductsResolver {
                     throw new Error(response.statusText);
                 }
                 return response.json();
-            })
-                .then(products => {
+            }).then(products => {
                 return products;
-            })
-                .catch(err => {
+            }).catch(err => {
                 console.log(err);
                 return _assets_sample_product__WEBPACK_IMPORTED_MODULE_2__["products"];
             });
@@ -2527,12 +2529,9 @@ class ProductsResolver {
     }
     resolve(route, state) {
         const row = [];
-        let category = '';
-        let subcategory = '';
-        let q = '';
-        category = route.queryParamMap.get('category') ? route.queryParamMap.get('category').trim() : '';
-        subcategory = route.queryParamMap.get('subcategory') ? route.queryParamMap.get('subcategory').trim() : '';
-        q = route.queryParamMap.get('q') ? route.queryParamMap.get('q').trim() : '';
+        const category = route.queryParamMap.get('category') ? route.queryParamMap.get('category').trim() : '';
+        const subcategory = route.queryParamMap.get('subcategory') ? route.queryParamMap.get('subcategory').trim() : '';
+        const q = route.queryParamMap.get('q') ? route.queryParamMap.get('q').trim() : '';
         console.log(category, subcategory, q);
         return this.getList(category, subcategory, q);
     }
@@ -2546,18 +2545,18 @@ ProductsResolver.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefine
 class RecentlyViewedResolver {
     getList() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let cookieManagerService = new _services_cookie_manager_service__WEBPACK_IMPORTED_MODULE_5__["CookieManagerService"]();
+            const cookieManagerService = new _services_cookie_manager_service__WEBPACK_IMPORTED_MODULE_5__["CookieManagerService"]();
             return fetch(`${homeRoute}/getfeaturedproduct`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    "placement_name": "recently_viewed_default",
-                    "params": {
-                        "dryRun": false,
-                        "userEvent": {
-                            "eventType": "home-page-view",
-                            "userInfo": {
-                                "visitorId": cookieManagerService.getCookie('_ga'),
-                                "userId": cookieManagerService.visitorId$.value
+                    placement_name: recentlyViewedPlacement,
+                    params: {
+                        dryRun: false,
+                        userEvent: {
+                            eventType: 'home-page-view',
+                            userInfo: {
+                                visitorId: cookieManagerService.getCookie('_ga'),
+                                userId: cookieManagerService.visitorId$.value
                             }
                         }
                     }
@@ -2568,16 +2567,14 @@ class RecentlyViewedResolver {
                     throw new Error(response.statusText);
                 }
                 return response.json();
-            })
-                .then(products => {
+            }).then(products => {
                 if (Array.isArray(products)) {
                     return products;
                 }
                 else {
                     return [];
                 }
-            })
-                .catch(err => {
+            }).catch(err => {
                 console.log(err);
                 return _assets_sample_product__WEBPACK_IMPORTED_MODULE_2__["products"];
             });
@@ -2596,18 +2593,18 @@ RecentlyViewedResolver.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵ
 class FeaturedProductsResolver {
     getList() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let cookieManagerService = new _services_cookie_manager_service__WEBPACK_IMPORTED_MODULE_5__["CookieManagerService"]();
+            const cookieManagerService = new _services_cookie_manager_service__WEBPACK_IMPORTED_MODULE_5__["CookieManagerService"]();
             return fetch(`${homeRoute}/getfeaturedproduct`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    "placement_name": "homepage",
-                    "params": {
-                        "dryRun": false,
-                        "userEvent": {
-                            "eventType": "home-page-view",
-                            "userInfo": {
-                                "visitorId": cookieManagerService.getCookie('_ga'),
-                                "userId": cookieManagerService.visitorId$.value
+                    placement_name: homepagePlacement,
+                    params: {
+                        dryRun: false,
+                        userEvent: {
+                            eventType: 'home-page-view',
+                            userInfo: {
+                                visitorId: cookieManagerService.getCookie('_ga'),
+                                userId: cookieManagerService.visitorId$.value
                             }
                         }
                     }
@@ -2618,11 +2615,9 @@ class FeaturedProductsResolver {
                     throw new Error(response.statusText);
                 }
                 return response.json();
-            })
-                .then(products => {
+            }).then(products => {
                 return products;
-            })
-                .catch(err => {
+            }).catch(err => {
                 console.log(err);
                 return _assets_sample_product__WEBPACK_IMPORTED_MODULE_2__["products"];
             });
@@ -2641,16 +2636,15 @@ FeaturedProductsResolver.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵ
 class CategoriesResolver {
     getList() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            return fetch(`${homeRoute}/getcategory`, { headers: { 'Access-Control-Allow-Origin': 'no-cors' } }).then(response => {
+            return fetch(`${homeRoute}/getcategory`, { headers: { 'Access-Control-Allow-Origin': 'no-cors' }
+            }).then(response => {
                 if (!response.ok) {
                     throw new Error(response.statusText);
                 }
                 return response.json();
-            })
-                .then(categories => {
+            }).then(categories => {
                 return categories;
-            })
-                .catch(err => {
+            }).catch(err => {
                 console.log(err);
                 return _assets_sample_categories__WEBPACK_IMPORTED_MODULE_3__["categories"];
             });
@@ -2669,16 +2663,15 @@ CategoriesResolver.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefi
 class BrandsResolver {
     getList() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            return fetch(`${homeRoute}/getbrand`, { headers: { 'Access-Control-Allow-Origin': 'no-cors' } }).then(response => {
+            return fetch(`${homeRoute}/getbrand`, { headers: { 'Access-Control-Allow-Origin': 'no-cors' }
+            }).then(response => {
                 if (!response.ok) {
                     throw new Error(response.statusText);
                 }
                 return response.json();
-            })
-                .then(brand => {
+            }).then(brand => {
                 return brand;
-            })
-                .catch(err => {
+            }).catch(err => {
                 console.log(err);
                 return _assets_sample_brands__WEBPACK_IMPORTED_MODULE_4__["brands"];
             });
@@ -2720,19 +2713,23 @@ class CookieManagerService {
     constructor() {
         this.login$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](false);
         this.bag$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
-        this._bag = [];
         this.bagTotal$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](0.0);
         this.bagSize$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](0);
         this.visitorId$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]('');
         this.addToBag = (product) => {
-            let current_bag = this.bag$.value;
-            let bagSize = this.bagSize$.value;
-            let filtered_bag = current_bag.findIndex(e => e.ID === product.ID && e.SIZE === product.SIZE && e.COLOR === product.COLOR);
-            if (filtered_bag > -1) {
-                current_bag[filtered_bag]['quantity'] = typeof current_bag[filtered_bag]['quantity'] === typeof 1 ? current_bag[filtered_bag]['quantity'] + 1 : parseInt(current_bag[filtered_bag]['quantity']) + 1;
+            const currentBag = this.bag$.value;
+            const bagSize = this.bagSize$.value;
+            const filteredBag = currentBag.findIndex(e => e.ID === product.ID &&
+                e.SIZE === product.SIZE &&
+                e.COLOR === product.COLOR);
+            if (filteredBag > -1) {
+                currentBag[filteredBag]['quantity'] =
+                    typeof currentBag[filteredBag]['quantity'] === typeof 1 ?
+                        currentBag[filteredBag]['quantity'] + 1 :
+                        parseInt(currentBag[filteredBag]['quantity']) + 1;
             }
             else {
-                current_bag.push({
+                currentBag.push({
                     ID: product.ID,
                     NAME: product.NAME,
                     SIZE: product.SIZE,
@@ -2743,17 +2740,26 @@ class CookieManagerService {
                 });
             }
             let total = 0.0;
-            current_bag.map(item => total += item.PRICE * item.quantity);
-            this._bag = current_bag;
-            this.bag = current_bag;
+            currentBag.map(item => total += item.PRICE * item.quantity);
+            this.bag = currentBag;
             this.bagSize = bagSize + 1;
             this.bagTotal = total.toFixed(2);
-            this.setCookie('bag', JSON.stringify(current_bag), 100, '/');
+            this.setCookie('bag', JSON.stringify(currentBag), 100, '/');
         };
-        this.bag = this.getCookie('bag') ? JSON.parse(this.getCookie('bag')) : [];
+        this.bag = this.getCookie('bag') ?
+            JSON.parse(this.getCookie('bag')) :
+            [];
         this.login = this.getCookie('login') ? true : false;
-        this.bagTotal = this.getCookie('bagTotal') ? typeof this.getCookie('bagTotal') === 'string' ? parseFloat(this.getCookie('bagTotal')) : this.getCookie('bagTotal') : 0.0;
-        this.bagSize = this.getCookie('bagSize') ? typeof this.getCookie('bagSize') === 'string' ? parseInt(this.getCookie('bagSize')) : this.getCookie('bagSize') : 0;
+        this.bagTotal = this.getCookie('bagTotal') ?
+            typeof this.getCookie('bagTotal') === 'string' ?
+                parseFloat(this.getCookie('bagTotal')) :
+                this.getCookie('bagTotal')
+            : 0.0;
+        this.bagSize = this.getCookie('bagSize') ?
+            typeof this.getCookie('bagSize') === 'string' ?
+                parseInt(this.getCookie('bagSize')) :
+                this.getCookie('bagSize') :
+            0;
         if (this.getCookie('visitorId')) {
             this.visitorId = this.getCookie('visitorId');
         }
@@ -2794,46 +2800,47 @@ class CookieManagerService {
     set bagTotal(value) {
         this.bagTotal$.next(value);
     }
-    get _bagTotal() {
+    get getBagTotal() {
         return this.bagTotal$.asObservable();
     }
     set bagSize(value) {
         this.bagSize$.next(value);
     }
-    get _bagSize() {
+    get getBagSize() {
         return this.bagSize$.asObservable();
     }
     set visitorId(value) {
         this.visitorId$.next(value);
     }
-    get _visitorId() {
+    get getVisitorId() {
         return this.visitorId$.asObservable();
     }
     editBag(index, newQuantity) {
-        let current_bag = this.getCookie('bag') ? JSON.parse(this.getCookie('bag')) : [];
-        console.log(current_bag, index, newQuantity);
+        const currentBag = this.getCookie('bag') ?
+            JSON.parse(this.getCookie('bag')) :
+            [];
+        console.log(currentBag, index, newQuantity);
         let newSize = 0;
-        if (newQuantity > current_bag[index]['quantity']) {
-            current_bag[index]['quantity'] = newQuantity;
+        if (newQuantity > currentBag[index]['quantity']) {
+            currentBag[index]['quantity'] = newQuantity;
         }
         else {
             if (newQuantity > 0) {
-                current_bag[index]['quantity'] = newQuantity;
+                currentBag[index]['quantity'] = newQuantity;
             }
             else {
-                current_bag.splice(index, 1);
+                currentBag.splice(index, 1);
             }
         }
         let total = 0.0;
-        current_bag.map(item => {
+        currentBag.map(item => {
             newSize += item['quantity'];
             total += item.PRICE * item.quantity;
         });
-        this._bag = current_bag;
-        this.bag = current_bag;
+        this.bag = currentBag;
         this.bagSize = newSize;
         this.bagTotal = total.toFixed(2);
-        this.setCookie('bag', JSON.stringify(current_bag), 100, '/');
+        this.setCookie('bag', JSON.stringify(currentBag), 100, '/');
     }
 }
 CookieManagerService.ɵfac = function CookieManagerService_Factory(t) { return new (t || CookieManagerService)(); };
@@ -2896,18 +2903,18 @@ __webpack_require__.r(__webpack_exports__);
 
 class StoreInfoService {
     constructor() {
-        this.store_name$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]('store');
-        this.primary_color$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]('');
-        this.secondary_color$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]('');
+        this.storeName$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]('store');
+        this.primaryColor$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]('');
+        this.secondaryColor$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]('');
     }
-    set store_name(value) {
-        this.store_name$.next(value);
+    set storeName(value) {
+        this.storeName$.next(value);
     }
-    set primary_color(value) {
-        this.primary_color$.next(value);
+    set primaryColor(value) {
+        this.primaryColor$.next(value);
     }
-    set secondary_color(value) {
-        this.secondary_color$.next(value);
+    set secondaryColor(value) {
+        this.secondaryColor$.next(value);
     }
 }
 StoreInfoService.ɵfac = function StoreInfoService_Factory(t) { return new (t || StoreInfoService)(); };
@@ -2929,7 +2936,7 @@ StoreInfoService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /usr/local/google/home/babrams/repo/css-retail-frontend/frontend/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /usr/local/google/home/babrams/repo/css-retail-frontend/5.frontend/src/main.ts */"./src/main.ts");
 
 
 /***/ })
