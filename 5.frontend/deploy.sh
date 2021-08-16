@@ -2,7 +2,7 @@
 
 source ../0.setup/env_vars.sh
 
-python build_deployment_yaml.py
+python build_deployment_files.py
 
 gcloud builds submit --tag gcr.io/css-storeops/retail-store \
 --project "${RECAI_PROJECT}"

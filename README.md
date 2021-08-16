@@ -79,10 +79,7 @@ ___
 
 ### 5.frontend
 > Consult original demo instructions document for various items to be updated
-1. Update src/environments/* with required variables substituted
-    `vi ./src/environments/environments.ts`
-    `vi ./src/environments/environments.prod.ts`
-2. Execute deploy script
+1. Execute deploy script
     `bash deploy_app_engine.sh`
    
 ### 6.bqml
