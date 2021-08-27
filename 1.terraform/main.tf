@@ -5,6 +5,10 @@ terraform {
       source  = "hashicorp/google"
       version = "3.48.0"
     }
+    google-beta = {
+      source  = "hashicorp/google-beta"
+      version = "3.79.0"
+    }
   }
 }
 # Primary provider
@@ -170,13 +174,6 @@ resource "google_storage_bucket" "model_export" {
   location                    = "US"
   uniform_bucket_level_access = true
 }
-data "google_storage_bucket" "init_action" {
-  name                        = "goog-dataproc-initialization-actions-${var.region}"
-}
-data "google_storage_bucket_object" "mlvm_init_action" {
-  name                        = "mlvm/mlvm.sh"
-  bucket                      = data.google_storage_bucket.init_action.name
-}
 
 resource "google_storage_bucket_iam_member" "bq_exports_storage_admin" {
   bucket = google_storage_bucket.recai_demo_data_transfers.name
@@ -197,16 +194,17 @@ resource "google_storage_bucket_iam_member" "bq_exports_storage_legacy_object_ow
 resource "google_dataproc_cluster" "tensor_cluster" {
   name    = "tf-clus"
   region  = var.region
+  provider = google-beta
 
   cluster_config {
     gce_cluster_config {
       zone        = var.zone
-      network     = google_compute_network.private_network
-      subnetwork  = google_compute_subnetwork.css-retail1
+      network     = google_compute_network.private_network.id
+      subnetwork  = google_compute_subnetwork.css-retail1.id
       metadata    = {
         include-gpus        = true
         gpu-driver-provider = "NVIDIA"
-        init-actions-repo   = "gs://${data.google_storage_bucket.init_action.name}"
+        init-actions-repo   = "gs://goog-dataproc-initialization-actions-${var.region}"
       }
     }
     software_config {
@@ -233,7 +231,7 @@ resource "google_dataproc_cluster" "tensor_cluster" {
       num_instances = 0
     }
     initialization_action {
-      script      = data.google_storage_bucket_object.mlvm_init_action.self_link
+      script      = "gs://goog-dataproc-initialization-actions-${var.region}/mlvm/mlvm.sh"
       timeout_sec = 45 * 60
     }
     endpoint_config {
