@@ -157,28 +157,35 @@ resource "google_bigquery_dataset" "css_retail" {
   dataset_id = "css_retail"
 }
 resource "google_storage_bucket" "recai_demo_data_transfers" {
-  provider = google
-  project  = var.project
-  name     = "${var.project}_data_transfers"
-  location = "US"
+  provider                    = google
+  project                     = var.project
+  name                        = "${var.project}_data_transfers"
+  location                    = "US"
   uniform_bucket_level_access = true
 }
 resource "google_storage_bucket" "model_export" {
-  provider = google
-  project  = var.project
-  name     = "${var.project}_model_exports"
-  location = "US"
+  provider                    = google
+  project                     = var.project
+  name                        = "${var.project}_model_exports"
+  location                    = "US"
   uniform_bucket_level_access = true
+}
+data "google_storage_bucket" "init_action" {
+  name                        = "goog-dataproc-initialization-actions-${var.region}"
+}
+data "google_storage_bucket_object" "mlvm_init_action" {
+  name                        = "mlvm/mlvm.sh"
+  bucket                      = data.google_storage_bucket.init_action.name
 }
 
 resource "google_storage_bucket_iam_member" "bq_exports_storage_admin" {
   bucket = google_storage_bucket.recai_demo_data_transfers.name
-  role = "roles/storage.admin"
+  role   = "roles/storage.admin"
   member = "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
 }
 resource "google_storage_bucket_iam_member" "bq_exports_storage_legacy_bucket_owner" {
   bucket = google_storage_bucket.recai_demo_data_transfers.name
-  role = "roles/storage.legacyBucketOwner"
+  role   = "roles/storage.legacyBucketOwner"
   member = "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
 }
 resource "google_storage_bucket_iam_member" "bq_exports_storage_legacy_object_owner" {
@@ -187,6 +194,54 @@ resource "google_storage_bucket_iam_member" "bq_exports_storage_legacy_object_ow
   member = "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
 }
 
+resource "google_dataproc_cluster" "tensor_cluster" {
+  name    = "tf-clus"
+  region  = var.region
+
+  cluster_config {
+    gce_cluster_config {
+      zone        = var.zone
+      network     = google_compute_network.private_network
+      subnetwork  = google_compute_subnetwork.css-retail1
+      metadata    = {
+        include-gpus        = true
+        gpu-driver-provider = "NVIDIA"
+        init-actions-repo   = "gs://${data.google_storage_bucket.init_action.name}"
+      }
+    }
+    software_config {
+      image_version       = "preview-ubuntu18"
+      optional_components = ["JUPYTER"]
+    }
+    master_config {
+      num_instances = 1
+      machine_type  = "n1-standard-16"
+      accelerators {
+        accelerator_count = 1
+        accelerator_type  = "nvidia-tesla-t4"
+      }
+    }
+    worker_config {
+      num_instances = 3
+      machine_type  = "n1-highmem-16"
+      accelerators {
+        accelerator_count = 1
+        accelerator_type  = "nvidia-tesla-t4"
+      }
+    }
+    preemptible_worker_config {
+      num_instances = 0
+    }
+    initialization_action {
+      script      = data.google_storage_bucket_object.mlvm_init_action.self_link
+      timeout_sec = 45 * 60
+    }
+    endpoint_config {
+      enable_http_port_access = true
+    }
+  }
+
+}
 /*
 data "google_iam_policy" "cloud_sql_admin" {
   binding {

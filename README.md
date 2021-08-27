@@ -100,3 +100,10 @@ ___
     `bash deploy_mf_model.sh`
 3. Update the service account for prediction request in the script and execute
     `bash call_mf_model.sh`
+   
+### 7.tf_two_tower
+> Build, deploy, and call your own Tensorflow-based Two Tower model
+> Requires a dataproc cluster with GPU and Jupyter enabled
+1. Consult step-1 notebook
+2. Consult step-2 notebook
+3. Consult step-3 notebook

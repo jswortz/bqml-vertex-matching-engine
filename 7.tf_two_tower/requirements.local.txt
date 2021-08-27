@@ -1,0 +1,7 @@
+tensorflow
+tensorflow_recommenders
+tensorflow-data-validation
+google-cloud-storage
+progressbar
+matplotlib
+pyplt
