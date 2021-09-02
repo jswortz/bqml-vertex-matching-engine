@@ -58,3 +58,6 @@ cloud_sql_proxy
 **/.terraform*
 **/terraform.tfstat*
 **/service_account.json
+
+#Notebook files
+**/.ipynb_checkpoints/
