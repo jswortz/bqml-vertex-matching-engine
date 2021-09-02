@@ -36,7 +36,7 @@ export class ProductComponent {
   getRandomValues = getRandomValues;
 
   constructor( private gtmService: GoogleTagManagerService,
-    private readonly router: Router,
+               private readonly router: Router,
                private readonly route: ActivatedRoute,
                private readonly cookieManagerService: CookieManagerService) {
       this.product = this.route.snapshot.data["Product"];

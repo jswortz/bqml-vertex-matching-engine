@@ -4,7 +4,7 @@
 export MY_ACCOUNT="babrams@google.com"
 
 # Base project variables
-export RECAI_PROJECT="babrams-recai-demo-test"
+export RECAI_PROJECT="babrams-recai-demo"
 export PRIMARY_LOCATION="us-central"
 export PRIMARY_REGION="us-central1"
 export PRIMARY_ZONE="us-central1-c"
@@ -32,4 +32,4 @@ export TF_VAR_beta_region="${SECONDARY_REGION}"
 export TF_VAR_beta_zone="${SECONDARY_ZONE}"
 
 # Custom BQML variables
-export BQML_NAME="mf_model"
+export BQML_NAME="mf_test"

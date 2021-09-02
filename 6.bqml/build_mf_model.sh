@@ -4,21 +4,21 @@ source ../0.setup/env_vars.sh
 
 # Buy Flex slots
 bq mk --project_id="${RECAI_PROJECT}" \
---location=US --capacity_commitment \
---plan=FLEX --slots=100
+  --location=US --capacity_commitment \
+  --plan=FLEX --slots=100
 # Create reservation
 bq mk --project_id="${RECAI_PROJECT}" \
---location=US --reservation --slots=100 prod
+  --location=US --reservation --slots=100 prod
 # Assign project to reservation
 bq mk --project_id="${RECAI_PROJECT}" \
---location=US --reservation_assignment \
---reservation_id="${RECAI_PROJECT}":US.prod \
---job_type=QUERY --assignee_id="${RECAI_PROJECT}" \
---assignee_type=PROJECT
+  --location=US --reservation_assignment \
+  --reservation_id="${RECAI_PROJECT}":US.prod \
+  --job_type=QUERY --assignee_id="${RECAI_PROJECT}" \
+  --assignee_type=PROJECT
 
 
 # Prepare data and build model
-model_data_view="create view \`${RECAI_PROJECT}.css_retail.mf_dataset\` as
+model_data_view="create or replace view \`${RECAI_PROJECT}.css_retail.mf_dataset\` as
 with purchases as (
 select
   eventType
@@ -42,7 +42,7 @@ cross join unnest(views.productEventDetail.productDetails) as products
 ) select visitorId, productId, (sum(trxId) * 2) as ratings from purchases group by visitorId, productId
 union all
 select visitorId, productId, sum(viewCount) as ratings from page_views group by visitorId, productId;"
-bq --use_legacy_sql=false "${model_data_view}"
+bq query --use_legacy_sql=false "${model_data_view}"
 
 model_query="create or replace model \`${RECAI_PROJECT}.css_retail.${BQML_NAME}\`
 options(
@@ -58,14 +58,14 @@ select
   *
 from \`${RECAI_PROJECT}.css_retail.mf_dataset\`
 ;"
-bq --use_legacy_sql=false "${model_query}"
+bq query --use_legacy_sql=false "${model_query}"
 
 # Cleanup Reservation, commit and Flex slots
 ASSIGNMENT_ID=$(bq show --project_id="${RECAI_PROJECT}" --location=US --reservation_assignment --job_type=QUERY --assignee_id="${RECAI_PROJECT}" --assignee_type=PROJECT | grep ${RECAI_PROJECT} | sed 's/^  \+//g' | cut -d" " -f1)
 bq rm --project_id="${RECAI_PROJECT}" \
---location=US --reservation_assignment "${ASSIGNMENT_ID}"
+  --location=US --reservation_assignment "${ASSIGNMENT_ID}"
 bq rm --project_id="${RECAI_PROJECT}" \
---location=US --reservation prod
+  --location=US --reservation prod
 COMMIT_ID=$(bq ls --capacity_commitment --location=US --project_id="${RECAI_PROJECT}" | grep "${RECAI_PROJECT}" | sed 's/^  \+//g' | cut -d" " -f1)
 bq rm --project_id="${RECAI_PROJECT}" \
---location=US --capacity_commitment "${COMMIT_ID}"
+  --location=US --capacity_commitment "${COMMIT_ID}"
