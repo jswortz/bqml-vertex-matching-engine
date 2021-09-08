@@ -77,6 +77,7 @@ ___
 > Note: Model training will take a few days.
 > While waiting, the site will not function correctly due to invalid RecAI API calls.  
 1. Load Product Catalog and User events into Recommendations AI
+    `bash load_recai_data.sh`
 2. Configure and build Recommendations AI models
 3. Configure Google Tag Manager
 4. Update and export additional variables from previous steps
