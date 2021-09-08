@@ -4,11 +4,12 @@
 export MY_ACCOUNT="babrams@google.com"
 
 # Base project variables
-export RECAI_PROJECT="babrams-recai-demo"
+export RECAI_PROJECT="babrams-recai-demo-final"
+export TERRAFORM_SA="terraform-sa"
 export PRIMARY_LOCATION="us-central"
 export PRIMARY_REGION="us-central1"
-export PRIMARY_ZONE="us-central1-c"
-export SECONDARY_LOCATION="us-west1"
+export PRIMARY_ZONE="us-central1-a"
+export SECONDARY_LOCATION="us-west"
 export SECONDARY_REGION="us-west1"
 export SECONDARY_ZONE="us-west1-a"
 
@@ -17,7 +18,7 @@ export RECAI_SA="recai-predict-sa"
 export HP_PLACEMENT="homepage"  # homepage placement id
 export FBT_PLACEMENT="copurchased"  # frequently bought together placement id
 export OYML_PLACEMENT="pdp"  # others you may like placement id
-export RVD_PLACEMENT="recently_viewed_default"
+export RVD_PLACEMENT="recently_viewed_default" # default placement and model on fresh recai usage
 
 gcloud config set project "${RECAI_PROJECT}"
 

@@ -3,11 +3,11 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "3.48.0"
+      version = "3.82.0"
     }
     google-beta = {
       source  = "hashicorp/google-beta"
-      version = "3.79.0"
+      version = "3.82.0"
     }
   }
 }
@@ -187,59 +187,29 @@ resource "google_storage_bucket_iam_member" "bq_exports_storage_legacy_bucket_ow
 }
 resource "google_storage_bucket_iam_member" "bq_exports_storage_legacy_object_owner" {
   bucket = google_storage_bucket.recai_demo_data_transfers.name
-  role = "roles/storage.legacyObjectOwner"
+  role   = "roles/storage.legacyObjectOwner"
   member = "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
 }
 
-resource "google_dataproc_cluster" "tensor_cluster" {
-  name    = "tf-clus"
-  region  = var.region
-  provider = google-beta
+resource "google_notebooks_instance" "tf_two_tower" {
+  provider = google
+  name = "tf-two-tower"
+  location = var.zone
+  subnet = google_compute_subnetwork.css-retail1.id
 
-  cluster_config {
-    gce_cluster_config {
-      zone        = var.zone
-      network     = google_compute_network.private_network.id
-      subnetwork  = google_compute_subnetwork.css-retail1.id
-      metadata    = {
-        include-gpus        = true
-        gpu-driver-provider = "NVIDIA"
-        init-actions-repo   = "gs://goog-dataproc-initialization-actions-${var.region}"
-      }
-    }
-    software_config {
-      image_version       = "preview-ubuntu18"
-      optional_components = ["JUPYTER"]
-    }
-    master_config {
-      num_instances = 1
-      machine_type  = "n1-standard-16"
-      accelerators {
-        accelerator_count = 1
-        accelerator_type  = "nvidia-tesla-t4"
-      }
-    }
-    worker_config {
-      num_instances = 3
-      machine_type  = "n1-highmem-16"
-      accelerators {
-        accelerator_count = 1
-        accelerator_type  = "nvidia-tesla-t4"
-      }
-    }
-    preemptible_worker_config {
-      num_instances = 0
-    }
-    initialization_action {
-      script      = "gs://goog-dataproc-initialization-actions-${var.region}/mlvm/mlvm.sh"
-      timeout_sec = 45 * 60
-    }
-    endpoint_config {
-      enable_http_port_access = true
-    }
+  machine_type = "n1-standard-4"
+  install_gpu_driver = true
+  accelerator_config {
+    core_count = 1
+    type = "NVIDIA_TESLA_T4"
   }
 
+  vm_image {
+    project = "deeplearning-platform-release"
+    image_family = "tf-latest-gpu"
+  }
 }
+
 /*
 data "google_iam_policy" "cloud_sql_admin" {
   binding {
