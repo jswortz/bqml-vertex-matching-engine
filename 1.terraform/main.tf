@@ -17,56 +17,12 @@ provider "google" {
   region  = var.region
   zone    = var.zone
 }
-# Use this provider only if app engine and VPC,Cloud SQL are in separate region
+# Use this provider only if app engine and VPC, Cloud SQL are in separate region
 provider "google-beta" {
   project = var.project
   region  = var.beta_region
   zone    = var.beta_zone
 }
-
-# Service Accounts
-/*
-resource "google_service_account" "recai-demo-sa" {
-  provider     = google
-  project      = var.project
-  account_id   = "recai-demo-sa"
-  display_name = "RecAI Demo"
-}
-data "google_iam_policy" "ml_admin" {
-  binding {
-    members = ["serviceAccount:${google_service_account.recai-demo-sa.name}"]
-    role = "roles/automl.admin"
-  }
-  binding {
-    members = ["serviceAccount:${google_service_account.recai-demo-sa.name}"]
-    role = "roles/automlrecommendations.admin"
-  }
-}
-*/
-#resource "google_service_account_iam_policy" "recai-demo-sa-ml-admin" {
-#  service_account_id = google_service_account.recai-demo-sa.name
-#  policy_data = data.google_iam_policy.ml_admin.policy_data
-#}
-/*
-resource "google_service_account_iam_binding" "recai-demo-sa-automl-admin" {
-  provider           = google
-  depends_on = [google_service_account.recai-demo-sa]
-  service_account_id = google_service_account.recai-demo-sa.name
-  role               = "roles/automl.admin"
-  #member             = "serviceAccount:${google_service_account.recai-demo-sa.email}}"
-  members             = ["user:${var.myaccount}"]
-}
-resource "google_service_account_iam_binding" "recai-demo-sa-recai-admin" {
-  provider           = google
-  depends_on = [google_service_account.recai-demo-sa]
-  service_account_id = google_service_account.recai-demo-sa.name
-  role               = "roles/automlrecommendations.admin"
-  #member             = "serviceAccount:${google_service_account.recai-demo-sa.email}}"
-  members             = ["user:${var.myaccount}"]
-}
-*/
-
-
 # Networking configurations
 resource "google_compute_network" "private_network" {
   provider                = google-beta                #provider to be set as per region and zone
@@ -122,7 +78,6 @@ resource "google_vpc_access_connector" "connector" {
   ip_cidr_range = "10.1.1.0/28"
   network       = google_compute_network.private_network.name
 }
-
 # Application resource configuration
 resource "google_app_engine_application" "retail-site" {
   provider    = google
@@ -174,7 +129,7 @@ resource "google_storage_bucket" "model_export" {
   location                    = "US"
   uniform_bucket_level_access = true
 }
-
+# Data permissions configuration
 resource "google_storage_bucket_iam_member" "bq_exports_storage_admin" {
   bucket = google_storage_bucket.recai_demo_data_transfers.name
   role   = "roles/storage.admin"
@@ -190,7 +145,7 @@ resource "google_storage_bucket_iam_member" "bq_exports_storage_legacy_object_ow
   role   = "roles/storage.legacyObjectOwner"
   member = "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
 }
-
+# Custom model building configuration
 resource "google_notebooks_instance" "tf_two_tower" {
   provider = google
   name = "tf-two-tower"
@@ -209,35 +164,3 @@ resource "google_notebooks_instance" "tf_two_tower" {
     image_family = "tf-latest-gpu"
   }
 }
-
-/*
-data "google_iam_policy" "cloud_sql_admin" {
-  binding {
-    members = [
-      "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
-    ]
-    role = "roles/cloudsql.owner"
-  }
-  binding {
-    members = [
-      "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
-    ]
-    role = "roles/storage.objectAdmin"
-  }
-  binding {
-    members = [
-      "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
-    ]
-    role = "roles/storage.legacyObjectOwner"
-  }
-  binding {
-    members = [
-      "serviceAccount:${google_sql_database_instance.retail.service_account_email_address}"
-    ]
-    role = "roles/storage.legacyBucketOwner"
-  }
-}
-resource "google_storage_bucket_iam_policy" "bq_exports" {
-  bucket      = google_storage_bucket.recai_demo_data_transfers.name
-  policy_data = data.google_iam_policy.cloud_sql_admin.policy_data
-}*/

@@ -53,7 +53,7 @@ ___
 ### 1.terraform
 > main.tf is configured to build Service Accounts, Networking, AppEngine, Cloud SQL, Storage buckets, and Big Query Datasets
 1. Export Service Account Credentials path variable  
-   `export GOOGLE_APPLICATION_CREDENTIALS=./service_account.json`
+    `export GOOGLE_APPLICATION_CREDENTIALS=./service_account.json`
 2. Initialize terraform for the current project  
     `terraform init`
 3. Execute the plan step to review the full set of changes to be applied  
