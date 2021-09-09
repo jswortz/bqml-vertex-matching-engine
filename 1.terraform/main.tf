@@ -129,6 +129,23 @@ resource "google_storage_bucket" "model_export" {
   location                    = "US"
   uniform_bucket_level_access = true
 }
+resource "google_storage_bucket" "vertex_training" {
+  provider                    = google
+  project                     = var.project
+  name                        = "${var.project}_vertex_training"
+  location                    = "US"
+  uniform_bucket_level_access = true
+}
+resource "google_storage_bucket_object" "notebook_post_startup_script" {
+  bucket = google_storage_bucket.vertex_training.name
+  name = "notebook_install.sh"
+  source = "../7.tf_two_tower/notebook_install.sh"
+}
+resource "google_storage_bucket_object" "notebook_requirements" {
+  bucket = google_storage_bucket.vertex_training.name
+  name = "notebook_requirements.txt"
+  source = "../7.tf_two_tower/notebook_requirements.txt"
+}
 # Data permissions configuration
 resource "google_storage_bucket_iam_member" "bq_exports_storage_admin" {
   bucket = google_storage_bucket.recai_demo_data_transfers.name
@@ -147,20 +164,20 @@ resource "google_storage_bucket_iam_member" "bq_exports_storage_legacy_object_ow
 }
 # Custom model building configuration
 resource "google_notebooks_instance" "tf_two_tower" {
-  provider = google
-  name = "tf-two-tower"
-  location = var.zone
-  subnet = google_compute_subnetwork.css-retail1.id
-
-  machine_type = "n1-standard-4"
-  install_gpu_driver = true
+  provider            = google
+  name                = "tf-two-tower"
+  location            = var.zone
+  subnet              = google_compute_subnetwork.css-retail1.id
+  machine_type        = "n1-standard-4"
+  install_gpu_driver  = true
   accelerator_config {
-    core_count = 1
-    type = "NVIDIA_TESLA_T4"
+    core_count  = 1
+    type        = "NVIDIA_TESLA_T4"
+  }
+  vm_image {
+    project       = "deeplearning-platform-release"
+    image_family  = "tf-latest-gpu"
   }
 
-  vm_image {
-    project = "deeplearning-platform-release"
-    image_family = "tf-latest-gpu"
-  }
+  #post_startup_script = "${google_storage_bucket_object.notebook_post_startup_script.media_link}"
 }
