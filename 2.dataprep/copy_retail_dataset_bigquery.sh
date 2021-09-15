@@ -15,8 +15,9 @@ bq mk --transfer_config --project_id="${RECAI_PROJECT}" \
 --params="${PARAMS}"
 echo "Monitoring for completion of data transfer service run"
 JOB_STATE=$(bq ls --transfer_config --transfer_location=us --format=prettyjson | grep "state" | sed 's/.*: "\([A-Z]*\)",.*/\1/g')
-while [ "${JOB_STATE}" != "SUCCEEDED" ]; do
-  (( JOB_STATE=$(bq ls --transfer_config --transfer_location=us --format=prettyjson | grep "state" | sed 's/.*: "\([A-Z]*\)",.*/\1/g') ))
+while [ "${JOB_STATE}" == "SUCCEEDED" ]; do
+  JOB_STATE=$(bq ls --transfer_config --transfer_location=us --format=prettyjson | grep "state" | sed 's/.*: "\([A-Z]*\)",.*/\1/g')
+  echo "${JOB_STATE}"
 done
 
 for TABLE in 'detail_page_view' 'home_page_view' 'purchase_complete' 'add_to_cart';do
