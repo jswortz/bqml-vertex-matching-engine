@@ -179,5 +179,5 @@ resource "google_notebooks_instance" "tf_two_tower" {
     image_family  = "tf-latest-gpu"
   }
 
-  post_startup_script = "${google_storage_bucket_object.notebook_post_startup_script.media_link}"
+  post_startup_script = google_storage_bucket_object.notebook_post_startup_script.media_link
 }
