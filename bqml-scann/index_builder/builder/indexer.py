@@ -79,7 +79,7 @@ def save_index(index, tokens, output_dir):
   print('Saving index as a SavedModel...')
   module = index.serialize_to_module()
   tf.saved_model.save(
-    module, output_dir, signatures=None, options=None
+    module, output_dir, signatures=None, options=tf.saved_model.SaveOptions(namespace_whitelist=["Scann"])
   )
   print(f'Index is saved to {output_dir}')
   

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import argparse
-from . import indexer
+from indexer import build
 
 def get_args():
 
@@ -48,7 +48,7 @@ def get_args():
 
 def main():
   args = get_args()
-  indexer.build(
+  build(
     embedding_files_pattern=args.embedding_files_path, 
     output_dir=args.output_dir,
     num_leaves=args.num_leaves
