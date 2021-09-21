@@ -17,12 +17,12 @@ class MatchServiceStub(object):
             channel: A grpc.Channel.
         """
         self.Match = channel.unary_unary(
-                '/google.cloud.aiplatform.container.v1alpha1.MatchService/Match',
+                '/google.cloud.aiplatform.container.v1beta1.MatchService/Match',
                 request_serializer=match__pb2.MatchRequest.SerializeToString,
                 response_deserializer=match__pb2.MatchResponse.FromString,
                 )
         self.BatchMatch = channel.unary_unary(
-                '/google.cloud.aiplatform.container.v1alpha1.MatchService/BatchMatch',
+                '/google.cloud.aiplatform.container.v1beta1.MatchService/BatchMatch',
                 request_serializer=match__pb2.BatchMatchRequest.SerializeToString,
                 response_deserializer=match__pb2.BatchMatchResponse.FromString,
                 )
@@ -64,7 +64,7 @@ def add_MatchServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'google.cloud.aiplatform.container.v1alpha1.MatchService', rpc_method_handlers)
+            'google.cloud.aiplatform.container.v1beta1.MatchService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -85,7 +85,7 @@ class MatchService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/google.cloud.aiplatform.container.v1alpha1.MatchService/Match',
+        return grpc.experimental.unary_unary(request, target, '/google.cloud.aiplatform.container.v1beta1.MatchService/Match',
             match__pb2.MatchRequest.SerializeToString,
             match__pb2.MatchResponse.FromString,
             options, channel_credentials,
