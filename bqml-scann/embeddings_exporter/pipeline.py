@@ -37,9 +37,11 @@ def to_csv(entry):
   return csv_string
 
 
-def run(bq_dataset_name, embeddings_table_name, output_dir, pipeline_args):
+def run(bq_dataset_name, embeddings_table_name, output_dir, PROJECT):
 
-    pipeline_options = beam.options.pipeline_options.PipelineOptions(pipeline_args)
+    pipeline_options = beam.options.pipeline_options.PipelineOptions(
+    project=PROJECT,
+    runner)
     project = pipeline_options.get_all_options()['project']
     with beam.Pipeline(options=pipeline_options) as pipeline:
 
