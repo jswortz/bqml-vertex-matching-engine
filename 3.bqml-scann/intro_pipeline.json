@@ -1,0 +1,806 @@
+{
+  "pipelineSpec": {
+    "components": {
+      "comp-create-index": {
+        "executorLabel": "exec-create-index",
+        "inputDefinitions": {
+          "parameters": {
+            "bucket": {
+              "type": "STRING"
+            },
+            "deployed_index_id": {
+              "type": "STRING"
+            },
+            "project_id": {
+              "type": "STRING"
+            },
+            "project_number": {
+              "type": "STRING"
+            },
+            "region": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "parameters": {
+            "COMPLETE_CODE": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-launch-python": {
+        "executorLabel": "exec-launch-python",
+        "inputDefinitions": {
+          "parameters": {
+            "args": {
+              "type": "STRING"
+            },
+            "location": {
+              "type": "STRING"
+            },
+            "project": {
+              "type": "STRING"
+            },
+            "python_file_path": {
+              "type": "STRING"
+            },
+            "requirements_file_path": {
+              "type": "STRING"
+            },
+            "staging_dir": {
+              "type": "STRING"
+            },
+            "wait_interval": {
+              "type": "INT"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "artifacts": {
+            "MLPipeline UI metadata": {
+              "artifactType": {
+                "schemaTitle": "system.Artifact",
+                "schemaVersion": "0.0.1"
+              }
+            }
+          },
+          "parameters": {
+            "job_id": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-load-sprocs": {
+        "executorLabel": "exec-load-sprocs",
+        "inputDefinitions": {
+          "parameters": {
+            "bucket": {
+              "type": "STRING"
+            },
+            "bucket_name": {
+              "type": "STRING"
+            },
+            "dataset_name": {
+              "type": "STRING"
+            },
+            "project": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "parameters": {
+            "COMPLETE_CODE": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-run-a-bq-call": {
+        "executorLabel": "exec-run-a-bq-call",
+        "inputDefinitions": {
+          "parameters": {
+            "project": {
+              "type": "STRING"
+            },
+            "query": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "parameters": {
+            "RESULT": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-run-a-bq-call-2": {
+        "executorLabel": "exec-run-a-bq-call-2",
+        "inputDefinitions": {
+          "parameters": {
+            "project": {
+              "type": "STRING"
+            },
+            "query": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "parameters": {
+            "RESULT": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-run-a-bq-call-3": {
+        "executorLabel": "exec-run-a-bq-call-3",
+        "inputDefinitions": {
+          "parameters": {
+            "project": {
+              "type": "STRING"
+            },
+            "query": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "parameters": {
+            "RESULT": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-run-a-bq-call-4": {
+        "executorLabel": "exec-run-a-bq-call-4",
+        "inputDefinitions": {
+          "parameters": {
+            "project": {
+              "type": "STRING"
+            },
+            "query": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "parameters": {
+            "RESULT": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-run-a-bq-call-5": {
+        "executorLabel": "exec-run-a-bq-call-5",
+        "inputDefinitions": {
+          "parameters": {
+            "project": {
+              "type": "STRING"
+            },
+            "query": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "parameters": {
+            "RESULT": {
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "comp-run-a-bq-call-6": {
+        "executorLabel": "exec-run-a-bq-call-6",
+        "inputDefinitions": {
+          "parameters": {
+            "project": {
+              "type": "STRING"
+            },
+            "query": {
+              "type": "STRING"
+            }
+          }
+        },
+        "outputDefinitions": {
+          "parameters": {
+            "RESULT": {
+              "type": "STRING"
+            }
+          }
+        }
+      }
+    },
+    "deploymentSpec": {
+      "executors": {
+        "exec-create-index": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "create_index"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "(python3 -m ensurepip || python3 -m ensurepip --user) && (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'grpcio-tools' 'google-cloud-storage' 'protobuf' 'google-cloud-aiplatform' 'kfp==1.8.2' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'grpcio-tools' 'google-cloud-storage' 'protobuf' 'google-cloud-aiplatform' 'kfp==1.8.2' --user) && \"$0\" \"$@\"",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef create_index(\n  project_id: str, bucket: str, region: str,\nproject_number: str, deployed_index_id: str) -> NamedTuple('Outputs', [('COMPLETE_CODE', str)]):\n    import os\n    import time\n    import subprocess\n    from google.cloud import storage\n\n    import grpc\n    from google.cloud import aiplatform_v1beta1\n    from google.protobuf import struct_pb2\n\n    NETWORK_NAME = 'default'\n    PEERING_RANGE_NAME = 'google-reserved-range'\n    PROJECT_ID = project_id\n    BUCKET = bucket\n\n    BUCKET_NAME = f\"gs://{BUCKET}/bqml/item_embeddings\"  # @param {type:\"string\"}\n    REGION = region  # @param {type:\"string\"}\n    PARENT = \"projects/{}/locations/{}\".format(PROJECT_ID, REGION)\n    ENDPOINT = \"{}-aiplatform.googleapis.com\".format(REGION)\n    DEPLOYED_INDEX_ID = deployed_index_id\n    #AUTH_TOKEN = subprocess.check_output(\"gcloud auth print-access-token\", shell=True)\n    #AUTH_TOKEN = [str(AUTH_TOKEN2,'utf-8').replace(\"\\n\", \"\")]\n    PROJECT_NUMBER = project_number\n\n    index_client = aiplatform_v1beta1.IndexServiceClient(\n    client_options=dict(api_endpoint=ENDPOINT)\n    )\n    DIMENSIONS = 50\n    DISPLAY_NAME = \"retail_demo_matching_engine\"\n\n    treeAhConfig = struct_pb2.Struct(\n        fields={\n            \"leafNodeEmbeddingCount\": struct_pb2.Value(number_value=500),\n            \"leafNodesToSearchPercent\": struct_pb2.Value(number_value=7),\n        }\n    )\n\n    algorithmConfig = struct_pb2.Struct(\n        fields={\"treeAhConfig\": struct_pb2.Value(struct_value=treeAhConfig)}\n    )\n\n    config = struct_pb2.Struct(\n        fields={\n            \"dimensions\": struct_pb2.Value(number_value=DIMENSIONS),\n            \"approximateNeighborsCount\": struct_pb2.Value(number_value=150),\n            \"distanceMeasureType\": struct_pb2.Value(string_value=\"DOT_PRODUCT_DISTANCE\"),\n            \"algorithmConfig\": struct_pb2.Value(struct_value=algorithmConfig),\n        }\n    )\n\n    metadata = struct_pb2.Struct(\n        fields={\n            \"config\": struct_pb2.Value(struct_value=config),\n            \"contentsDeltaUri\": struct_pb2.Value(string_value=BUCKET_NAME), # 'tmp/' | BUCKET_NAME\n        }\n    )\n\n    ann_index = {\n        \"display_name\": DISPLAY_NAME,\n        \"description\": \"Retail 50 Index\",\n        \"metadata\": struct_pb2.Value(struct_value=metadata),\n    }\n\n    ann_index = index_client.create_index(parent=PARENT, index=ann_index)\n\n    # Poll the operation until it's done successfullly.\n    # This will take ~50 min.\n\n    print(\"starting index creation\")\n\n    while not ann_index.done():\n        print(\"Poll the operation to create index...\")\n        time.sleep(60)\n\n    print(\"index created\")    \n    #create an indexEndpoint\n    index_endpoint_client = aiplatform_v1beta1.IndexEndpointServiceClient(client_options=dict(api_endpoint=ENDPOINT))\n\n    VPC_NETWORK_NAME = \"projects/{}/global/networks/{}\".format(PROJECT_NUMBER, NETWORK_NAME)\n    VPC_NETWORK_NAME\n\n    index_endpoint = {\n    \"display_name\": \"index_endpoint_for_demo\",\n    \"network\": VPC_NETWORK_NAME,}\n\n    r = index_endpoint_client.create_index_endpoint(parent=PARENT, index_endpoint=index_endpoint)\n\n    INDEX_ENDPOINT_NAME = r.result().name\n    INDEX_RESOURCE_NAME = ann_index.result().name\n\n    deploy_ann_index = {\n    \"id\": DEPLOYED_INDEX_ID,\n    \"display_name\": DEPLOYED_INDEX_ID,\n    \"index\": INDEX_RESOURCE_NAME,\n    }\n\n    res = index_endpoint_client.deploy_index(index_endpoint=INDEX_ENDPOINT_NAME, deployed_index=deploy_ann_index)\n    print(f\"Starting endpoint deployment for{INDEX_ENDPOINT_NAME}\")\n\n    while not res.done():\n        print(\"Poll the operation to deploy index...\")\n        time.sleep(60)\n    print(\"success\")\n\n    return (\n    str(200),\n    )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-launch-python": {
+          "container": {
+            "args": [
+              "--ui_metadata_path",
+              "{{$.outputs.artifacts['MLPipeline UI metadata'].path}}",
+              "kfp_component.google.dataflow",
+              "launch_python",
+              "--python_file_path",
+              "{{$.inputs.parameters['python_file_path']}}",
+              "--project_id",
+              "{{$.inputs.parameters['project']}}",
+              "--region",
+              "{{$.inputs.parameters['location']}}",
+              "--staging_dir",
+              "{{$.inputs.parameters['staging_dir']}}",
+              "--requirements_file_path",
+              "{{$.inputs.parameters['requirements_file_path']}}",
+              "--args",
+              "{{$.inputs.parameters['args']}}",
+              "--wait_interval",
+              "{{$.inputs.parameters['wait_interval']}}",
+              "--job_id_output_path",
+              "{{$.outputs.parameters['job_id'].output_file}}"
+            ],
+            "command": [
+              "python",
+              "-u",
+              "-m",
+              "kfp_component.launcher"
+            ],
+            "image": "gcr.io/ml-pipeline/ml-pipeline-gcp:1.7.0-rc.3"
+          }
+        },
+        "exec-load-sprocs": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "load_sprocs"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "(python3 -m ensurepip || python3 -m ensurepip --user) && (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery' 'google-cloud-storage' 'kfp==1.8.2' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery' 'google-cloud-storage' 'kfp==1.8.2' --user) && \"$0\" \"$@\"",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef load_sprocs(\n  bucket: str, dataset_name: str, project: str, bucket_name: str) -> NamedTuple('Outputs', [('COMPLETE_CODE', str)]):\n    import os\n    from google.cloud import storage\n    from google.cloud import bigquery\n\n    client = bigquery.Client(project=project)\n\n    sql_scripts = dict()\n    SQL_SCRIPTS_DIR = f'{bucket_name}/sql_scripts'\n    BQ_DATASET_NAME = dataset_name\n\n    os.mkdir(\"downloads_\")\n    files = ['sp_ExractEmbeddings.sql', 'sp_ComputePMI.sql', 'sp_TrainItemMatchingModel.sql']\n\n    storage_client = storage.Client(project)\n\n    bucket = storage_client.bucket(bucket)\n\n    for file in files:\n        blob = bucket.blob(f\"sql_scripts/{file}\")\n\n        blob.download_to_filename(f\"downloads_/{file}\")\n\n\n    SQL_SCRIPTS_DIR = \"downloads_/\"\n\n    for script_file in [file for file in os.listdir(SQL_SCRIPTS_DIR) if '.sql' in file]:\n        script_file_path = os.path.join(SQL_SCRIPTS_DIR, script_file)\n        sql_script = open(script_file_path, 'r').read()\n        sql_script = sql_script.replace('@DATASET_NAME', BQ_DATASET_NAME)\n        sql_scripts[script_file] = sql_script\n    for script_file in sql_scripts:\n        print(f'Executing {script_file} script...')\n        query = sql_scripts[script_file]\n        query_job = client.query(query)\n        result = query_job.result()\n\n    return (\n    str(result),\n    )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-run-a-bq-call": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "run_a_bq_call"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "(python3 -m ensurepip || python3 -m ensurepip --user) && (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' --user) && \"$0\" \"$@\"",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef run_a_bq_call(\n  project: str, query: str) -> NamedTuple('Outputs', [('RESULT', str)]):\n    from google.cloud import bigquery\n    bq_client = bigquery.Client(project=project)\n    j = bq_client.query(query).result()\n\n    return (\n    str(j),\n    )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-run-a-bq-call-2": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "run_a_bq_call"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "(python3 -m ensurepip || python3 -m ensurepip --user) && (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' --user) && \"$0\" \"$@\"",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef run_a_bq_call(\n  project: str, query: str) -> NamedTuple('Outputs', [('RESULT', str)]):\n    from google.cloud import bigquery\n    bq_client = bigquery.Client(project=project)\n    j = bq_client.query(query).result()\n\n    return (\n    str(j),\n    )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-run-a-bq-call-3": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "run_a_bq_call"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "(python3 -m ensurepip || python3 -m ensurepip --user) && (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' --user) && \"$0\" \"$@\"",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef run_a_bq_call(\n  project: str, query: str) -> NamedTuple('Outputs', [('RESULT', str)]):\n    from google.cloud import bigquery\n    bq_client = bigquery.Client(project=project)\n    j = bq_client.query(query).result()\n\n    return (\n    str(j),\n    )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-run-a-bq-call-4": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "run_a_bq_call"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "(python3 -m ensurepip || python3 -m ensurepip --user) && (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' --user) && \"$0\" \"$@\"",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef run_a_bq_call(\n  project: str, query: str) -> NamedTuple('Outputs', [('RESULT', str)]):\n    from google.cloud import bigquery\n    bq_client = bigquery.Client(project=project)\n    j = bq_client.query(query).result()\n\n    return (\n    str(j),\n    )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-run-a-bq-call-5": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "run_a_bq_call"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "(python3 -m ensurepip || python3 -m ensurepip --user) && (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' --user) && \"$0\" \"$@\"",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef run_a_bq_call(\n  project: str, query: str) -> NamedTuple('Outputs', [('RESULT', str)]):\n    from google.cloud import bigquery\n    bq_client = bigquery.Client(project=project)\n    j = bq_client.query(query).result()\n\n    return (\n    str(j),\n    )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        },
+        "exec-run-a-bq-call-6": {
+          "container": {
+            "args": [
+              "--executor_input",
+              "{{$}}",
+              "--function_to_execute",
+              "run_a_bq_call"
+            ],
+            "command": [
+              "sh",
+              "-c",
+              "(python3 -m ensurepip || python3 -m ensurepip --user) && (PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' || PIP_DISABLE_PIP_VERSION_CHECK=1 python3 -m pip install --quiet                 --no-warn-script-location 'google-cloud-bigquery==2.18.0' 'kfp==1.8.2' --user) && \"$0\" \"$@\"",
+              "sh",
+              "-ec",
+              "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
+              "\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef run_a_bq_call(\n  project: str, query: str) -> NamedTuple('Outputs', [('RESULT', str)]):\n    from google.cloud import bigquery\n    bq_client = bigquery.Client(project=project)\n    j = bq_client.query(query).result()\n\n    return (\n    str(j),\n    )\n\n"
+            ],
+            "image": "python:3.9"
+          }
+        }
+      }
+    },
+    "pipelineInfo": {
+      "name": "bqml-scann-demo"
+    },
+    "root": {
+      "dag": {
+        "tasks": {
+          "create-index": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-create-index"
+            },
+            "dependentTasks": [
+              "launch-python"
+            ],
+            "inputs": {
+              "parameters": {
+                "bucket": {
+                  "componentInputParameter": "bucket"
+                },
+                "deployed_index_id": {
+                  "componentInputParameter": "deployed_index_id"
+                },
+                "project_id": {
+                  "componentInputParameter": "project"
+                },
+                "project_number": {
+                  "componentInputParameter": "project_number"
+                },
+                "region": {
+                  "componentInputParameter": "region"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "Python - Create and deploy ScaNN matching engine deployment"
+            }
+          },
+          "launch-python": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-launch-python"
+            },
+            "dependentTasks": [
+              "run-a-bq-call-6"
+            ],
+            "inputs": {
+              "parameters": {
+                "args": {
+                  "componentInputParameter": "args"
+                },
+                "location": {
+                  "componentInputParameter": "region"
+                },
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "python_file_path": {
+                  "componentInputParameter": "dataflow_job_code"
+                },
+                "requirements_file_path": {
+                  "runtimeValue": {
+                    "constantValue": {
+                      "stringValue": ""
+                    }
+                  }
+                },
+                "staging_dir": {
+                  "componentInputParameter": "temp_location"
+                },
+                "wait_interval": {
+                  "runtimeValue": {
+                    "constantValue": {
+                      "stringValue": "30"
+                    }
+                  }
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "Dataflow - Extract embeddings from BQ to GCS"
+            }
+          },
+          "load-sprocs": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-load-sprocs"
+            },
+            "dependentTasks": [
+              "run-a-bq-call-3"
+            ],
+            "inputs": {
+              "parameters": {
+                "bucket": {
+                  "componentInputParameter": "bucket"
+                },
+                "bucket_name": {
+                  "componentInputParameter": "bucket_name"
+                },
+                "dataset_name": {
+                  "componentInputParameter": "dataset_name"
+                },
+                "project": {
+                  "componentInputParameter": "project"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "Python - Load BQ stored procedures"
+            }
+          },
+          "run-a-bq-call": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-run-a-bq-call"
+            },
+            "inputs": {
+              "parameters": {
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "query": {
+                  "componentInputParameter": "create_item_view"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "BigQuery - Item user view creation"
+            }
+          },
+          "run-a-bq-call-2": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-run-a-bq-call-2"
+            },
+            "dependentTasks": [
+              "run-a-bq-call"
+            ],
+            "inputs": {
+              "parameters": {
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "query": {
+                  "componentInputParameter": "create_cooc_matrix_query"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "BigQuery - Create co-occurance matrix"
+            }
+          },
+          "run-a-bq-call-3": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-run-a-bq-call-3"
+            },
+            "dependentTasks": [
+              "run-a-bq-call-2"
+            ],
+            "inputs": {
+              "parameters": {
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "query": {
+                  "componentInputParameter": "create_bqml_model_query"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "BigQuery - Create recAI model"
+            }
+          },
+          "run-a-bq-call-4": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-run-a-bq-call-4"
+            },
+            "dependentTasks": [
+              "load-sprocs"
+            ],
+            "inputs": {
+              "parameters": {
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "query": {
+                  "componentInputParameter": "compute_PMI_query"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "BigQuery - Compute PMI Query"
+            }
+          },
+          "run-a-bq-call-5": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-run-a-bq-call-5"
+            },
+            "dependentTasks": [
+              "load-sprocs"
+            ],
+            "inputs": {
+              "parameters": {
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "query": {
+                  "componentInputParameter": "train_item_matching_query"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "BigQuery - Train the recAI model"
+            }
+          },
+          "run-a-bq-call-6": {
+            "cachingOptions": {
+              "enableCache": true
+            },
+            "componentRef": {
+              "name": "comp-run-a-bq-call-6"
+            },
+            "dependentTasks": [
+              "run-a-bq-call-5"
+            ],
+            "inputs": {
+              "parameters": {
+                "project": {
+                  "componentInputParameter": "project"
+                },
+                "query": {
+                  "componentInputParameter": "extract_embeddings_query"
+                }
+              }
+            },
+            "taskInfo": {
+              "name": "BigQuery - Extract trained embeddings to table"
+            }
+          }
+        }
+      },
+      "inputDefinitions": {
+        "parameters": {
+          "args": {
+            "type": "STRING"
+          },
+          "bucket": {
+            "type": "STRING"
+          },
+          "bucket_name": {
+            "type": "STRING"
+          },
+          "compute_PMI_query": {
+            "type": "STRING"
+          },
+          "create_bqml_model_query": {
+            "type": "STRING"
+          },
+          "create_cooc_matrix_query": {
+            "type": "STRING"
+          },
+          "create_item_view": {
+            "type": "STRING"
+          },
+          "dataflow_job_code": {
+            "type": "STRING"
+          },
+          "dataset_name": {
+            "type": "STRING"
+          },
+          "deployed_index_id": {
+            "type": "STRING"
+          },
+          "embeddings_table_name": {
+            "type": "STRING"
+          },
+          "export_embeddings_query": {
+            "type": "STRING"
+          },
+          "extract_embeddings_query": {
+            "type": "STRING"
+          },
+          "output_dir": {
+            "type": "STRING"
+          },
+          "project": {
+            "type": "STRING"
+          },
+          "project_number": {
+            "type": "STRING"
+          },
+          "region": {
+            "type": "STRING"
+          },
+          "temp_location": {
+            "type": "STRING"
+          },
+          "train_item_matching_query": {
+            "type": "STRING"
+          }
+        }
+      }
+    },
+    "schemaVersion": "2.0.0",
+    "sdkVersion": "kfp-1.8.2"
+  },
+  "runtimeConfig": {
+    "gcsOutputDirectory": "gs://jsw-bucket-match/pipeline_root/intro",
+    "parameters": {
+      "args": {
+        "stringValue": "[\"--bq_dataset_name\", \"css_retail\", \"--embeddings_table_name\", \"item_embeddings\", \"--output_dir\", \"gs://jsw-bucket-match/bqml/item_embeddings\", \"--project_id\", \"diagflow-cx-jsw\", \"--output\", \"gs://jsw-bucket-match/bqml/item_embeddings\"]"
+      },
+      "bucket": {
+        "stringValue": "jsw-bucket-match"
+      },
+      "bucket_name": {
+        "stringValue": "gs://jsw-bucket-match"
+      },
+      "compute_PMI_query": {
+        "stringValue": "\nDECLARE min_item_frequency INT64;\nDECLARE max_group_size INT64;\n\nSET min_item_frequency = 15;\nSET max_group_size = 100;\n\nCALL css_retail.sp_ComputePMI(min_item_frequency, max_group_size);\n"
+      },
+      "create_bqml_model_query": {
+        "stringValue": "\nCREATE MODEL IF NOT EXISTS css_retail.item_matching_model\nOPTIONS(\n    MODEL_TYPE='matrix_factorization', \n    USER_COL='item1_Id', \n    ITEM_COL='item2_Id',\n    RATING_COL='score'\n)\nAS\nSELECT 0 AS item1_Id, 0 AS item2_Id, 0 AS score;\n"
+      },
+      "create_cooc_matrix_query": {
+        "stringValue": "\nCREATE TABLE IF NOT EXISTS css_retail.item_cooc\nAS SELECT 0 AS item1_Id, 0 AS item2_Id, 0 AS cooc, 0 AS pmi;\n"
+      },
+      "create_item_view": {
+        "stringValue": "\nCREATE or REPLACE VIEW `diagflow-cx-jsw.css_retail.vw_item_groups`\nAS\nSELECT \n  userInfo.userID as group_id, \n  pd.id as item_id \nFROM \n  `diagflow-cx-jsw.css_retail.purchase_complete`,\n  UNNEST(productEventDetail.productDetails) as pd\n"
+      },
+      "dataflow_job_code": {
+        "stringValue": "gs://jsw-bucket-match/embeddings_exporter/beam_kfp2.py"
+      },
+      "dataset_name": {
+        "stringValue": "css_retail"
+      },
+      "deployed_index_id": {
+        "stringValue": "ann_prod50_deployed21"
+      },
+      "embeddings_table_name": {
+        "stringValue": "item_embeddings"
+      },
+      "export_embeddings_query": {
+        "stringValue": "\nCREATE TEMP FUNCTION array_int_to_string(int_array ARRAY<FLOAT64>) \n  RETURNS ARRAY<STRING> LANGUAGE js as \"return int_array.map(x => x+'')\";\n  \nEXPORT DATA\nOPTIONS (uri='gs://jsw-bucket-match/bqml/item_embeddings/*.csv',\n  format='CSV',\n  overwrite=true) AS\nselect item_id, array_to_string(array_int_to_string(embedding), ',')  as embedding_string \nfrom `css_retail.item_embeddings`\n"
+      },
+      "extract_embeddings_query": {
+        "stringValue": "\nCALL css_retail.sp_ExractEmbeddings() \n"
+      },
+      "output_dir": {
+        "stringValue": "gs://jsw-bucket-match/bqml/item_embeddings"
+      },
+      "project": {
+        "stringValue": "diagflow-cx-jsw"
+      },
+      "project_number": {
+        "stringValue": "442799176336"
+      },
+      "region": {
+        "stringValue": "us-central1"
+      },
+      "temp_location": {
+        "stringValue": "gs://jsw-bucket-match/dataflow_tmp"
+      },
+      "train_item_matching_query": {
+        "stringValue": "\nDECLARE dimensions INT64 DEFAULT 50;\nCALL css_retail.sp_TrainItemMatchingModel(dimensions)\n"
+      }
+    }
+  }
+}
