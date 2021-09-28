@@ -4,7 +4,7 @@
 export MY_ACCOUNT="jwortz@google.com"
 
 # Base project variables
-export RECAI_PROJECT="smoke-test-jsw"
+export RECAI_PROJECT="diagflow-cx-jsw"
 export TERRAFORM_SA="terraform-sa"
 export PRIMARY_LOCATION="us-central"
 export PRIMARY_REGION="us-central1"
