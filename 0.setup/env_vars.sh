@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Your account in cloud
-export MY_ACCOUNT="babrams@google.com"
+export MY_ACCOUNT="jwortz@google.com"
 
 # Base project variables
-export RECAI_PROJECT="babrams-recai-demo-final"
+export RECAI_PROJECT="smoke-test-jsw"
 export TERRAFORM_SA="terraform-sa"
 export PRIMARY_LOCATION="us-central"
 export PRIMARY_REGION="us-central1"
