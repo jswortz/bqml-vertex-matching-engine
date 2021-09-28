@@ -1,4 +1,44 @@
-# Recommendations AI Demo Project
+# BigQueryML RecAI Implementation with Matching Engine and Vertex Pipelines
+<img src="3.bqml-scann/figures/pipeline_output2.png" style="width:700px;"/>
+The purpose of this section is to guide the user through creation of new indices on Matchining engine. Also, there is an indpendendent section to automate the entire process using Vertex pipelines. 
+
+Heavy adaptation from [this repo](https://github.com/GoogleCloudPlatform/analytics-componentized-patterns/tree/master/retail/recommendation-system/bqml-scann)
+_______
+
+### 00 Prep Bigquery
+* Create views for product-user pairs
+* Prep the stored procedures
+* Create
+* Loading data into datastore (unneccessary but could extend recommendations to be integrated in a simulated prod)
+
+### 01 Train BQML
+* Trains the item matching model
+* Some analysis on top products
+
+### 02 Dataflow embedding files to GCS
+* Export the embeddings using dataflow API
+* Export from BQML table to GCS
+* Product embeddings
+
+### 03 Matching Engine
+* Shorter section on simple tensorflow implementation
+* Not used in Vertex Pipelines (but could be extended)
+
+### 04 Vertex pipeline setup
+* Infrastrucure setup (VPC, etc..)
+* BQML Flex slot reservations (needed for training)
+* API enablement
+* Dataflow Vertex pipeline component
+
+_______
+
+
+## Instructions for running Vertex Pipelines from new project
+1. Begin by running the instructions below to terraform the environment, data
+2. Start from [04_setup_pipeline_resources](3.bqml-scann/04_setup_pipeline_resources.ipynb)
+
+
+# Terraforming new environment (do this first if new project)
 ___
 > Refactored code base sourced from
 > [go/recommendation-ai-demo-instructions](http://go/recommendation-ai-demo-instructions)  
@@ -14,7 +54,7 @@ ___
 > Each section assumes you are executing commands from the relative directory of each section
 
 
-### 0.setup
+### 0.setup 
 > Install packages and update variables
 1. Install cloud sdk, git, npm, and angular cli  
     `bash install_packages.sh`
@@ -42,52 +82,3 @@ ___
 > Create schema in Cloud SQL and copy the css_retail dataset in Big Query
 1. Execute Big Query copy and export script  
     `bash copy_retail_dataset_bigquery.sh`
-2. Execute the Cloud SQL prep script to build the schema and load the product dataset  
-    `bash prep_and_load_cloudsql.sh`
-
-
-### 3.recommendation_ai
-> Two scripts here, one to update RecAI for the newly minted API key for prediction calls
-> and another script to delete an api key, which is not likely required but provided for convenience.  
-> Consult original demo instructions for Recommendations AI interactions.  
-> Note: Model training will take a few days.
-> While waiting, the site will not function correctly due to invalid RecAI API calls.  
-1. Load Product Catalog and User events into Recommendations AI
-    `bash load_recai_data.sh`
-2. Configure and build Recommendations AI models
-3. Configure Google Tag Manager
-4. Update and export additional variables from previous steps
-   `vi add_env_vars.sh`
-   `bash add_env_vars.sh`
-5. Execute the prediction key script  
-    `bash prediction_key.sh`
-  
- 
-### 4.backend
-> Consult original demo instructions document for various items to be updated
-1. Execute deploy script
-    `bash deploy.sh`
-
-
-### 5.frontend
-> Consult original demo instructions document for various items to be updated
-1. Execute deploy script
-    `bash deploy_app_engine.sh`
-   
-
-### 6.bqml
-> Build, deploy, and call your own BQML Matrix Factorization model
-> This will require flex slot reservations in Big Query along with associated costs
-1. Execute the build script
-    `bash build_mf_model.sh`
-2. Deploy the model to AI Platform
-    `bash deploy_mf_model.sh`
-3. Update the service account for prediction request in the script and execute
-    `bash call_mf_model.sh`
-   
-### 7.tf_two_tower
-> Build, deploy, and call your own Tensorflow-based Two Tower model
-> Requires a dataproc cluster with GPU and Jupyter enabled
-1. Consult step-1 notebook
-2. Consult step-2 notebook
-3. Consult step-3 notebook
