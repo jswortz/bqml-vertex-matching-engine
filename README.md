@@ -14,7 +14,7 @@ ___
 > Each section assumes you are executing commands from the relative directory of each section
 
 
-### 0.setup
+### 0.setup 
 > Install packages and update variables
 1. Install cloud sdk, git, npm, and angular cli  
     `bash install_packages.sh`
